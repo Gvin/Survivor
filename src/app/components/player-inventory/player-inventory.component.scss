@@ -12,6 +12,9 @@
                 width: 66px;
                 height: 66px;
                 cursor: pointer;
+                margin-right: 2px;
+                margin-bottom: 2px;
+                display: inline-block;
 
                 .item-icon {
                     margin-top: 1px;
@@ -21,11 +24,13 @@
         
             .item.selected {
                 border: 1px solid blue;
+                background-color: lightblue;
             }
         }
     
         .details {
-            width: 450px
+            width: 450px;
+            margin: 2px;
         }
     }
 }

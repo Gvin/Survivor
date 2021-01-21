@@ -1,9 +1,16 @@
+@mixin add-icon($icon-name) {
+    .item-icon.#{$icon-name} {
+        background-image: url('./assets/item-icons/#{$icon-name}.svg');
+    }
+}
+
 .item-icon {
     width: 64px;
     height: 64px;
     background-size: cover;
 }
 
-.item-icon.fresh-water-bottle {
-    background-image: url('./assets/item-icons/fresh-water-bottle.svg');
-}
+@include add-icon('empty-bottle');
+@include add-icon('fresh-water-bottle');
+@include add-icon('salt-water-bottle');
+@include add-icon('mud-water-bottle');

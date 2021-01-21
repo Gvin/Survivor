@@ -1,3 +1,3 @@
 export interface GameJournalMessage {
-    toString(): string;
+    getMessageString(): string;
 }

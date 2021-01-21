@@ -24,8 +24,8 @@ export class GameEnvironment {
         return this.time;
     }
 
-    public addTime(hours: number, minutes: number): void {
-        this.time = new Date(this.time.getTime() + (hours * 60 + minutes) * 60000);
+    public addTime(minutes: number): void {
+        this.time = new Date(this.time.getTime() + minutes * 60000);
     }
 
     public getMemento(): GameEnvironmentMemento {

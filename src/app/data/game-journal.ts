@@ -1,5 +1,5 @@
 import { Game } from "./game";
-import { GameJournalMessage } from "./journal-messages/journal-message";
+import { GameJournalMessage } from "./journal-messages/game-journal-message";
 import { GameJournalMemento } from "./mementos/game-journal-memento";
 
 export class GameJournal {
@@ -15,7 +15,7 @@ export class GameJournal {
 
     public write(game: Game, message: GameJournalMessage): void {
         const timeStamp = this.getTimeStamp(game);
-        const messageText = `[${timeStamp}] ${message.toString()}`;
+        const messageText = `[${timeStamp}] ${message.getMessageString()}`;
         this.messages.push(messageText);
     }
 

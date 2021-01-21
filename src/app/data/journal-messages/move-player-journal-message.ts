@@ -1,4 +1,4 @@
-import { GameJournalMessage } from "./journal-message";
+import { GameJournalMessage } from "./game-journal-message";
 
 export class MovePlayerJournalMessage implements GameJournalMessage {
 
@@ -7,7 +7,7 @@ export class MovePlayerJournalMessage implements GameJournalMessage {
         private targetLocationTitle: string) {
     }
     
-    public toString(): string {
+    public getMessageString(): string {
         return `You walked from ${this.sourceLocationTitle} to ${this.targetLocationTitle}.`;
     }
 }

@@ -14,6 +14,10 @@
                     <mat-card-content>
                         {{selectedItem.Description}}
                     </mat-card-content>
+                    <mat-card-actions>
+                        <button *ngIf="selectedItem.IsConsumable" mat-raised-button (click)="consumeItem(selectedItem)">{{getConsumableActionTitle(selectedItem)}}</button>
+                        <button mat-raised-button (click)="throwItem(selectedItem)">Throw away 1</button>
+                    </mat-card-actions>
                 </mat-card>
             </div>
         </div>

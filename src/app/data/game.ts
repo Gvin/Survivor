@@ -34,7 +34,12 @@ export class Game {
 
     public performAction(action: PlayerAction): void {
         const minutesPassed = action.perform(this);
-        this.environment.addTime(0, minutesPassed);
+        this.environment.addTime(minutesPassed);
+        this.processTimePassed(minutesPassed);
+    }
+
+    private processTimePassed(minutes: number): void {
+        this.player.processTimePassed(this, minutes);
     }
 
     public get Environment(): GameEnvironment {

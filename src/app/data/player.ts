@@ -1,3 +1,4 @@
+import { Game } from "./game";
 import { Inventory } from "./inventory";
 import { PlayerMemento } from "./mementos/player-memento";
 
@@ -34,6 +35,14 @@ export class Player {
 
     public get Inventory(): Inventory {
         return this.inventory;
+    }
+
+    public processTimePassed(game: Game, minutes: number): void {
+        const thirstGrowthFactor = 1; // per hour
+        const hungerGrowthFactor = 0.83; // per hour
+
+        this.thirst += thirstGrowthFactor * minutes / 60;
+        this.hunger += hungerGrowthFactor * minutes / 60;
     }
 
     public getMemento(): PlayerMemento {

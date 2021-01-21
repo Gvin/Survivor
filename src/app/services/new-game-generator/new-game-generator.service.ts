@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { ItemType } from "src/app/data/items/item-type";
 import { GameMapMemento } from "src/app/data/mementos/game-map-memento";
 import { GameMemento } from "src/app/data/mementos/game-memento";
 
@@ -8,9 +9,7 @@ const locForest = 'forest';
 const locCaves = 'caves';
 const locSpring = 'spring';
 
-const itemType = {
-    consumable: 'consumable'
-}
+
 
 @Injectable({providedIn: 'root'})
 export class NewGameGeneratorService {
@@ -24,10 +23,22 @@ export class NewGameGeneratorService {
                 inventory: {
                     items: [
                         {
-                            type: itemType.consumable,
+                            types: [ItemType.consumable],
                             id: 'fresh-water-bottle',
                             name: 'Fresh Water Bottle',
-                            description: 'A bottle of fresh drinking water.'
+                            description: 'A bottle of fresh drinking water.',
+                            data: [
+                                {key: 'consumable-action', value: 'drink'}
+                            ]
+                        },
+                        {
+                            types: [ItemType.consumable],
+                            id: 'salt-water-bottle',
+                            name: 'Salt Water Bottle',
+                            description: 'A bottle of salt sea water.',
+                            data: [
+                                {key: 'consumable-action', value: 'drink'}
+                            ]
                         }
                     ]
                 }
