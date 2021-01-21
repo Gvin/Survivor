@@ -1,0 +1,39 @@
+.inventory {
+    
+    .content {
+        display: inline-flex;
+
+        .grid {
+            width: 650px;
+    
+            .item {
+                border: 1px solid black;
+                border-radius: 3px;
+                width: 66px;
+                height: 66px;
+                cursor: pointer;
+
+                .item-icon {
+                    margin-top: 1px;
+                    margin-left: 1px;
+                }
+            }
+        
+            .item.selected {
+                border: 1px solid blue;
+            }
+        }
+    
+        .details {
+            width: 450px
+        }
+    }
+}
+
+.inventory {
+    width: 700px;
+}
+
+.inventory.selection {
+    width: 1200px
+}

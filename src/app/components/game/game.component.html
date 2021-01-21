@@ -1,0 +1,19 @@
+<div class="game" *ngIf="game">
+    <div class="character-panel panel">
+        <div class="stats-panel">
+            <srv-player-stats [model]="game.Player"></srv-player-stats>
+            <srv-environment-stats [model]="game.Environment"></srv-environment-stats>
+        </div>
+    </div>
+
+    <div class="game-panel panel">
+        <div>
+            <srv-location-details [game]="game" [model]="getCurrentLocation()"></srv-location-details>
+            <mat-card class="journal-box">
+                <mat-card-content>
+                    <srv-journal [model]="game.Journal"></srv-journal>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</div>

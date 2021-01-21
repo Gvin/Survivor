@@ -1,0 +1,26 @@
+<div [ngClass]="{'inventory': true, 'selection': selectedItem}">
+    <h2 mat-dialog-title>Player Inventory</h2>
+    
+    <mat-dialog-content>
+        <div class="content">
+            <div class="grid">
+                <div *ngFor="let item of getItems()" (click)="selectItem(item)" [ngClass]="{'item': true, 'selected': isItemSelected(item)}">
+                    <div [class]="'item-icon ' + item.Id"></div>
+                </div>
+            </div>
+            <div class="details" *ngIf="selectedItem">
+                <mat-card>
+                    <mat-card-title>{{selectedItem.Name}}</mat-card-title>
+                    <mat-card-content>
+                        {{selectedItem.Description}}
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+        
+    </mat-dialog-content>
+
+    <mat-dialog-actions>
+        <button mat-raised-button (click)="close()">Close</button>
+    </mat-dialog-actions>
+</div>

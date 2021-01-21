@@ -1,18 +1,23 @@
+import {NgModule} from '@angular/core';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
+import {ComponentsModule} from './components/components.module';
+// import {ErrorInterceptor} from './interceptors/error-interceptor';
+import { SurvivorAppRootComponent } from './components/app-root/app-root.component';
+import {AppRoutingModule} from './routing.module';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
   imports: [
+    ComponentsModule,
+    HttpClientModule,
+    AppRoutingModule,
     BrowserModule,
-    AppRoutingModule
+    BrowserAnimationsModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    // {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
+  ],
+  bootstrap: [SurvivorAppRootComponent]
 })
 export class AppModule { }

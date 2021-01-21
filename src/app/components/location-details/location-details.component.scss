@@ -1,0 +1,13 @@
+.location {
+    .actions {
+        display: inline-flex;
+
+        .action {
+            margin-right: 10px;
+
+            button {
+                cursor: pointer !important;
+            }
+        }
+    }
+}

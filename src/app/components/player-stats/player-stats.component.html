@@ -1,0 +1,14 @@
+<div class="player-stats" *ngIf="model">
+    <mat-card>
+        <mat-card-title i18n="stats_title|Player stats title">Player Stats</mat-card-title>
+        <mat-card-content>
+            <div>Health: {{model.Health}}%</div>
+            <div>Thirst: {{model.Thirst}}%</div>
+            <div>Hunger: {{model.Hunger}}%</div>
+            <div>Energy: {{model.Energy}}%</div>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button (click)="openInventory()">Inventory</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

@@ -1,0 +1,13 @@
+<div class="menu">
+    <mat-card class="menu-card">
+        <mat-card-title i18n="menu_title|Main menu title">Main menu</mat-card-title>
+        <mat-card-content>
+            <div class="button">
+                <a mat-raised-button color="primary" i18n="new_game|Start new game button" (click)="startNewGameClick()">Start a new game</a>
+            </div>
+            <div class="button">
+                <a mat-raised-button i18n="continue_game|Continue game button" [routerLink]="['/game']">Continue game</a>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>>

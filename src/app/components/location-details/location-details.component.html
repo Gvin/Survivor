@@ -1,0 +1,11 @@
+<div *ngIf="model" class="location">
+    <mat-card>
+        <mat-card-title>{{model.Title}}</mat-card-title>
+        <mat-card-content>Location description</mat-card-content>
+        <mat-card-actions class="actions">
+            <div *ngFor="let connection of getConnections()" class="action">
+                <button mat-raised-button (click)="movePlayer(connection)">Go to {{getLocationTitle(connection)}} ({{connection.walkTime}}m)</button>
+            </div>
+        </mat-card-actions>
+    </mat-card>
+</div>

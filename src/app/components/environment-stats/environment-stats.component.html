@@ -1,0 +1,10 @@
+<div *ngIf="model">
+    <mat-card>
+        <mat-card-title i18n="environment_title|Current environment">Environment</mat-card-title>
+        <mat-card-content>
+            <div>Temperature: {{model.Temperature}} C</div>
+        <div>Weather: {{getWeatherText()}}</div>
+        <div>Time: {{model.Time | date: 'medium'}}</div>
+        </mat-card-content>
+    </mat-card>
+</div>
