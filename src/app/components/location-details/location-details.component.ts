@@ -3,6 +3,7 @@ import { Game } from "src/app/data/game";
 import { GameLocation } from "src/app/data/game-location";
 import { GameLocationConnection } from "src/app/data/mementos/game-map-memento";
 import { MovePlayerAction } from "src/app/data/player-actions/move-player-action";
+import { SaveGameService } from "src/app/services/save-game/save-game.service";
 
 @Component({
     selector: 'srv-location-details',
@@ -15,6 +16,9 @@ export class SurvivorLocationDetailsComponent {
 
     @Input()
     public game?: Game;
+
+    constructor(private readonly saveGameService: SaveGameService) {
+    }
 
     private getTargetLocationId(connection: GameLocationConnection): string {
         if (!this.model) {
@@ -34,6 +38,7 @@ export class SurvivorLocationDetailsComponent {
 
         const targetLocationId = this.getTargetLocationId(connection);
         this.game.performAction(new MovePlayerAction(this.model.Id, targetLocationId, connection.walkTime));
+        this.saveGameService.saveGame(this.game);
     }
 
     public getConnections(): GameLocationConnection[] {

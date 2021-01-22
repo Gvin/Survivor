@@ -4,6 +4,7 @@ import { Game } from "src/app/data/game";
 import { GameInventoryStack, Inventory } from "src/app/data/inventory";
 import {  GameItemExtraAction } from "src/app/data/items/game-item";
 import { ThrowItemPlayerAction } from "src/app/data/player-actions/throw-item-player-action";
+import { SaveGameService } from "src/app/services/save-game/save-game.service";
 
 @Component({
     selector: 'srv-player-inventory',
@@ -19,6 +20,7 @@ export class SurvivorPlayerInventoryComponent {
     public selectedItem?: GameInventoryStack;
 
     constructor(
+        private readonly saveGameService: SaveGameService,
         private dialogRef: MatDialogRef<SurvivorPlayerInventoryComponent>,
         @Inject(MAT_DIALOG_DATA) data: any) {
 
@@ -52,11 +54,15 @@ export class SurvivorPlayerInventoryComponent {
         if (dropSelection) {
             this.selectedItem = undefined;
         }
+
+        this.saveGameService.saveGame(this.game);
     }
 
     public throwItem(item: GameInventoryStack): void {
         this.game.performAction(new ThrowItemPlayerAction(item.TopItem));
         this.selectedItem = undefined;
+
+        this.saveGameService.saveGame(this.game);
     }
 
     public close(): void {
