@@ -4,7 +4,7 @@
     <mat-dialog-content>
         <div class="content">
             <div class="grid">
-                <div *ngFor="let item of getItems()" (click)="selectItem(item)" [ngClass]="{'item': true, 'selected': isItemSelected(item)}">
+                <div *ngFor="let item of getItems()" matTooltip="{{item.Name}}" (click)="selectItem(item)" [ngClass]="{'item': true, 'selected': isItemSelected(item)}">
                     <div [class]="'item-icon ' + item.Id"></div>
                 </div>
             </div>
@@ -14,9 +14,9 @@
                     <mat-card-content>
                         {{selectedItem.Description}}
                     </mat-card-content>
-                    <mat-card-actions>
-                        <button *ngIf="selectedItem.IsConsumable" mat-raised-button (click)="consumeItem(selectedItem)">{{getConsumableActionTitle(selectedItem)}}</button>
-                        <button mat-raised-button (click)="throwItem(selectedItem)">Throw away 1</button>
+                    <mat-card-actions class="item-actions">
+                        <button mat-raised-button matTooltip="The item will be lost." (click)="throwItem(selectedItem)">Throw away 1</button>
+                        <button mat-raised-button *ngFor="let action of getItemExtraActions(selectedItem)" matTooltip="{{action.tooltip}}" (click)="callItemExtraAction(action)">{{action.name}}</button>
                     </mat-card-actions>
                 </mat-card>
             </div>

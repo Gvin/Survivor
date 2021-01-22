@@ -1,23 +1,29 @@
+import { Game } from "../game";
 import { GameItemData, GameItemMemento } from "../mementos/game-item-memento";
-import { ItemType } from "./item-type";
 
-export class GameItem {
-    private readonly types: string[];
+export interface GameItemExtraAction {
+    name: string;
+    tooltip: string;
+    action: (game: Game) => boolean;
+}
+
+export abstract class GameItem {
+    private readonly type: string;
     private readonly id: string;
     private readonly name: string;
     private readonly description: string;
     private readonly data?: GameItemData[];
 
     constructor(data: GameItemMemento) {
-        this.types = data.types;
+        this.type = data.type;
         this.id = data.id;
         this.name = data.name;
         this.description = data.description;
         this.data = data.data;
     }
 
-    public get Types(): string[] {
-        return this.types;
+    public get Type(): string {
+        return this.type;
     }
 
     public get Id(): string {
@@ -32,18 +38,16 @@ export class GameItem {
         return this.description;
     }
 
-    public get IsConsumable(): boolean {
-        return this.types.indexOf(ItemType.consumable) >= 0;
-    }
-
     public getData(key: string): string | undefined {
         let dataPiece = this.data?.find(d => d.key === key);
         return dataPiece?.value;
     }
 
+    public abstract getExtraActions(): GameItemExtraAction[];
+
     public getMemento(): GameItemMemento {
         return {
-            types: this.types,
+            type: this.type,
             id: this.id,
             name: this.name,
             description: this.description,

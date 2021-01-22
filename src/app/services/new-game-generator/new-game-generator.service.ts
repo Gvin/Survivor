@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
-import { ItemType } from "src/app/data/items/item-type";
 import { GameMapMemento } from "src/app/data/mementos/game-map-memento";
 import { GameMemento } from "src/app/data/mementos/game-memento";
+import { ItemCreationService, ItemIds } from "../item-creation/item-creation.service";
 
 const locCamp = 'camp';
 const locBeach = 'beach';
@@ -9,10 +9,11 @@ const locForest = 'forest';
 const locCaves = 'caves';
 const locSpring = 'spring';
 
-
-
 @Injectable({providedIn: 'root'})
 export class NewGameGeneratorService {
+    constructor(private readonly itemCreationService: ItemCreationService) {
+    }
+
     public generateNewGame(): GameMemento {
         return {
             player: {
@@ -22,24 +23,8 @@ export class NewGameGeneratorService {
                 energy: 100,
                 inventory: {
                     items: [
-                        {
-                            types: [ItemType.consumable],
-                            id: 'fresh-water-bottle',
-                            name: 'Fresh Water Bottle',
-                            description: 'A bottle of fresh drinking water.',
-                            data: [
-                                {key: 'consumable-action', value: 'drink'}
-                            ]
-                        },
-                        {
-                            types: [ItemType.consumable],
-                            id: 'salt-water-bottle',
-                            name: 'Salt Water Bottle',
-                            description: 'A bottle of salt sea water.',
-                            data: [
-                                {key: 'consumable-action', value: 'drink'}
-                            ]
-                        }
+                        this.itemCreationService.getItemMemento(ItemIds.consumable.freshWaterBottle),
+                        this.itemCreationService.getItemMemento(ItemIds.consumable.saltWaterBottle)
                     ]
                 }
             },

@@ -2,7 +2,7 @@ import { Component, Inject } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { Game } from "src/app/data/game";
 import { Inventory } from "src/app/data/inventory";
-import { GameItem } from "src/app/data/items/game-item";
+import { GameItem, GameItemExtraAction } from "src/app/data/items/game-item";
 import { ConsumeItemPlayerAction } from "src/app/data/player-actions/consume-item-player-action";
 import { ThrowItemPlayerAction } from "src/app/data/player-actions/throw-item-player-action";
 
@@ -44,22 +44,15 @@ export class SurvivorPlayerInventoryComponent {
         return item === this.selectedItem;
     }
 
-    public getConsumableActionTitle(item: GameItem): string {
-        var action = item.getData('consumable-action');
-        if (!action) {
-            throw Error(`Unable to get consumable action for item ${item.Id}.`);
-        }
-        switch (action) {
-            case 'drink':
-                return 'Drink';
-            default:
-                return 'Consume';
-        }
+    public getItemExtraActions(item: GameItem): GameItemExtraAction[] {
+        return item.getExtraActions();
     }
 
-    public consumeItem(item: GameItem): void {
-        this.game.performAction(new ConsumeItemPlayerAction(item));
-        this.selectedItem = undefined;
+    public callItemExtraAction(itemAction: GameItemExtraAction): void {
+        const dropSelection = itemAction.action(this.game);
+        if (dropSelection) {
+            this.selectedItem = undefined;
+        }
     }
 
     public throwItem(item: GameItem): void {

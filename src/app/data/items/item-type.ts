@@ -1,3 +1,5 @@
 export const ItemType = {
-    consumable: 'consumable'
+    consumable: 'consumable',
+    bottledLiquid: 'bottled-liquid',
+    misc: 'misc'
 }

@@ -1,11 +1,12 @@
+import { ItemCreationService } from "../services/item-creation/item-creation.service";
 import { GameItem } from "./items/game-item";
 import { InventoryMemento } from "./mementos/inventory-memento";
 
 export class Inventory {
     private items: GameItem[];
 
-    constructor(data: InventoryMemento) {
-        this.items = data.items.map(item => new GameItem(item))
+    constructor(data: InventoryMemento, itemCreationService: ItemCreationService) {
+        this.items = data.items.map(itemMemento => itemCreationService.loadItem(itemMemento));
     }
 
     public get Items(): GameItem[] {

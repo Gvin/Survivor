@@ -10,6 +10,7 @@ import {AppRoutingModule} from '../routing.module';
 import {MatCardModule} from '@angular/material/card';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
+import {MatTooltipModule} from '@angular/material/tooltip';
 // import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatDialogModule} from '@angular/material/dialog';
 // import {MatTableModule} from '@angular/material/table';
@@ -30,6 +31,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     BrowserAnimationsModule,
     AppRoutingModule,
 
+    MatTooltipModule,
     MatToolbarModule,
     MatCardModule,
     // MatGridListModule,

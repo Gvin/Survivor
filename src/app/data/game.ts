@@ -4,6 +4,7 @@ import { Player } from "./player";
 import { Map as GameMap } from "./game-map";
 import { PlayerAction } from "./player-actions/player-action";
 import { GameJournal } from "./game-journal";
+import { ItemCreationService } from "../services/item-creation/item-creation.service";
 
 export class Game {
     private player: Player;
@@ -12,8 +13,8 @@ export class Game {
     private map: GameMap;
     private journal: GameJournal;
 
-    constructor(data: GameMemento) {
-        this.player = new Player(data.player);
+    constructor(data: GameMemento, itemCreationService: ItemCreationService) {
+        this.player = new Player(data.player, itemCreationService);
         this.currentLocation = data.currentLocation;
         this.environment = new GameEnvironment(data.environment);
         this.map = new GameMap(data.map);

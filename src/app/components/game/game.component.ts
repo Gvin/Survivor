@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Game } from "src/app/data/game";
 import { GameLocation } from "src/app/data/game-location";
+import { ItemCreationService } from "src/app/services/item-creation/item-creation.service";
 import { SaveGameService } from "src/app/services/save-game/save-game.service";
 
 @Component({
@@ -11,7 +12,9 @@ import { SaveGameService } from "src/app/services/save-game/save-game.service";
 export class SurvivorGameComponent implements OnInit{
     public game?: Game;
 
-    constructor(private saveGameService: SaveGameService) {
+    constructor(
+        private readonly saveGameService: SaveGameService,
+        private readonly itemCreationService: ItemCreationService) {
     }
 
     public ngOnInit(): void {
@@ -20,7 +23,7 @@ export class SurvivorGameComponent implements OnInit{
             throw new Error('Unable to load game data.');
         }
 
-        this.game = new Game(gameData);
+        this.game = new Game(gameData, this.itemCreationService);
     }
 
     public getCurrentLocation(): GameLocation | undefined {

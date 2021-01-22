@@ -4,7 +4,7 @@ export interface GameItemData {
 }
 
 export interface GameItemMemento {
-    types: string[];
+    type: string;
     id: string;
     name: string;
     description: string;

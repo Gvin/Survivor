@@ -31,6 +31,12 @@
         .details {
             width: 450px;
             margin: 2px;
+
+            .item-actions {
+                button {
+                    margin-right: 3px;
+                }
+            }
         }
     }
 }
