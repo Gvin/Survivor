@@ -12,7 +12,7 @@ export abstract class GameItem {
     private readonly id: string;
     private readonly name: string;
     private readonly description: string;
-    private readonly data?: GameItemData[];
+    protected readonly data?: GameItemData[];
 
     constructor(data: GameItemMemento) {
         this.type = data.type;

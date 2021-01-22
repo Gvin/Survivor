@@ -2,6 +2,7 @@ import { Game } from "../game";
 import { EmptyItemJournalMessage } from "../journal-messages/empty-item-journal-message";
 import { ItemReceivedJournalMessage } from "../journal-messages/item-received-journal-message";
 import { GameItemMemento } from "../mementos/game-item-memento";
+import { Player } from "../player";
 import { ConsumeItemPlayerAction } from "../player-actions/consume-item-player-action";
 import { GameItem, GameItemExtraAction } from "./game-item";
 
@@ -39,8 +40,29 @@ export class BottledLiquidGameItem extends GameItem {
 
     private drinkLiquid(game: Game): boolean {
         game.performAction(new ConsumeItemPlayerAction(this));
+        this.applyEffect(game.Player);
         game.Player.Inventory.addItem(this.bottleItem);
         game.Journal.write(game, new ItemReceivedJournalMessage(this.bottleItem));
         return true;
+    }
+
+    private applyEffect(player: Player): void {
+        if (!this.data) {
+            return;
+        }
+
+        this.data.forEach(effect => {
+            const value = Number(effect.value);
+            switch (effect.key) {
+                case 'thirst':
+                    player.Thirst += value;
+                    break;
+                case 'hunger':
+                    player.Hunger += value;
+                    break;
+                default:
+                    throw Error(`Unknown effect type: ${effect.key},`);
+            }
+        });
     }
 }

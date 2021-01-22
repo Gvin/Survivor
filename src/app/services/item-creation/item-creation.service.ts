@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { GameItem } from "src/app/data/items/game-item";
 import { ItemType } from "src/app/data/items/item-type";
-import { BottledLiquidGameItem } from "src/app/data/items/liquid-game-item";
+import { BottledLiquidGameItem } from "src/app/data/items/bottled-liquid-game-item";
 import { SimpleGameItem } from "src/app/data/items/simple-game-item";
 import { GameItemMemento } from "src/app/data/mementos/game-item-memento";
 
@@ -41,14 +41,20 @@ export class ItemCreationService {
                     type: ItemType.bottledLiquid,
                     id: itemId,
                     name: 'Fresh Water Bottle',
-                    description: 'A bottle of fresh drinking water.'
+                    description: 'A bottle of fresh drinking water.',
+                    data: [
+                        {key: 'thirst', value: '-20'}
+                    ]
                 };
             case ItemIds.consumable.saltWaterBottle:
                 return {
                     type: ItemType.bottledLiquid,
                     id: itemId,
                     name: 'Salt Water Bottle',
-                    description: 'A bottle of salt sea water.'
+                    description: 'A bottle of salt sea water.',
+                    data: [
+                        {key: 'thirst', value: '10'}
+                    ]
                 }
             case ItemIds.misc.emptyBottle:
                 return {

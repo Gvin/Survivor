@@ -26,8 +26,16 @@ export class Player {
         return this.thirst;
     }
 
+    public set Thirst(value: number) {
+        this.thirst = Math.min(100, Math.max(0, value));
+    }
+
     public get Hunger(): number {
         return this.hunger;
+    }
+
+    public set Hunger(value: number) {
+        this.hunger = Math.min(100, Math.max(0, value));
     }
 
     public get Energy(): number {
