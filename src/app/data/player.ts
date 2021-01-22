@@ -22,6 +22,10 @@ export class Player {
         return this.health;
     }
 
+    public set Health(value: number) {
+        this.health = Math.min(100, Math.max(0, value));
+    }
+
     public get Thirst(): number {
         return this.thirst;
     }
@@ -40,6 +44,10 @@ export class Player {
 
     public get Energy(): number {
         return this.energy;
+    }
+
+    public set Energy(value: number) {
+        this.energy = Math.min(100, Math.max(0, value));
     }
 
     public get Inventory(): Inventory {

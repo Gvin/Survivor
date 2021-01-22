@@ -60,6 +60,12 @@ export class BottledLiquidGameItem extends GameItem {
                 case 'hunger':
                     player.Hunger += value;
                     break;
+                case 'health':
+                    player.Health += value;
+                    break;
+                case 'energy':
+                    player.Energy += value;
+                    break;
                 default:
                     throw Error(`Unknown effect type: ${effect.key},`);
             }
