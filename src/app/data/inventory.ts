@@ -1,34 +1,88 @@
 import { ItemCreationService } from "../services/item-creation/item-creation.service";
 import { GameItem } from "./items/game-item";
+import { GameItemMemento } from "./mementos/game-item-memento";
 import { InventoryMemento } from "./mementos/inventory-memento";
 
-export class Inventory {
-    private items: GameItem[];
+export interface GameInventoryStack {
+    TopItem: GameItem;
+    Count: number;
+}
 
-    constructor(data: InventoryMemento, itemCreationService: ItemCreationService) {
-        this.items = data.items.map(itemMemento => itemCreationService.loadItem(itemMemento));
-    }
+class GameInventoryStackImpl implements GameInventoryStack {
+    private readonly items: GameItem[];
 
-    public get Items(): GameItem[] {
-        return this.items;
+    constructor() {
+        this.items = [];
     }
 
     public addItem(item: GameItem): void {
         this.items.push(item);
     }
 
+    public removeItem(): void {
+        this.items.pop();
+    }
+
+    public get TopItem(): GameItem {
+        return this.items[0];
+    }
+
+    public get Items(): GameItem[] {
+        return this.items;
+    }
+
+    public get Count(): number {
+        return this.items.length;
+    }
+}
+
+export class Inventory {
+    private stacks: GameInventoryStackImpl[];
+
+    constructor(data: InventoryMemento, itemCreationService: ItemCreationService) {
+        this.stacks = [];
+        
+        data.items.map(itemMemento => itemCreationService.loadItem(itemMemento)).forEach(item => {
+            this.addItem(item);
+        });
+    }
+
+    public get Stacks(): GameInventoryStack[] {
+        return this.stacks;
+    }
+
+    public addItem(item: GameItem): void {
+        if (!item.Stackable || this.stacks.findIndex(stack => stack.TopItem.Id === item.Id) < 0) {
+            let stack = new GameInventoryStackImpl();
+            stack.addItem(item);
+            this.stacks.push(stack);
+        } else {
+            let existingStack = this.stacks.find(stack => stack.TopItem.Id === item.Id);
+            existingStack?.addItem(item);
+        }
+    }
+
     public removeItem(item: GameItem): void {
-        const itemIndex = this.items.indexOf(item);
-        if (itemIndex < 0) {
+        const stackIndex = this.stacks.findIndex(stack => stack.TopItem.Id === item.Id);
+        if (stackIndex < 0) {
             throw Error(`Item ${item} doesn't exist in inventory.`);
         }
-
-        this.items = this.items.filter((_, index) => index !== itemIndex);
+        const stack = this.stacks[stackIndex];
+        stack.removeItem();
+        if (stack.Count === 0) {
+            this.stacks = this.stacks.filter((_, index) => index !== stackIndex);
+        }
     }
 
     public getMemento(): InventoryMemento {
+        let result: GameItemMemento[] = [];
+        this.stacks.forEach(stack => {
+            stack.Items.map(item => item.getMemento()).forEach(memento => {
+                result.push(memento);
+            });
+        });
         return {
-            items: this.items.map(item => item.getMemento())
+            items: result
         };
     }
 }

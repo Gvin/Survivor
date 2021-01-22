@@ -11,6 +11,7 @@ export abstract class GameItem {
     private readonly type: string;
     private readonly id: string;
     private readonly name: string;
+    private readonly stackable: boolean;
     private readonly description: string;
     protected readonly data?: GameItemData[];
 
@@ -18,6 +19,7 @@ export abstract class GameItem {
         this.type = data.type;
         this.id = data.id;
         this.name = data.name;
+        this.stackable = data.stackable;
         this.description = data.description;
         this.data = data.data;
     }
@@ -38,6 +40,10 @@ export abstract class GameItem {
         return this.description;
     }
 
+    public get Stackable(): boolean {
+        return this.stackable;
+    }
+
     public getData(key: string): string | undefined {
         let dataPiece = this.data?.find(d => d.key === key);
         return dataPiece?.value;
@@ -50,6 +56,7 @@ export abstract class GameItem {
             type: this.type,
             id: this.id,
             name: this.name,
+            stackable: this.stackable,
             description: this.description,
             data: this.data
         };

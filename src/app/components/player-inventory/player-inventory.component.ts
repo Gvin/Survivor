@@ -1,9 +1,8 @@
 import { Component, Inject } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { Game } from "src/app/data/game";
-import { Inventory } from "src/app/data/inventory";
-import { GameItem, GameItemExtraAction } from "src/app/data/items/game-item";
-import { ConsumeItemPlayerAction } from "src/app/data/player-actions/consume-item-player-action";
+import { GameInventoryStack, Inventory } from "src/app/data/inventory";
+import {  GameItemExtraAction } from "src/app/data/items/game-item";
 import { ThrowItemPlayerAction } from "src/app/data/player-actions/throw-item-player-action";
 
 @Component({
@@ -17,7 +16,7 @@ import { ThrowItemPlayerAction } from "src/app/data/player-actions/throw-item-pl
 export class SurvivorPlayerInventoryComponent {
     private readonly game: Game;
     private readonly inventory: Inventory;
-    public selectedItem?: GameItem;
+    public selectedItem?: GameInventoryStack;
 
     constructor(
         private dialogRef: MatDialogRef<SurvivorPlayerInventoryComponent>,
@@ -28,11 +27,11 @@ export class SurvivorPlayerInventoryComponent {
         this.selectedItem = undefined;
     }
 
-    public getItems(): GameItem[] {
-        return this.inventory.Items;
+    public getItems(): GameInventoryStack[] {
+        return this.inventory.Stacks;
     }
 
-    public selectItem(item: GameItem): void {
+    public selectItem(item: GameInventoryStack): void {
         if (this.selectedItem === item) {
             this.selectedItem = undefined;
         } else {
@@ -40,12 +39,12 @@ export class SurvivorPlayerInventoryComponent {
         }
     }
 
-    public isItemSelected(item: GameItem): boolean {
-        return item === this.selectedItem;
+    public isItemSelected(item: GameInventoryStack): boolean {
+        return this.selectedItem === item;
     }
 
-    public getItemExtraActions(item: GameItem): GameItemExtraAction[] {
-        return item.getExtraActions();
+    public getItemExtraActions(item: GameInventoryStack): GameItemExtraAction[] {
+        return item.TopItem.getExtraActions();
     }
 
     public callItemExtraAction(itemAction: GameItemExtraAction): void {
@@ -55,8 +54,8 @@ export class SurvivorPlayerInventoryComponent {
         }
     }
 
-    public throwItem(item: GameItem): void {
-        this.game.performAction(new ThrowItemPlayerAction(item));
+    public throwItem(item: GameInventoryStack): void {
+        this.game.performAction(new ThrowItemPlayerAction(item.TopItem));
         this.selectedItem = undefined;
     }
 
