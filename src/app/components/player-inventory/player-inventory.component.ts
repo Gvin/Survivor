@@ -59,6 +59,14 @@ export class SurvivorPlayerInventoryComponent {
         return item.TopItem.getExtraActions();
     }
 
+    public getExtraActionName(action: GameItemExtraAction): string {
+        return this.localizationService.translate(`${action.localizationKey}.title`) ?? 'TRANSLATION NOT FOUND';
+    }
+
+    public getExtraActionTooltip(action: GameItemExtraAction): string {
+        return this.localizationService.translate(`${action.localizationKey}.tooltip`) ?? 'TRANSLATION NOT FOUND';
+    }
+
     public callItemExtraAction(itemAction: GameItemExtraAction): void {
         const dropSelection = itemAction.action(this.game);
         if (dropSelection) {

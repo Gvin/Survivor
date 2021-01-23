@@ -2,8 +2,7 @@ import { Game } from "../game";
 import { GameItemData, GameItemMemento } from "../mementos/game-item-memento";
 
 export interface GameItemExtraAction {
-    name: string;
-    tooltip: string;
+    localizationKey: string;
     action: (game: Game) => boolean;
 }
 

@@ -22,9 +22,24 @@
     "location": {
         "go-to-button": "Go to {0} ({1}m)"
     },
+    "player-inventory": {
+        "title": "Player Inventory"
+    },
+    "item-actions": {
+        "drop": {
+            "title": "Drop {0}",
+            "tooltip": "The items will be lost."
+        },
+        "drink": {
+            "title": "Drink",
+            "tooltip": "Drink the liquid."
+        },
+        "empty": {
+            "title": "Empty",
+            "tooltip": "Empty the bottle. Content will be lost."
+        }
+    },
     "actions": {
-        "drink": "Drink",
-        "drop": "Drop {0}",
-        "empty": "Empty"
+        "close": "Close"
     }
 }

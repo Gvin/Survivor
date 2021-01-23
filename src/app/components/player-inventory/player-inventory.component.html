@@ -1,5 +1,5 @@
 <div [ngClass]="{'inventory': true, 'selection': selectedItem}">
-    <h2 mat-dialog-title>Player Inventory</h2>
+    <h2 mat-dialog-title>{{'player-inventory.title' | localize: 'Player Inventory'}}</h2>
     
     <mat-dialog-content>
         <div class="content">
@@ -15,8 +15,8 @@
                         {{getItemDescription(selectedItem)}}
                     </mat-card-content>
                     <mat-card-actions class="item-actions">
-                        <button mat-raised-button matTooltip="The item will be lost." (click)="dropItem(selectedItem)">Drop 1</button>
-                        <button mat-raised-button *ngFor="let action of getItemExtraActions(selectedItem)" matTooltip="{{action.tooltip}}" (click)="callItemExtraAction(action)">{{action.name}}</button>
+                        <button mat-raised-button matTooltip="{{'item-actions.drop.tooltip' | localize: 'The items will be lost.'}}" (click)="dropItem(selectedItem)">{{'item-actions.drop.title' | localize: 'Drop': '1'}}</button>
+                        <button mat-raised-button *ngFor="let action of getItemExtraActions(selectedItem)" matTooltip="{{getExtraActionTooltip(action)}}" (click)="callItemExtraAction(action)">{{getExtraActionName(action)}}</button>
                     </mat-card-actions>
                 </mat-card>
             </div>
@@ -25,6 +25,6 @@
     </mat-dialog-content>
 
     <mat-dialog-actions>
-        <button mat-raised-button (click)="close()">Close</button>
+        <button mat-raised-button (click)="close()">{{'action.close' | localize: 'Close'}}</button>
     </mat-dialog-actions>
 </div>

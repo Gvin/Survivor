@@ -14,13 +14,11 @@ export class BottledLiquidGameItem extends GameItem {
 
         this.actions = [
             {
-                name: 'Drink',
-                tooltip: 'Drink the liquid',
+                localizationKey: 'item-actions.drink',
                 action: (game: Game) => this.drinkLiquid(game)
             },
             {
-                name: 'Empty',
-                tooltip: 'Empty the bottle',
+                localizationKey: 'item-actions.empty',
                 action: (game: Game) => this.emptyBottle(game)
             }
         ];
