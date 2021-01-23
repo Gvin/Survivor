@@ -2,8 +2,9 @@ import { Component, Inject } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { Game } from "src/app/data/game";
 import { GameInventoryStack, Inventory } from "src/app/data/inventory";
-import {  GameItemExtraAction } from "src/app/data/items/game-item";
-import { ThrowItemPlayerAction } from "src/app/data/player-actions/throw-item-player-action";
+import { GameItemExtraAction } from "src/app/data/items/game-item";
+import { ItemDroppedJournalMessage } from "src/app/data/journal-messages/item-thrown-journal-message";
+import { LocaleNamespace, LocalizationService } from "src/app/services/game-localization/localization.service";
 import { SaveGameService } from "src/app/services/save-game/save-game.service";
 
 @Component({
@@ -20,6 +21,7 @@ export class SurvivorPlayerInventoryComponent {
     public selectedItem?: GameInventoryStack;
 
     constructor(
+        private readonly localizationService: LocalizationService,
         private readonly saveGameService: SaveGameService,
         private dialogRef: MatDialogRef<SurvivorPlayerInventoryComponent>,
         @Inject(MAT_DIALOG_DATA) data: any) {
@@ -31,6 +33,14 @@ export class SurvivorPlayerInventoryComponent {
 
     public getItems(): GameInventoryStack[] {
         return this.inventory.Stacks;
+    }
+
+    public getItemName(stack: GameInventoryStack): string {
+        return this.localizationService.translate(`${stack.TopItem.Id}.name`, LocaleNamespace.items) ?? 'TRANSLATION NOT FOUND';
+    }
+
+    public getItemDescription(stack: GameInventoryStack): string {
+        return this.localizationService.translate(`${stack.TopItem.Id}.description`, LocaleNamespace.items) ?? 'TRANSLATION NOT FOUND';
     }
 
     public selectItem(item: GameInventoryStack): void {
@@ -58,8 +68,9 @@ export class SurvivorPlayerInventoryComponent {
         this.saveGameService.saveGame(this.game);
     }
 
-    public throwItem(item: GameInventoryStack): void {
-        this.game.performAction(new ThrowItemPlayerAction(item.TopItem));
+    public dropItem(item: GameInventoryStack): void {
+        this.game.Player.Inventory.removeItem(item.TopItem);
+        this.game.Journal.write(this.game, new ItemDroppedJournalMessage(item.TopItem));
         this.selectedItem = undefined;
 
         this.saveGameService.saveGame(this.game);

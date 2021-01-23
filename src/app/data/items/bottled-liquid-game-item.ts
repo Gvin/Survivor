@@ -1,9 +1,9 @@
 import { Game } from "../game";
 import { EmptyItemJournalMessage } from "../journal-messages/empty-item-journal-message";
+import { ItemConsumedJournalMessage } from "../journal-messages/item-consumed-journal-message";
 import { ItemReceivedJournalMessage } from "../journal-messages/item-received-journal-message";
 import { GameItemMemento } from "../mementos/game-item-memento";
 import { Player } from "../player";
-import { ConsumeItemPlayerAction } from "../player-actions/consume-item-player-action";
 import { GameItem, GameItemExtraAction } from "./game-item";
 
 export class BottledLiquidGameItem extends GameItem {
@@ -39,7 +39,9 @@ export class BottledLiquidGameItem extends GameItem {
     }
 
     private drinkLiquid(game: Game): boolean {
-        game.performAction(new ConsumeItemPlayerAction(this));
+        game.Player.Inventory.removeItem(this);
+        game.Journal.write(game, new ItemConsumedJournalMessage(this));
+        game.processTimePassed(1);
         this.applyEffect(game.Player);
         game.Player.Inventory.addItem(this.bottleItem);
         game.Journal.write(game, new ItemReceivedJournalMessage(this.bottleItem));

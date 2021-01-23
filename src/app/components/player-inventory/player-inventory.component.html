@@ -4,18 +4,18 @@
     <mat-dialog-content>
         <div class="content">
             <div class="grid">
-                <div *ngFor="let stack of getItems()" matTooltip="{{stack.TopItem.Name}}" (click)="selectItem(stack)" [ngClass]="{'item': true, 'selected': isItemSelected(stack)}">
+                <div *ngFor="let stack of getItems()" matTooltip="{{getItemName(stack)}}" (click)="selectItem(stack)" [ngClass]="{'item': true, 'selected': isItemSelected(stack)}">
                     <div [class]="'item-icon ' + stack.TopItem.Id">{{stack.Count}}</div>
                 </div>
             </div>
             <div class="details" *ngIf="selectedItem">
                 <mat-card>
-                    <mat-card-title>{{selectedItem.TopItem.Name}}</mat-card-title>
+                    <mat-card-title>{{getItemName(selectedItem)}}</mat-card-title>
                     <mat-card-content>
-                        {{selectedItem.TopItem.Description}}
+                        {{getItemDescription(selectedItem)}}
                     </mat-card-content>
                     <mat-card-actions class="item-actions">
-                        <button mat-raised-button matTooltip="The item will be lost." (click)="throwItem(selectedItem)">Throw away 1</button>
+                        <button mat-raised-button matTooltip="The item will be lost." (click)="dropItem(selectedItem)">Drop 1</button>
                         <button mat-raised-button *ngFor="let action of getItemExtraActions(selectedItem)" matTooltip="{{action.tooltip}}" (click)="callItemExtraAction(action)">{{action.name}}</button>
                     </mat-card-actions>
                 </mat-card>

@@ -10,17 +10,13 @@ export interface GameItemExtraAction {
 export abstract class GameItem {
     private readonly type: string;
     private readonly id: string;
-    private readonly name: string;
     private readonly stackable: boolean;
-    private readonly description: string;
     protected readonly data?: GameItemData[];
 
     constructor(data: GameItemMemento) {
         this.type = data.type;
         this.id = data.id;
-        this.name = data.name;
         this.stackable = data.stackable;
-        this.description = data.description;
         this.data = data.data;
     }
 
@@ -30,14 +26,6 @@ export abstract class GameItem {
 
     public get Id(): string {
         return this.id;
-    }
-
-    public get Name(): string {
-        return this.name;
-    }
-
-    public get Description(): string {
-        return this.description;
     }
 
     public get Stackable(): boolean {
@@ -55,9 +43,7 @@ export abstract class GameItem {
         return {
             type: this.type,
             id: this.id,
-            name: this.name,
             stackable: this.stackable,
-            description: this.description,
             data: this.data
         };
     }

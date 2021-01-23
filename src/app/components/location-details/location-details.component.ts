@@ -1,8 +1,8 @@
 import { Component, Input } from "@angular/core";
 import { Game } from "src/app/data/game";
 import { GameLocation } from "src/app/data/game-location";
+import { MovePlayerJournalMessage } from "src/app/data/journal-messages/move-player-journal-message";
 import { GameLocationConnection } from "src/app/data/mementos/game-map-memento";
-import { MovePlayerAction } from "src/app/data/player-actions/move-player-action";
 import { SaveGameService } from "src/app/services/save-game/save-game.service";
 
 @Component({
@@ -37,7 +37,14 @@ export class SurvivorLocationDetailsComponent {
         }
 
         const targetLocationId = this.getTargetLocationId(connection);
-        this.game.performAction(new MovePlayerAction(this.model.Id, targetLocationId, connection.walkTime));
+
+        const sourceLocation = this.model;
+        const targetLocation = this.game.Map.getLocation(targetLocationId);
+
+        this.game.movePlayer(targetLocationId);
+        this.game.Journal.write(this.game, new MovePlayerJournalMessage(sourceLocation.Title, targetLocation.Title));
+        this.game.processTimePassed(connection.walkTime);
+
         this.saveGameService.saveGame(this.game);
     }
 

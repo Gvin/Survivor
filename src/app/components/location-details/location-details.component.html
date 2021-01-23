@@ -4,7 +4,7 @@
         <mat-card-content>Location description</mat-card-content>
         <mat-card-actions class="actions">
             <div *ngFor="let connection of getConnections()" class="action">
-                <button mat-raised-button (click)="movePlayer(connection)">Go to {{getLocationTitle(connection)}} ({{connection.walkTime}}m)</button>
+                <button mat-raised-button (click)="movePlayer(connection)">{{'location.go-to-button' | localize: 'Go to {0} ({1}m)': getLocationTitle(connection): connection.walkTime}}</button>
             </div>
         </mat-card-actions>
     </mat-card>

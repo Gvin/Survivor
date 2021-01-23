@@ -1,10 +1,10 @@
 <div *ngIf="model">
     <mat-card>
-        <mat-card-title i18n="environment_title|Current environment">Environment</mat-card-title>
+        <mat-card-title>{{'environment.title' | localize: 'Environment'}}</mat-card-title>
         <mat-card-content>
-            <div>Temperature: {{model.Temperature}} C</div>
-        <div>Weather: {{getWeatherText()}}</div>
-        <div>Time: {{model.Time | date: 'medium'}}</div>
+            <div>{{'environment.temperature' | localize: 'Temperature:'}} {{model.Temperature}}°C</div>
+            <div>{{'environment.weather' | localize: 'Weather:'}} {{getWeatherText()}}</div>
+            <div>{{'environment.time' | localize: 'Time:'}} {{model.Time | date: getTimeFormat()}}</div>
         </mat-card-content>
     </mat-card>
 </div>

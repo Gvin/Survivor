@@ -40,9 +40,7 @@ export class ItemCreationService {
                 return {
                     type: ItemType.bottledLiquid,
                     id: itemId,
-                    name: 'Fresh Water Bottle',
                     stackable: true,
-                    description: 'A bottle of fresh drinking water.',
                     data: [
                         {key: 'thirst', value: '-20'}
                     ]
@@ -51,9 +49,7 @@ export class ItemCreationService {
                 return {
                     type: ItemType.bottledLiquid,
                     id: itemId,
-                    name: 'Salt Water Bottle',
                     stackable: true,
-                    description: 'A bottle of salt sea water.',
                     data: [
                         {key: 'thirst', value: '10'}
                     ]
@@ -62,9 +58,7 @@ export class ItemCreationService {
                 return {
                     type: ItemType.misc,
                     id: itemId,
-                    name: 'Empty Bottle',
                     stackable: true,
-                    description: 'Empty plastic bottle. Can be used to store liquids.'
                 }
             default:
                 throw Error(`Unknown item id: ${itemId}.`);

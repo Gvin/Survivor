@@ -6,8 +6,6 @@ export interface GameItemData {
 export interface GameItemMemento {
     type: string;
     id: string;
-    name: string;
-    description: string;
     stackable: boolean;
     data?: GameItemData[];
 }

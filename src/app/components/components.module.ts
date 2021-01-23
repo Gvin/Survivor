@@ -22,6 +22,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 // import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { LocalizePipe } from '../services/game-localization/localize.pipe';
 // import { MatNativeDateModule } from '@angular/material/core';
 
 
@@ -52,10 +53,14 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     // MatProgressBarModule
   ],
   declarations: [
-    ...ComponentsList
+    ...ComponentsList,
+    LocalizePipe
   ],
   entryComponents: [
     ...EntryComponentsList
+  ],
+  exports: [
+    LocalizePipe
   ]
 })
 export class ComponentsModule {}
