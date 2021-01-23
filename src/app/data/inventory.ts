@@ -68,9 +68,10 @@ export class Inventory {
             throw Error(`Item ${item} doesn't exist in inventory.`);
         }
         const stack = this.stacks[stackIndex];
-        stack.removeItem();
-        if (stack.Count === 0) {
+        if (stack.Count === 1) {
             this.stacks = this.stacks.filter((_, index) => index !== stackIndex);
+        } else {
+            stack.removeItem();
         }
     }
 

@@ -55,8 +55,8 @@ export class SurvivorPlayerInventoryComponent {
         return this.selectedItem === item;
     }
 
-    public getItemExtraActions(item: GameInventoryStack): GameItemExtraAction[] {
-        return item.TopItem.getExtraActions();
+    public getItemExtraActions(stack: GameInventoryStack): GameItemExtraAction[] {
+        return stack.TopItem.getExtraActions();
     }
 
     public getExtraActionName(action: GameItemExtraAction): string {
