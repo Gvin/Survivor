@@ -3,11 +3,11 @@ import { GameMapMemento } from "src/app/data/mementos/game-map-memento";
 import { GameMemento } from "src/app/data/mementos/game-memento";
 import { ItemCreationService, ItemIds } from "../item-creation/item-creation.service";
 
-const locCamp = 'camp';
-const locBeach = 'beach';
-const locForest = 'forest';
-const locCaves = 'caves';
-const locSpring = 'spring';
+const locCamp = 'tropical.camp';
+const locBeach = 'tropical.beach';
+const locForest = 'tropical.forest';
+const locCaves = 'tropical.caves';
+const locSpring = 'tropical.spring';
 
 @Injectable({providedIn: 'root'})
 export class NewGameGeneratorService {
@@ -45,24 +45,19 @@ export class NewGameGeneratorService {
         return {
             locations: [
                 {
-                    id: locCamp,
-                    title: 'Camp'
+                    id: locCamp
                 },
                 {
-                    id: locBeach,
-                    title: 'Beach'
+                    id: locBeach
                 },
                 {
-                    id: locForest,
-                    title: 'Forest'
+                    id: locForest
                 },
                 {
-                    id: locCaves,
-                    title: 'Caves'
+                    id: locCaves
                 },
                 {
-                    id: locSpring,
-                    title: 'Spring'
+                    id: locSpring
                 }
             ],
             connections: [

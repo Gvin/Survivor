@@ -3,6 +3,7 @@ import { Game } from "src/app/data/game";
 import { GameLocation } from "src/app/data/game-location";
 import { MovePlayerJournalMessage } from "src/app/data/journal-messages/move-player-journal-message";
 import { GameLocationConnection } from "src/app/data/mementos/game-map-memento";
+import { LocaleNamespace, LocalizationService } from "src/app/services/game-localization/localization.service";
 import { SaveGameService } from "src/app/services/save-game/save-game.service";
 
 @Component({
@@ -17,7 +18,25 @@ export class SurvivorLocationDetailsComponent {
     @Input()
     public game?: Game;
 
-    constructor(private readonly saveGameService: SaveGameService) {
+    constructor(
+        private readonly localizationService: LocalizationService,
+        private readonly saveGameService: SaveGameService) {
+    }
+
+    public getLocationTitle(): string {
+        if (!this.model) {
+            throw Error('Model not initialized.');
+        }
+
+        return this.translateLocationTitle(this.model.Id);
+    }
+
+    public getLocationDescription(): string {
+        if (!this.model) {
+            throw Error('Model not initialized.');
+        }
+
+        return this.localizationService.translate(`${this.model.Id}.description`, LocaleNamespace.locations) ?? 'TRANSLATION NOT FOUND';
     }
 
     private getTargetLocationId(connection: GameLocationConnection): string {
@@ -38,11 +57,8 @@ export class SurvivorLocationDetailsComponent {
 
         const targetLocationId = this.getTargetLocationId(connection);
 
-        const sourceLocation = this.model;
-        const targetLocation = this.game.Map.getLocation(targetLocationId);
-
         this.game.movePlayer(targetLocationId);
-        this.game.Journal.write(this.game, new MovePlayerJournalMessage(sourceLocation.Title, targetLocation.Title));
+        this.game.Journal.write(this.game, new MovePlayerJournalMessage(this.translateLocationTitle(this.model.Id), this.translateLocationTitle(targetLocationId)));
         this.game.processTimePassed(connection.walkTime);
 
         this.saveGameService.saveGame(this.game);
@@ -59,7 +75,7 @@ export class SurvivorLocationDetailsComponent {
         return this.game.Map.getConnections(this.model.Id);
     }
 
-    public getLocationTitle(connection: GameLocationConnection): string {
+    public getConnectedLocationTitle(connection: GameLocationConnection): string {
         if (!this.game) {
             throw Error('Game object not initialized.')
         }
@@ -70,6 +86,10 @@ export class SurvivorLocationDetailsComponent {
             throw Error(`Unable to find location ${targetLocation}.`)
         }
 
-        return location.Title;
+        return this.translateLocationTitle(location.Id);
+    }
+
+    private translateLocationTitle(locationId: string): string {
+        return this.localizationService.translate(`${locationId}.title`, LocaleNamespace.locations) ?? 'TRANSLATION NOT FOUND';
     }
 }

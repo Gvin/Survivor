@@ -1,5 +1,4 @@
 import { Pipe, PipeTransform } from "@angular/core";
-import { environment } from "src/environments/environment";
 import { LocalizationService } from "./localization.service";
 
 
@@ -23,9 +22,6 @@ export class LocalizePipe implements PipeTransform {
     private getTranslation(value: string, args: any[]): string {
         const translation = this.localizationService.translate(value);
         if (translation == null && args.length >= 1) {
-            if (!environment.production) {
-                console.warn(`Localization key ${value} not found for ${this.localizationService.currentLocale} locale.`);
-            }
             return args[0];
         }
 

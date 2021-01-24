@@ -22,6 +22,6 @@ export class SurvivorEnvironmentStatsComponent {
     }
 
     public getTimeFormat(): string {
-        return this.localizationService.translate('environment.date-format') ?? 'medium';
+        return this.localizationService.translate('environment.date-time-format') ?? 'medium';
     }
 }

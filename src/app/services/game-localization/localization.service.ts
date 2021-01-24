@@ -1,10 +1,12 @@
 import { Injectable } from "@angular/core";
+import { environment } from "src/environments/environment";
 import * as locales from '../../localization';
 import { LocalStorageService } from "../local-storage/local-storage.service";
 
 export enum LocaleNamespace {
-    default,
-    items
+    default = 'default',
+    items = 'items',
+    locations = 'locations'
 }
 
 const LocaleNamespacesMap = [
@@ -15,6 +17,10 @@ const LocaleNamespacesMap = [
     {
         key: LocaleNamespace.items,
         value: 'items_'
+    },
+    {
+        key: LocaleNamespace.locations,
+        value: 'locations_'
     }
 ]
 
@@ -51,6 +57,9 @@ export class LocalizationService {
             const part = parts[index];
             currentElement = (currentElement as Indexable)[part];
             if (currentElement == null) {
+                if (!environment.production) {
+                    console.warn(`Translation not found for key "${key}" in namespace "${localeNamespace}".`);
+                }
                 return null;
             }
         }

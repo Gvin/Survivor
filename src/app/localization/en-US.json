@@ -9,7 +9,7 @@
         "temperature": "Temperature:",
         "weather": "Weather:",
         "time": "Time:",
-        "date-format": "MM/dd/yyyy hh:mm"
+        "date-time-format": "MM/dd/yyyy hh:mm"
     },
     "player-stats": {
         "title": "Player",
@@ -20,7 +20,8 @@
         "inventory-button": "Inventory"
     },
     "location": {
-        "go-to-button": "Go to {0} ({1}m)"
+        "go-to-button": "Go to {0} ({1}m)",
+        "go-to-tooltip": "Move to a different location."
     },
     "player-inventory": {
         "title": "Player Inventory"
