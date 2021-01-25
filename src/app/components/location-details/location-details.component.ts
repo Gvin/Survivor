@@ -1,8 +1,10 @@
 import { Component, Input } from "@angular/core";
 import { Game } from "src/app/data/game";
 import { GameLocation } from "src/app/data/game-location";
-import { MovePlayerJournalMessage } from "src/app/data/journal-messages/move-player-journal-message";
+import { ChangedLocationJournalMessage } from "src/app/data/journal-messages/changed-location-journal-message";
+import { GameLocationId } from "src/app/data/mementos/game-location-memento";
 import { GameLocationConnection } from "src/app/data/mementos/game-map-memento";
+import { ChangeLocationPlayerAction } from "src/app/data/player-actions/change-location-player-action";
 import { LocaleNamespace, LocalizationService } from "src/app/services/game-localization/localization.service";
 import { SaveGameService } from "src/app/services/save-game/save-game.service";
 
@@ -39,7 +41,7 @@ export class SurvivorLocationDetailsComponent {
         return this.localizationService.translate(`${this.model.Id}.description`, LocaleNamespace.locations) ?? 'TRANSLATION NOT FOUND';
     }
 
-    private getTargetLocationId(connection: GameLocationConnection): string {
+    private getTargetLocationId(connection: GameLocationConnection): GameLocationId {
         if (!this.model) {
             throw Error('Model not initialized.');
         }
@@ -57,11 +59,7 @@ export class SurvivorLocationDetailsComponent {
 
         const targetLocationId = this.getTargetLocationId(connection);
 
-        this.game.movePlayer(targetLocationId);
-        this.game.Journal.write(this.game, new MovePlayerJournalMessage(this.translateLocationTitle(this.model.Id), this.translateLocationTitle(targetLocationId)));
-        this.game.processTimePassed(connection.walkTime);
-
-        this.saveGameService.saveGame(this.game);
+        this.game.performAction(new ChangeLocationPlayerAction(this.model.Id, targetLocationId, connection.walkTime));
     }
 
     public getConnections(): GameLocationConnection[] {

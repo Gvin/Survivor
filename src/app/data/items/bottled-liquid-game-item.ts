@@ -1,16 +1,15 @@
 import { Game } from "../game";
-import { EmptyItemJournalMessage } from "../journal-messages/empty-item-journal-message";
-import { ItemConsumedJournalMessage } from "../journal-messages/item-consumed-journal-message";
-import { ItemReceivedJournalMessage } from "../journal-messages/item-received-journal-message";
 import { GameItemMemento } from "../mementos/game-item-memento";
-import { Player } from "../player";
+import { DrinkLiquidPlayerAction } from "../player-actions/drink-liquid-player-action";
+import { EmptyBottlePlayerAction } from "../player-actions/empty-bottle-player-action";
+import { ConsumableGameItem } from "./consumable-game-item";
 import { GameItem, GameItemExtraAction } from "./game-item";
 
-export class BottledLiquidGameItem extends GameItem {
+export class BottledLiquidGameItem extends ConsumableGameItem {
     private readonly actions: GameItemExtraAction[];
 
-    constructor(data: GameItemMemento, private readonly bottleItem: GameItem){
-        super(data);
+    constructor(memento: GameItemMemento, private readonly bottleItem: GameItem){
+        super(memento);
 
         this.actions = [
             {
@@ -29,46 +28,12 @@ export class BottledLiquidGameItem extends GameItem {
     }
 
     private emptyBottle(game: Game): boolean {
-        game.Journal.write(game, new EmptyItemJournalMessage(this));
-        game.Player.Inventory.removeItem(this);
-        game.Player.Inventory.addItem(this.bottleItem);
-        game.Journal.write(game, new ItemReceivedJournalMessage(this.bottleItem));
-        return true;
+        game.performAction(new EmptyBottlePlayerAction(this, this.bottleItem));
+        return false;
     }
 
     private drinkLiquid(game: Game): boolean {
-        game.Player.Inventory.removeItem(this);
-        game.Journal.write(game, new ItemConsumedJournalMessage(this));
-        game.processTimePassed(1);
-        this.applyEffect(game.Player);
-        game.Player.Inventory.addItem(this.bottleItem);
-        game.Journal.write(game, new ItemReceivedJournalMessage(this.bottleItem));
-        return true;
-    }
-
-    private applyEffect(player: Player): void {
-        if (!this.data) {
-            return;
-        }
-
-        this.data.forEach(effect => {
-            const value = Number(effect.value);
-            switch (effect.key) {
-                case 'thirst':
-                    player.Thirst += value;
-                    break;
-                case 'hunger':
-                    player.Hunger += value;
-                    break;
-                case 'health':
-                    player.Health += value;
-                    break;
-                case 'energy':
-                    player.Energy += value;
-                    break;
-                default:
-                    throw Error(`Unknown effect type: ${effect.key},`);
-            }
-        });
+        game.performAction(new DrinkLiquidPlayerAction(this, this.bottleItem));
+        return false;
     }
 }

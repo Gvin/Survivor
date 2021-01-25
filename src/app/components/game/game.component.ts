@@ -26,6 +26,14 @@ export class SurvivorGameComponent implements OnInit{
         }
 
         this.game = new Game(gameData, this.itemCreationService, this.localizationService);
+        this.game.actionPerformed.on('action', () => this.gameActionPerformed());
+    }
+
+    private gameActionPerformed(): void {
+        if (this.game) {
+            const memento = this.game.getMemento();
+            this.saveGameService.setGameData(memento);
+        }
     }
 
     public getCurrentLocation(): GameLocation | undefined {

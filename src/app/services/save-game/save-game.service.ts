@@ -1,5 +1,4 @@
 import { Injectable } from "@angular/core";
-import { Game } from "src/app/data/game";
 import { GameMemento } from "src/app/data/mementos/game-memento";
 import { LocalStorageService } from "../local-storage/local-storage.service";
 
@@ -7,11 +6,6 @@ import { LocalStorageService } from "../local-storage/local-storage.service";
 export class SaveGameService {
 
     constructor(private readonly localStorageService: LocalStorageService) {
-    }
-
-    public saveGame(game: Game): void {
-        const memento = game.getMemento();
-        this.setGameData(memento);
     }
 
     public getGameData(): GameMemento | null {

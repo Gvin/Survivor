@@ -5,6 +5,8 @@ import { Map as GameMap } from "./game-map";
 import { GameJournal } from "./game-journal";
 import { ItemCreationService } from "../services/item-creation/item-creation.service";
 import { LocalizationService } from "../services/game-localization/localization.service";
+import { PlayerAction } from "./player-actions/player-action";
+import { EventEmitter } from "events";
 
 export class Game {
     private player: Player;
@@ -13,12 +15,16 @@ export class Game {
     private map: GameMap;
     private journal: GameJournal;
 
+    public readonly actionPerformed: EventEmitter;
+
     constructor(data: GameMemento, itemCreationService: ItemCreationService, localizationService: LocalizationService) {
         this.player = new Player(data.player, itemCreationService);
         this.currentLocation = data.currentLocation;
         this.environment = new GameEnvironment(data.environment);
         this.map = new GameMap(data.map);
         this.journal = new GameJournal(data.journal, localizationService);
+
+        this.actionPerformed = new EventEmitter();
     }
 
     public get Player(): Player {
@@ -36,6 +42,11 @@ export class Game {
     public processTimePassed(minutes: number): void {
         this.environment.addTime(minutes);
         this.player.processTimePassed(this, minutes);
+    }
+
+    public performAction(action: PlayerAction): void {
+        action.perform(this);
+        this.actionPerformed.emit('action');
     }
 
     public get Environment(): GameEnvironment {

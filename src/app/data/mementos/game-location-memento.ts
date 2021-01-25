@@ -1,3 +1,5 @@
+export type GameLocationId = string;
+
 export interface GameLocationMemento {
-    id: string;
+    id: GameLocationId;
 }

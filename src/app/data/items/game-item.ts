@@ -12,11 +12,11 @@ export abstract class GameItem {
     private readonly stackable: boolean;
     protected readonly data?: GameItemData[];
 
-    constructor(data: GameItemMemento) {
-        this.type = data.type;
-        this.id = data.id;
-        this.stackable = data.stackable;
-        this.data = data.data;
+    constructor(memento: GameItemMemento) {
+        this.type = memento.type;
+        this.id = memento.id;
+        this.stackable = memento.stackable;
+        this.data = memento.data;
     }
 
     public get Type(): string {

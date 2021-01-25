@@ -1,7 +1,7 @@
-import { GameLocationMemento } from "./mementos/game-location-memento";
+import { GameLocationId, GameLocationMemento } from "./mementos/game-location-memento";
 
 export class GameLocation {
-    private id: string;
+    private id: GameLocationId;
 
     constructor(data: GameLocationMemento) {
         this.id = data.id;
@@ -13,7 +13,7 @@ export class GameLocation {
         }
     }
 
-    public get Id(): string {
+    public get Id(): GameLocationId {
         return this.id;
     }
 }
