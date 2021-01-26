@@ -48,7 +48,26 @@ export class NewGameGeneratorService {
                     id: locCamp
                 },
                 {
-                    id: locBeach
+                    id: locBeach,
+                    actions: [
+                        {
+                            type: "swim",
+                            time: 10,
+                            data: [
+                                {key: "thirst", value: "10"},
+                                {key: "hunger", value: "3"},
+                                {key: "energy", value: "-3"}
+                            ]
+                        },
+                        {
+                            type: "drink",
+                            time: 1,
+                            data: [
+                                {key: "thirst", value: "10"},
+                                {key: "health", value: "-1"}
+                            ]
+                        }
+                    ]
                 },
                 {
                     id: locForest
@@ -57,7 +76,26 @@ export class NewGameGeneratorService {
                     id: locCaves
                 },
                 {
-                    id: locSpring
+                    id: locSpring,
+                    actions: [
+                        {
+                            type: "swim",
+                            time: 10,
+                            data: [
+                                {key: "thirst", value: "-10"},
+                                {key: "hunger", value: "3"},
+                                {key: "energy", value: "-3"}
+                            ]
+                        },
+                        {
+                            type: "drink",
+                            time: 1,
+                            data: [
+                                {key: "thirst", value: "-20"},
+                                {key: "health", value: "-1"}
+                            ]
+                        }
+                    ]
                 }
             ],
             connections: [
