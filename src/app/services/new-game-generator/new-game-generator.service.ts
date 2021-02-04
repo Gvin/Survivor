@@ -35,9 +35,7 @@ export class NewGameGeneratorService {
                 time: new Date(2021, 7, 13, 11, 0).toString()
             },
             map: this.generateMap(),
-            journal: {
-                messages: []
-            }
+            journal: {}
         };
     }
 

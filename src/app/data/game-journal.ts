@@ -8,7 +8,7 @@ export class GameJournal {
     private messages: string[];
 
     constructor(data: GameJournalMemento, private readonly localizationService: LocalizationService) {
-        this.messages = data.messages;
+        this.messages = [];
     }
 
     private getTimeStamp(game: Game): string {
@@ -29,7 +29,6 @@ export class GameJournal {
 
     public getMemento(): GameJournalMemento {
         return {
-            messages: this.messages
         };
     }
 }
