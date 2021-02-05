@@ -8,7 +8,7 @@ export class GameJournal {
     private messages: string[];
 
     constructor(data: GameJournalMemento, private readonly localizationService: LocalizationService) {
-        this.messages = data.messages;
+        this.messages = [];
     }
 
     private getTimeStamp(game: Game): string {
@@ -19,7 +19,9 @@ export class GameJournal {
 
     public write(game: Game, message: GameJournalMessage): void {
         const timeStamp = this.getTimeStamp(game);
-        const messageText = `[${timeStamp}] ${message.getMessageString(this.localizationService)}`;
+        const messageLocalizableString = message.getMessageString();
+        const pureMessageText = this.localizationService.translateString(messageLocalizableString);
+        const messageText = `[${timeStamp}] ${pureMessageText}`;
         this.messages.push(messageText);
     }
 
@@ -29,7 +31,6 @@ export class GameJournal {
 
     public getMemento(): GameJournalMemento {
         return {
-            messages: this.messages
         };
     }
 }

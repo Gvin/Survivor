@@ -1,17 +1,16 @@
-import { LocaleNamespace, LocalizationService } from "src/app/services/game-localization/localization.service";
-import { GameLocationId } from "../mementos/game-location-memento";
+import { GameLocation } from "../game-location";
+import { LocalizableString } from "../localizable-string";
 import { GameJournalMessage } from "./game-journal-message";
 
 export class ChangedLocationJournalMessage implements GameJournalMessage {
 
     constructor(
-        private readonly sourceLocationId: GameLocationId, 
-        private readonly targetLocationId: GameLocationId) {
+        private readonly sourceLocation: GameLocation, 
+        private readonly targetLocation: GameLocation) {
     }
     
-    public getMessageString(localizationService: LocalizationService): string {
-        const sourceLocationTitle = localizationService.translate(`${this.sourceLocationId}.title`, LocaleNamespace.locations);
-        const targetLocationTitle = localizationService.translate(`${this.targetLocationId}.title`, LocaleNamespace.locations);
-        return `You walked from ${sourceLocationTitle} to ${targetLocationTitle}.`;
+    public getMessageString(): LocalizableString {
+        return new LocalizableString()
+            .addStatic('You walked from ').addSubstring(this.sourceLocation.Title).addStatic(' to ').addSubstring(this.targetLocation.Title).addStatic('.');
     }
 }

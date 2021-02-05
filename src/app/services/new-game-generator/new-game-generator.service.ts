@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { WaterType } from "src/app/data/mementos/game-location-memento";
 import { GameMapMemento } from "src/app/data/mementos/game-map-memento";
 import { GameMemento } from "src/app/data/mementos/game-memento";
 import { ItemCreationService, ItemIds } from "../item-creation/item-creation.service";
@@ -35,9 +36,7 @@ export class NewGameGeneratorService {
                 time: new Date(2021, 7, 13, 11, 0).toString()
             },
             map: this.generateMap(),
-            journal: {
-                messages: []
-            }
+            journal: {}
         };
     }
 
@@ -48,7 +47,9 @@ export class NewGameGeneratorService {
                     id: locCamp
                 },
                 {
-                    id: locBeach
+                    id: locBeach,
+                    waterSource: WaterType.sea,
+                    canSwim: true
                 },
                 {
                     id: locForest
@@ -57,7 +58,9 @@ export class NewGameGeneratorService {
                     id: locCaves
                 },
                 {
-                    id: locSpring
+                    id: locSpring,
+                    waterSource: WaterType.clean,
+                    canSwim: true
                 }
             ],
             connections: [
