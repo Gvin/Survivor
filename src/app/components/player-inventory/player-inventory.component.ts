@@ -4,7 +4,7 @@ import { Game } from "src/app/data/game";
 import { GameInventoryStack, Inventory } from "src/app/data/inventory";
 import { GameItemExtraAction } from "src/app/data/items/game-item";
 import { DropItemPlayerAction } from "src/app/data/player-actions/drop-item-player-action";
-import { LocaleNamespace, LocalizationService } from "src/app/services/game-localization/localization.service";
+import { LocalizationService } from "src/app/services/game-localization/localization.service";
 
 @Component({
     selector: 'srv-player-inventory',
@@ -41,11 +41,20 @@ export class SurvivorPlayerInventoryComponent {
     }
 
     public getItemName(stack: GameInventoryStack): string {
-        return this.localizationService.translate(`${stack.TopItem.Id}.name`, LocaleNamespace.items) ?? 'TRANSLATION NOT FOUND';
+        return this.localizationService.translateString(stack.TopItem.Name);
+    }
+
+    public getItemNameWithCount(stack: GameInventoryStack): string {
+        const itemName = this.getItemName(stack);
+        if (stack.TopItem.Stackable) {
+            return `${itemName} (${stack.Count})`;
+        } else {
+            return itemName;
+        }
     }
 
     public getItemDescription(stack: GameInventoryStack): string {
-        return this.localizationService.translate(`${stack.TopItem.Id}.description`, LocaleNamespace.items) ?? 'TRANSLATION NOT FOUND';
+        return this.localizationService.translateString(stack.TopItem.Description);
     }
 
     public selectItem(item: GameInventoryStack): void {
@@ -65,11 +74,11 @@ export class SurvivorPlayerInventoryComponent {
     }
 
     public getExtraActionName(action: GameItemExtraAction): string {
-        return this.localizationService.translate(`${action.localizationKey}.title`) ?? 'TRANSLATION NOT FOUND';
+        return this.localizationService.translateString(action.title);
     }
 
     public getExtraActionTooltip(action: GameItemExtraAction): string {
-        return this.localizationService.translate(`${action.localizationKey}.tooltip`) ?? 'TRANSLATION NOT FOUND';
+        return this.localizationService.translateString(action.tooltip);
     }
 
     public callItemExtraAction(itemAction: GameItemExtraAction): void {

@@ -1,4 +1,5 @@
 import { Game } from "../game";
+import { LocalizableString } from "../localizable-string";
 import { GameItemMemento } from "../mementos/game-item-memento";
 import { DrinkLiquidPlayerAction } from "../player-actions/drink-liquid-player-action";
 import { EmptyBottlePlayerAction } from "../player-actions/empty-bottle-player-action";
@@ -13,11 +14,13 @@ export class BottledLiquidGameItem extends ConsumableGameItem {
 
         this.actions = [
             {
-                localizationKey: 'item-actions.drink',
+                title: new LocalizableString().addLocalizable('item-actions.drink.title'),
+                tooltip: new LocalizableString().addLocalizable('item-actions.drink.tooltip'),
                 action: (game: Game) => this.drinkLiquid(game)
             },
             {
-                localizationKey: 'item-actions.empty',
+                title: new LocalizableString().addLocalizable('item-actions.empty.title'),
+                tooltip: new LocalizableString().addLocalizable('item-actions.empty.tooltip'),
                 action: (game: Game) => this.emptyBottle(game)
             }
         ];

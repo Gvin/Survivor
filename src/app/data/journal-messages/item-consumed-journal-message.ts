@@ -1,4 +1,3 @@
-import { LocaleNamespace } from "src/app/services/game-localization/localization.service";
 import { GameItem } from "../items/game-item";
 import { LocalizableString } from "../localizable-string";
 import { GameJournalMessage } from "./game-journal-message";
@@ -9,6 +8,6 @@ export class ItemConsumedJournalMessage implements GameJournalMessage {
     }
 
     public getMessageString(): LocalizableString {
-        return new LocalizableString().addStatic('You have consumed ').addLocalizable(`${this.item.Id}.name`, LocaleNamespace.items).addStatic('.');
+        return new LocalizableString().addStatic('You have consumed ').addSubstring(this.item.Name).addStatic('.');
     }
 }

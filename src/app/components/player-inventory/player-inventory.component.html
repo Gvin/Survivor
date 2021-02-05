@@ -10,7 +10,7 @@
             </div>
             <div class="details" *ngIf="selectedItem">
                 <mat-card>
-                    <mat-card-title>{{getItemName(selectedItem)}}</mat-card-title>
+                    <mat-card-title>{{getItemNameWithCount(selectedItem)}}</mat-card-title>
                     <mat-card-content>
                         {{getItemDescription(selectedItem)}}
                     </mat-card-content>

@@ -1,8 +1,11 @@
+import { LocaleNamespace } from "src/app/services/game-localization/localization.service";
 import { Game } from "../game";
+import { LocalizableString } from "../localizable-string";
 import { GameItemData, GameItemMemento } from "../mementos/game-item-memento";
 
 export interface GameItemExtraAction {
-    localizationKey: string;
+    title: LocalizableString;
+    tooltip: LocalizableString;
     action: (game: Game) => boolean;
 }
 
@@ -12,11 +15,25 @@ export abstract class GameItem {
     private readonly stackable: boolean;
     protected readonly data?: GameItemData[];
 
+    private readonly name: LocalizableString;
+    private readonly description: LocalizableString;
+
     constructor(memento: GameItemMemento) {
         this.type = memento.type;
         this.id = memento.id;
         this.stackable = memento.stackable;
         this.data = memento.data;
+
+        this.name = new LocalizableString().addLocalizable(`${this.Id}.name`, LocaleNamespace.items);
+        this.description = new LocalizableString().addLocalizable(`${this.Id}.description`, LocaleNamespace.items);
+    }
+
+    public get Name(): LocalizableString {
+        return this.name;
+    }
+
+    public get Description(): LocalizableString {
+        return this.description;
     }
 
     public get Type(): string {
