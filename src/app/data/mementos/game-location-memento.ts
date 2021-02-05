@@ -1,17 +1,13 @@
 export type GameLocationId = string;
 
-export interface GameLocationActionData {
-    key: string;
-    value: string;
-}
-
-export interface GameLocationActionMemento {
-    type: "drink" | "swim",
-    time: number;
-    data?: GameLocationActionData[];
+export enum WaterType {
+    clean = 'clean',
+    dirty = 'dirty',
+    sea = 'sea'
 }
 
 export interface GameLocationMemento {
     id: GameLocationId;
-    actions?: GameLocationActionMemento[];
+    waterSource?: WaterType;
+    canSwim?: boolean;
 }

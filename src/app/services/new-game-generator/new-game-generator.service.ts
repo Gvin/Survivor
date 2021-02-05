@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { WaterType } from "src/app/data/mementos/game-location-memento";
 import { GameMapMemento } from "src/app/data/mementos/game-map-memento";
 import { GameMemento } from "src/app/data/mementos/game-memento";
 import { ItemCreationService, ItemIds } from "../item-creation/item-creation.service";
@@ -47,25 +48,8 @@ export class NewGameGeneratorService {
                 },
                 {
                     id: locBeach,
-                    actions: [
-                        {
-                            type: "swim",
-                            time: 10,
-                            data: [
-                                {key: "thirst", value: "10"},
-                                {key: "hunger", value: "3"},
-                                {key: "energy", value: "-3"}
-                            ]
-                        },
-                        {
-                            type: "drink",
-                            time: 1,
-                            data: [
-                                {key: "thirst", value: "10"},
-                                {key: "health", value: "-1"}
-                            ]
-                        }
-                    ]
+                    waterSource: WaterType.sea,
+                    canSwim: true
                 },
                 {
                     id: locForest
@@ -75,25 +59,8 @@ export class NewGameGeneratorService {
                 },
                 {
                     id: locSpring,
-                    actions: [
-                        {
-                            type: "swim",
-                            time: 10,
-                            data: [
-                                {key: "thirst", value: "-10"},
-                                {key: "hunger", value: "3"},
-                                {key: "energy", value: "-3"}
-                            ]
-                        },
-                        {
-                            type: "drink",
-                            time: 1,
-                            data: [
-                                {key: "thirst", value: "-20"},
-                                {key: "health", value: "-1"}
-                            ]
-                        }
-                    ]
+                    waterSource: WaterType.clean,
+                    canSwim: true
                 }
             ],
             connections: [

@@ -1,6 +1,5 @@
 import { Game } from "../game";
 import { LocalizableString } from "../localizable-string";
-import { GameLocationActionMemento } from "../mementos/game-location-memento";
 
 export interface GameLocationAction {
 
@@ -11,6 +10,4 @@ export interface GameLocationAction {
     Time: number;
 
     perform(game: Game): void;
-
-    getMemento(): GameLocationActionMemento;
 }

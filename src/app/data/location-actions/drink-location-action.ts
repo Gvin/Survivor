@@ -1,37 +1,28 @@
 import { Game } from "../game";
 import { LocalizableString } from "../localizable-string";
-import { GameLocationActionData, GameLocationActionMemento } from "../mementos/game-location-memento";
+import { WaterType } from "../mementos/game-location-memento";
 import { DrinkOnLocationPlayerAction } from "../player-actions/drink-on-location-player-action";
 import { GameLocationAction } from "./game-location-action";
 
+const drinkTime = 1;
+
 export class DrinkLocationAction implements GameLocationAction {
-    constructor(private memento: GameLocationActionMemento) {
+    constructor(private waterSource: WaterType) {
     }
 
     public getTitle(): LocalizableString {
-        return new LocalizableString().addLocalizable('location-actions.drink.title', undefined, [`${this.memento.time}`]);
+        return new LocalizableString().addLocalizable('location-actions.drink.title', undefined, [`${drinkTime}`]);
     }
 
     public getDescription(): LocalizableString {
-        return new LocalizableString().addLocalizable('location-actions.drink.tooltip', undefined, [`${this.memento.time}`]);
-    }
-
-    public getMemento(): GameLocationActionMemento {
-        return this.memento;
+        return new LocalizableString().addLocalizable('location-actions.drink.tooltip', undefined, [`${drinkTime}`]);
     }
 
     public get Time(): number {
-        return this.memento.time;
-    }
-
-    public getEffects(): GameLocationActionData[] {
-        if (!this.memento.data) {
-            throw Error(`Location data is empty for action ${this.memento.type}.`);
-        }
-        return this.memento.data;
+        return drinkTime;
     }
 
     public perform(game: Game): void {
-        game.performAction(new DrinkOnLocationPlayerAction(this));
+        game.performAction(new DrinkOnLocationPlayerAction(this.waterSource, drinkTime));
     }
 }
