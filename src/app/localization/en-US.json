@@ -40,6 +40,16 @@
             "tooltip": "Empty the bottle. Content will be lost."
         }
     },
+    "location-actions": {
+        "drink": {
+            "title": "Drink ({0}m)",
+            "tooltip": "Drink from the water source."
+        },
+        "swim": {
+            "title": "Swim ({0}m)",
+            "tooltip": "Swim in the water."
+        }
+    },
     "actions": {
         "close": "Close"
     }

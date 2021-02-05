@@ -1,4 +1,6 @@
+import { stringify } from "@angular/compiler/src/util";
 import { Injectable } from "@angular/core";
+import { LocalizableString } from "src/app/data/localizable-string";
 import { environment } from "src/environments/environment";
 import * as locales from '../../localization';
 import { LocalStorageService } from "../local-storage/local-storage.service";
@@ -48,7 +50,22 @@ export class LocalizationService {
         this.localStorageService.setLocale(newLocale);
     }
 
-    public translate(key: string, localeNamespace: LocaleNamespace = LocaleNamespace.default): string | null {
+    public translateString(localizableString: LocalizableString): string {
+        return localizableString.Parts.map(part => {
+            if (part.shouldLocalize) {
+                const translation = this.translate(part.data, part.namespace, part.args);
+                if (translation == null) {
+                    return 'TRANSLATION_NOT_FOUND';
+                } else {
+                    return translation;
+                }
+            } else {
+                return part.data;
+            }
+        }).join('');
+    }
+
+    public translate(key: string, localeNamespace: LocaleNamespace = LocaleNamespace.default, args: string[] = []): string | null {
         const localeData = this.getLocaleData(localeNamespace);
         const parts = key.split('.');
 
@@ -64,7 +81,18 @@ export class LocalizationService {
             }
         }
 
-        return currentElement;
+        return this.applyArguments(currentElement, args);
+    }
+
+    private applyArguments(translation: string | null, args: string[]): string | null {
+        if (translation == null) {
+            return null;
+        }
+
+        for (let index = 0; index < args.length; index++) {
+            translation = translation.replace(new RegExp(`\\{${index}\\}`, 'g'), args[index]);
+        }
+        return translation;
     }
 
     private getLocaleData(namespace: LocaleNamespace): any {

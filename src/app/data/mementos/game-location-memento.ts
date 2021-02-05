@@ -5,7 +5,7 @@ export interface GameLocationActionData {
     value: string;
 }
 
-export interface GameLocationAction {
+export interface GameLocationActionMemento {
     type: "drink" | "swim",
     time: number;
     data?: GameLocationActionData[];
@@ -13,5 +13,5 @@ export interface GameLocationAction {
 
 export interface GameLocationMemento {
     id: GameLocationId;
-    actions?: GameLocationAction[];
+    actions?: GameLocationActionMemento[];
 }

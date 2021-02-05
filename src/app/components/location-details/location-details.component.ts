@@ -1,12 +1,11 @@
 import { Component, Input } from "@angular/core";
 import { Game } from "src/app/data/game";
 import { GameLocation } from "src/app/data/game-location";
-import { ChangedLocationJournalMessage } from "src/app/data/journal-messages/changed-location-journal-message";
+import { GameLocationAction } from "src/app/data/location-actions/game-location-action";
 import { GameLocationId } from "src/app/data/mementos/game-location-memento";
 import { GameLocationConnection } from "src/app/data/mementos/game-map-memento";
 import { ChangeLocationPlayerAction } from "src/app/data/player-actions/change-location-player-action";
 import { LocaleNamespace, LocalizationService } from "src/app/services/game-localization/localization.service";
-import { SaveGameService } from "src/app/services/save-game/save-game.service";
 
 @Component({
     selector: 'srv-location-details',
@@ -21,8 +20,7 @@ export class SurvivorLocationDetailsComponent {
     public game?: Game;
 
     constructor(
-        private readonly localizationService: LocalizationService,
-        private readonly saveGameService: SaveGameService) {
+        private readonly localizationService: LocalizationService) {
     }
 
     public getLocationTitle(): string {
@@ -30,7 +28,7 @@ export class SurvivorLocationDetailsComponent {
             throw Error('Model not initialized.');
         }
 
-        return this.translateLocationTitle(this.model.Id);
+        return this.localizationService.translateString(this.model.Title);
     }
 
     public getLocationDescription(): string {
@@ -38,7 +36,31 @@ export class SurvivorLocationDetailsComponent {
             throw Error('Model not initialized.');
         }
 
-        return this.localizationService.translate(`${this.model.Id}.description`, LocaleNamespace.locations) ?? 'TRANSLATION NOT FOUND';
+        return this.localizationService.translateString(this.model.Description);
+    }
+
+    public getLocationActions(): GameLocationAction[] {
+        if (!this.model) {
+            throw Error('Model not initialized.');
+        }
+
+        return this.model.Actions;
+    }
+
+    public getLocationActionTitle(action: GameLocationAction): string {
+        return this.localizationService.translateString(action.getTitle())
+    }
+
+    public getLocationActionDescription(action: GameLocationAction): string {
+        return this.localizationService.translateString(action.getDescription())
+    }
+
+    public performLocationAction(action: GameLocationAction): void {
+        if (!this.game) {
+            throw Error('Game object not initialized.')
+        }
+
+        action.perform(this.game);
     }
 
     private getTargetLocationId(connection: GameLocationConnection): GameLocationId {
@@ -58,8 +80,9 @@ export class SurvivorLocationDetailsComponent {
         }
 
         const targetLocationId = this.getTargetLocationId(connection);
+        const targetLocation = this.game.Map.getLocation(targetLocationId);
 
-        this.game.performAction(new ChangeLocationPlayerAction(this.model.Id, targetLocationId, connection.walkTime));
+        this.game.performAction(new ChangeLocationPlayerAction(this.model, targetLocation, connection.walkTime));
     }
 
     public getConnections(): GameLocationConnection[] {

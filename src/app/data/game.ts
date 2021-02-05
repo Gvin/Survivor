@@ -7,6 +7,7 @@ import { ItemCreationService } from "../services/item-creation/item-creation.ser
 import { LocalizationService } from "../services/game-localization/localization.service";
 import { PlayerAction } from "./player-actions/player-action";
 import { EventEmitter } from "events";
+import { GameLocation } from "./game-location";
 
 export class Game {
     private player: Player;
@@ -35,8 +36,8 @@ export class Game {
         return this.currentLocation;
     }
 
-    public movePlayer(newLocation: string): void {
-        this.currentLocation = newLocation;
+    public movePlayer(newLocation: GameLocation): void {
+        this.currentLocation = newLocation.Id;
     }
 
     public processTimePassed(minutes: number): void {

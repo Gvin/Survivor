@@ -6,6 +6,9 @@
             <div *ngFor="let connection of getConnections()" class="action">
                 <button mat-raised-button matTooltip="{{'location.go-to-tooltip' | localize: 'Move to a different location.'}}" (click)="movePlayer(connection)">{{'location.go-to-button' | localize: 'Go to {0} ({1}m)': getConnectedLocationTitle(connection): connection.walkTime}}</button>
             </div>
+            <div *ngFor="let action of getLocationActions()" class="action">
+                <button mat-raised-button matTooltip="{{getLocationActionDescription(action)}}" (click)="performLocationAction(action)">{{getLocationActionTitle(action)}}</button>
+            </div>
         </mat-card-actions>
     </mat-card>
 </div>

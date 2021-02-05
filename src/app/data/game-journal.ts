@@ -19,7 +19,9 @@ export class GameJournal {
 
     public write(game: Game, message: GameJournalMessage): void {
         const timeStamp = this.getTimeStamp(game);
-        const messageText = `[${timeStamp}] ${message.getMessageString(this.localizationService)}`;
+        const messageLocalizableString = message.getMessageString();
+        const pureMessageText = this.localizationService.translateString(messageLocalizableString);
+        const messageText = `[${timeStamp}] ${pureMessageText}`;
         this.messages.push(messageText);
     }
 

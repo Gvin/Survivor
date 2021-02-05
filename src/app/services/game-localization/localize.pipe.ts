@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from "@angular/core";
-import { LocalizationService } from "./localization.service";
+import { LocaleNamespace, LocalizationService } from "./localization.service";
 
 
 @Pipe({
@@ -11,16 +11,11 @@ export class LocalizePipe implements PipeTransform {
     }
 
     public transform(value: any, ...args: any[]) {
-        let translation = this.getTranslation(value, args);
-
-        for (let index = 1; index < args.length; index++) {
-            translation = translation.replace(new RegExp(`\\{${index - 1}\\}`, 'g'), args[index]);
-        }
-        return translation;
+        return this.getTranslation(value, args);
     }
 
-    private getTranslation(value: string, args: any[]): string {
-        const translation = this.localizationService.translate(value);
+    private getTranslation(value: string, args: string[]): string {
+        const translation = this.localizationService.translate(value, LocaleNamespace.default, args.slice(1));
         if (translation == null && args.length >= 1) {
             return args[0];
         }
