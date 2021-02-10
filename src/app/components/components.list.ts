@@ -1,6 +1,7 @@
 import { SurvivorAppRootComponent } from './app-root/app-root.component';
 import { SurvivorEnvironmentStatsComponent } from './environment-stats/environment-stats.component';
 import { SurvivorGameComponent } from './game/game.component';
+import { SurvivorItemsGridComponent } from './items-grid/items-grid.component';
 import { SurvivorJournalComponent } from './journal/journal.component';
 import { SurvivorLocationDetailsComponent } from './location-details/location-details.component';
 import { SurvivorMenuComponent } from './menu/menu.component';
@@ -15,7 +16,8 @@ export const ComponentsList = [
   SurvivorEnvironmentStatsComponent,
   SurvivorLocationDetailsComponent,
   SurvivorJournalComponent,
-  SurvivorPlayerInventoryComponent
+  SurvivorPlayerInventoryComponent,
+  SurvivorItemsGridComponent
 ];
 
 export const EntryComponentsList = [

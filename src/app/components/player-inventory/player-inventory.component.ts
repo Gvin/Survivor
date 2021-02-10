@@ -9,14 +9,11 @@ import { LocalizationService } from "src/app/services/game-localization/localiza
 @Component({
     selector: 'srv-player-inventory',
     templateUrl: './player-inventory.component.html',
-    styleUrls: [
-        './player-inventory.component.scss',
-        '../../../item-icons.scss'
-    ]
+    styleUrls: ['./player-inventory.component.scss']
 })
 export class SurvivorPlayerInventoryComponent {
     private readonly game: Game;
-    private readonly inventory: Inventory;
+    public readonly inventory: Inventory;
     public selectedItem?: GameInventoryStack;
 
     constructor(
@@ -36,16 +33,12 @@ export class SurvivorPlayerInventoryComponent {
         this.selectedItem = undefined;
     }
 
-    public getItems(): GameInventoryStack[] {
-        return this.inventory.Stacks;
-    }
-
-    public getItemName(stack: GameInventoryStack): string {
-        return this.localizationService.translateString(stack.TopItem.Name);
+    public handleItemSelected(item?: GameInventoryStack) {
+        this.selectedItem = item;
     }
 
     public getItemNameWithCount(stack: GameInventoryStack): string {
-        const itemName = this.getItemName(stack);
+        const itemName = this.localizationService.translateString(stack.TopItem.Name);
         if (stack.TopItem.Stackable) {
             return `${itemName} (${stack.Count})`;
         } else {
@@ -55,18 +48,6 @@ export class SurvivorPlayerInventoryComponent {
 
     public getItemDescription(stack: GameInventoryStack): string {
         return this.localizationService.translateString(stack.TopItem.Description);
-    }
-
-    public selectItem(item: GameInventoryStack): void {
-        if (this.selectedItem === item) {
-            this.selectedItem = undefined;
-        } else {
-            this.selectedItem = item;
-        }
-    }
-
-    public isItemSelected(item: GameInventoryStack): boolean {
-        return this.selectedItem === item;
     }
 
     public getItemExtraActions(stack: GameInventoryStack): GameItemExtraAction[] {
