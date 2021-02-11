@@ -1,13 +1,13 @@
 import { Component, Input } from "@angular/core";
-import { Game } from "src/app/data/game";
-import { GameLocation } from "src/app/data/game-location";
-import { LocalizableString } from "src/app/data/localizable-string";
-import { GameLocationAction } from "src/app/data/location-actions/game-location-action";
-import { GameLocationId } from "src/app/data/mementos/game-location-memento";
-import { GameLocationConnection } from "src/app/data/mementos/game-map-memento";
-import { ChangeLocationPlayerAction } from "src/app/data/player-actions/change-location-player-action";
-import { GameDialogsService } from "src/app/services/game-dialogs/game-dialogs.service";
-import { LocalizationService } from "src/app/services/game-localization/localization.service";
+import { GameLocation } from "../../data/game-location";
+import { LocalizableString } from "../../data/localizable-string";
+import { GameLocationAction } from "../../data/location-actions/game-location-action";
+import { GameLocationId } from "../../data/mementos/game-location-memento";
+import { GameLocationConnection } from "../../data/mementos/game-map-memento";
+import { ChangeLocationPlayerAction } from "../../data/player-actions/change-location-player-action";
+import { GameDialogsService } from "../../services/game-dialogs/game-dialogs.service";
+import { LocalizationService } from "../../services/game-localization/localization.service";
+import { Game } from "../../data/game";
 
 @Component({
     selector: 'srv-location-details',

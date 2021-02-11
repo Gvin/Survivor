@@ -1,7 +1,7 @@
 import { Component, Input } from "@angular/core";
-import { Game } from "src/app/data/game";
-import { Player } from "src/app/data/player";
-import { GameDialogsService } from "src/app/services/game-dialogs/game-dialogs.service";
+import { Game } from "../../data/game";
+import { Player } from "../../data/player";
+import { GameDialogsService } from "../../services/game-dialogs/game-dialogs.service";
 
 @Component({
     selector: 'srv-player-stats',

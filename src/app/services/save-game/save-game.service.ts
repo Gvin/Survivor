@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { GameMemento } from "src/app/data/mementos/game-memento";
+import { GameMemento } from "../../data/mementos/game-memento";
 import { LocalStorageService } from "../local-storage/local-storage.service";
 
 @Injectable({providedIn: 'root'})
