@@ -20,8 +20,14 @@
         "inventory-button": "Inventory"
     },
     "location": {
-        "go-to-button": "Go to {0} ({1}m)",
-        "go-to-tooltip": "Move to a different location."
+        "go-to": {
+            "title": "Go to {0} ({1}m)",
+            "tooltip": "Move to a different location."
+        },
+        "check-ground": {
+            "title": "Check ground ({0} items)",
+            "tooltip": "Check items on the ground."
+        }
     },
     "player-inventory": {
         "title": "Player Inventory"
@@ -30,6 +36,10 @@
         "drop": {
             "title": "Drop {0}",
             "tooltip": "The items will be lost."
+        },
+        "pickup": {
+            "title": "Pick up {0}",
+            "tooltip": "Pick up this item."
         },
         "drink": {
             "title": "Drink",

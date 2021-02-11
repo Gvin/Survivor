@@ -1,11 +1,13 @@
 import { Component, Input } from "@angular/core";
 import { Game } from "src/app/data/game";
 import { GameLocation } from "src/app/data/game-location";
+import { LocalizableString } from "src/app/data/localizable-string";
 import { GameLocationAction } from "src/app/data/location-actions/game-location-action";
 import { GameLocationId } from "src/app/data/mementos/game-location-memento";
 import { GameLocationConnection } from "src/app/data/mementos/game-map-memento";
 import { ChangeLocationPlayerAction } from "src/app/data/player-actions/change-location-player-action";
-import { LocaleNamespace, LocalizationService } from "src/app/services/game-localization/localization.service";
+import { GameDialogsService } from "src/app/services/game-dialogs/game-dialogs.service";
+import { LocalizationService } from "src/app/services/game-localization/localization.service";
 
 @Component({
     selector: 'srv-location-details',
@@ -20,7 +22,27 @@ export class SurvivorLocationDetailsComponent {
     public game?: Game;
 
     constructor(
-        private readonly localizationService: LocalizationService) {
+        private readonly localizationService: LocalizationService,
+        private readonly dialogService: GameDialogsService) {
+    }
+
+    public getGroundItemsCount(): number {
+        if (!this.model) {
+            throw Error('Model not initialized.');
+        }
+
+        return this.model.GroundInventory.Count;
+    }
+
+    public showGroundItems(): void {
+        if (!this.model) {
+            throw Error('Model not initialized.');
+        }
+        if (!this.game) {
+            throw Error('Game not initialized.')
+        }
+
+        this.dialogService.showStorageInventoryDialog(this.game, this.model.GroundInventory, new LocalizableString().addStatic('Ground'));
     }
 
     public getLocationTitle(): string {
@@ -110,7 +132,12 @@ export class SurvivorLocationDetailsComponent {
         return this.translateLocationTitle(location.Id);
     }
 
-    private translateLocationTitle(locationId: string): string {
-        return this.localizationService.translate(`${locationId}.title`, LocaleNamespace.locations) ?? 'TRANSLATION NOT FOUND';
+    private translateLocationTitle(locationId: GameLocationId): string {
+        if (!this.game) {
+            throw Error('Game object not initialized.')
+        }
+
+        const location = this.game.Map.getLocation(locationId);
+        return this.localizationService.translateString(location.Title);
     }
 }

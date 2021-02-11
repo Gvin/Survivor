@@ -7,6 +7,7 @@ import { SurvivorLocationDetailsComponent } from './location-details/location-de
 import { SurvivorMenuComponent } from './menu/menu.component';
 import { SurvivorPlayerInventoryComponent } from './player-inventory/player-inventory.component';
 import { SurvivorPlayerStatsComponent } from './player-stats/player-stats.component';
+import { SurvivorStorageInventoryComponent } from './storage-inventory/storage-inventory.component';
 
 export const ComponentsList = [
   SurvivorAppRootComponent,
@@ -17,9 +18,11 @@ export const ComponentsList = [
   SurvivorLocationDetailsComponent,
   SurvivorJournalComponent,
   SurvivorPlayerInventoryComponent,
-  SurvivorItemsGridComponent
+  SurvivorItemsGridComponent,
+  SurvivorStorageInventoryComponent
 ];
 
 export const EntryComponentsList = [
-  SurvivorPlayerInventoryComponent
+  SurvivorPlayerInventoryComponent,
+  SurvivorStorageInventoryComponent
 ];

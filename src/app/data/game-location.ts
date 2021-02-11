@@ -1,4 +1,6 @@
 import { LocaleNamespace } from "../services/game-localization/localization.service";
+import { ItemCreationService } from "../services/item-creation/item-creation.service";
+import { Inventory } from "./inventory";
 import { LocalizableString } from "./localizable-string";
 import { DrinkLocationAction } from "./location-actions/drink-location-action";
 import { GameLocationAction } from "./location-actions/game-location-action";
@@ -10,12 +12,14 @@ export class GameLocation {
     private readonly canSwim?: boolean;
     private readonly waterSource?: WaterType;
     private readonly actions: GameLocationAction[];
+    private readonly groundInventory: Inventory;
 
-    constructor(memento: GameLocationMemento) {
+    constructor(memento: GameLocationMemento, itemCreationService: ItemCreationService) {
         this.id = memento.id;
         this.canSwim = memento.canSwim;
         this.waterSource = memento.waterSource;
         this.actions = this.generateLocationActions();
+        this.groundInventory = new Inventory(memento.groundInventory, itemCreationService);
     }
 
     private generateLocationActions(): GameLocationAction[] {
@@ -35,7 +39,8 @@ export class GameLocation {
         return {
             id: this.id,
             canSwim: this.canSwim,
-            waterSource: this.waterSource
+            waterSource: this.waterSource,
+            groundInventory: this.groundInventory.getMemento()
         }
     }
 
@@ -53,5 +58,9 @@ export class GameLocation {
 
     public get Description(): LocalizableString {
         return new LocalizableString().addLocalizable(`${this.id}.description`, LocaleNamespace.locations);
+    }
+
+    public get GroundInventory(): Inventory {
+        return this.groundInventory;
     }
 }
