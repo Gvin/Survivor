@@ -1,11 +1,11 @@
-name: Build and Deploy
+name: Build and Test
 
 on:
   push:
-    branches:
+    branches-ignore:
       - master
 jobs:
-  build-and-deploy:
+  build-and-test:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -22,14 +22,8 @@ jobs:
     - name: Build
       run: |
         npm install
-        npm run-script deploy
+        npm run-script build
     - name: Test
       run: |
         npm install
         npm run-script test
-    - name: Deploy
-      uses: JamesIves/github-pages-deploy-action@releases/v3
-      with:
-        GITHUB_TOKEN: ${{ secrets.PAGES_TOKEN }}
-        BRANCH: gh-pages
-        FOLDER: dist/Survivor
