@@ -3,5 +3,64 @@
         "title": "Главное Меню",
         "new-game-button": "Начать новую игру",
         "continue-game-button": "Продолжить игру"
+    },
+    "environment": {
+        "title": "Окружение",
+        "temperature": "Температура:",
+        "weather": "Погода:",
+        "time": "Время:",
+        "date-time-format": "dd/MM/yyyy hh:mm"
+    },
+    "player-stats": {
+        "title": "Игрок",
+        "health": "Здоровье:",
+        "thirst": "Жажда:",
+        "hunger": "Голод:",
+        "energy": "Энергия:",
+        "inventory-button": "Инвентарь"
+    },
+    "location": {
+        "go-to": {
+            "title": "Переместиться в {0} ({1}мин)",
+            "tooltip": "Переместиться в другое место."
+        },
+        "check-ground": {
+            "title": "Осмотреть землю ({0} предметов)",
+            "tooltip": "Осмотреть предметы на земле."
+        }
+    },
+    "player-inventory": {
+        "title": "Инвентарь игрока"
+    },
+    "item-actions": {
+        "drop": {
+            "title": "Выбросить {0}",
+            "tooltip": "Предметы будут лежать на земле."
+        },
+        "pickup": {
+            "title": "Поднять {0}",
+            "tooltip": "Поднять этот предмет."
+        },
+        "drink": {
+            "title": "Выпить",
+            "tooltip": "Выпить жидкость."
+        },
+        "empty": {
+            "title": "Опустошить",
+            "tooltip": "Опустошить бутылку. Содержимое будет утрачено."
+        }
+    },
+    "location-actions": {
+        "drink": {
+            "title": "Выпить ({0}мин)",
+            "tooltip": "Выпить из источника воды."
+        },
+        "swim": {
+            "title": "Поплавать ({0}мин)",
+            "tooltip": "Поплавать в воде."
+        }
+    },
+    "actions": {
+        "close": "Закрыть"
     }
 }
