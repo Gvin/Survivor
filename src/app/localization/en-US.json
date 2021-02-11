@@ -35,7 +35,7 @@
     "item-actions": {
         "drop": {
             "title": "Drop {0}",
-            "tooltip": "The items will be lost."
+            "tooltip": "The items will be on the ground."
         },
         "pickup": {
             "title": "Pick up {0}",

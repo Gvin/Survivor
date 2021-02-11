@@ -1,8 +1,7 @@
-import { stringify } from "@angular/compiler/src/util";
 import { Injectable } from "@angular/core";
 import { LocalizableString } from "../../data/localizable-string";
 import { environment } from "src/environments/environment";
-import * as locales from '../../localization';
+import { locales } from '../../localization';
 import { LocalStorageService } from "../local-storage/local-storage.service";
 
 export enum LocaleNamespace {
@@ -14,15 +13,15 @@ export enum LocaleNamespace {
 const LocaleNamespacesMap = [
     {
         key: LocaleNamespace.default,
-        value: ''
+        value: 'common'
     },
     {
         key: LocaleNamespace.items,
-        value: 'items_'
+        value: 'items'
     },
     {
         key: LocaleNamespace.locations,
-        value: 'locations_'
+        value: 'locations'
     }
 ]
 
@@ -96,11 +95,21 @@ export class LocalizationService {
     }
 
     private getLocaleData(namespace: LocaleNamespace): any {
-        const localeKey = this.locale.replace('-', '_');
+        const localeTranslation = (locales as Indexable)[this.locale];
+        if (!localeTranslation) {
+            throw Error(`Translation not found for locale ${this.locale}.`);
+        }
+
         const namespaceKey = LocaleNamespacesMap.find(record => record.key === namespace)?.value;
         if (namespaceKey === undefined) {
             throw Error(`Unknown locale namespace: ${namespace}.`);
         }
-        return (locales as Indexable)[`${namespaceKey}${localeKey}`];
+        const namespaceTranslation = localeTranslation[namespaceKey];
+        if (!namespaceTranslation) {
+            throw Error(`Translation not found for locale ${this.locale} and namespace ${namespaceKey}.`);
+        }
+
+        // default is used to fix JSON format issues.
+        return namespaceTranslation['default'];
     }
 }
