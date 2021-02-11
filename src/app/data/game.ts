@@ -22,7 +22,7 @@ export class Game {
         this.player = new Player(data.player, itemCreationService);
         this.currentLocation = data.currentLocation;
         this.environment = new GameEnvironment(data.environment);
-        this.map = new GameMap(data.map);
+        this.map = new GameMap(data.map, itemCreationService);
         this.journal = new GameJournal(data.journal, localizationService);
 
         this.actionPerformed = new EventEmitter();

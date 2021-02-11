@@ -1,8 +1,7 @@
 import { Component, Input } from "@angular/core";
-import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { Game } from "src/app/data/game";
 import { Player } from "src/app/data/player";
-import { SurvivorPlayerInventoryComponent } from "../player-inventory/player-inventory.component";
+import { GameDialogsService } from "src/app/services/game-dialogs/game-dialogs.service";
 
 @Component({
     selector: 'srv-player-stats',
@@ -16,7 +15,7 @@ export class SurvivorPlayerStatsComponent {
     @Input()
     public game?: Game;
 
-    constructor(private dialog: MatDialog) {
+    constructor(private readonly dialogService: GameDialogsService) {
     }
 
     public openInventory(): void {
@@ -27,14 +26,6 @@ export class SurvivorPlayerStatsComponent {
             throw Error('Game not initialized.')
         }
 
-        const dialogConfig = new MatDialogConfig();
-        dialogConfig.autoFocus = true;
-
-        dialogConfig.data = {
-            inventory: this.model.Inventory,
-            game: this.game
-        };
-
-        this.dialog.open(SurvivorPlayerInventoryComponent, dialogConfig);
+        this.dialogService.showPlayerInventoryDialog(this.game, this.model.Inventory);
     }
 }

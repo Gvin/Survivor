@@ -44,23 +44,28 @@ export class NewGameGeneratorService {
         return {
             locations: [
                 {
-                    id: locCamp
+                    id: locCamp,
+                    groundInventory: {items: []}
                 },
                 {
                     id: locBeach,
                     waterSource: WaterType.sea,
-                    canSwim: true
+                    canSwim: true,
+                    groundInventory: {items: []}
                 },
                 {
-                    id: locForest
+                    id: locForest,
+                    groundInventory: {items: []}
                 },
                 {
-                    id: locCaves
+                    id: locCaves,
+                    groundInventory: {items: []}
                 },
                 {
                     id: locSpring,
                     waterSource: WaterType.clean,
-                    canSwim: true
+                    canSwim: true,
+                    groundInventory: {items: []}
                 }
             ],
             connections: [

@@ -1,12 +1,14 @@
 import { GameLocationConnection, GameMapMemento } from "./mementos/game-map-memento";
 import { GameLocation } from "./game-location";
+import { ItemCreationService } from "../services/item-creation/item-creation.service";
+import { GameLocationId } from "./mementos/game-location-memento";
 
 export class Map {
     private locations: GameLocation[];
     private connections: GameLocationConnection[];
 
-    constructor(data: GameMapMemento) {
-        this.locations = data.locations.map(loc => new GameLocation(loc));
+    constructor(data: GameMapMemento, itemCreationService: ItemCreationService) {
+        this.locations = data.locations.map(loc => new GameLocation(loc, itemCreationService));
         this.connections = data.connections;
     }
 
@@ -17,11 +19,11 @@ export class Map {
         }
     }
 
-    public getConnections(locationId: string): GameLocationConnection[] {
+    public getConnections(locationId: GameLocationId): GameLocationConnection[] {
         return this.connections.filter(connection => connection.locationA === locationId || connection.locationB === locationId);
     }
 
-    public getLocation(id: string): GameLocation {
+    public getLocation(id: GameLocationId): GameLocation {
         return this.locations.find(loc => loc.Id === id) as GameLocation;
     }
 }
