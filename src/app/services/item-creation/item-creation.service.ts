@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
-import { GameItem } from "src/app/data/items/game-item";
-import { ItemType } from "src/app/data/items/item-type";
-import { BottledLiquidGameItem } from "src/app/data/items/bottled-liquid-game-item";
-import { SimpleGameItem } from "src/app/data/items/simple-game-item";
-import { GameItemMemento } from "src/app/data/mementos/game-item-memento";
+import { GameItem } from "../../data/items/game-item";
+import { ItemType } from "../../data/items/item-type";
+import { BottledLiquidGameItem } from "../../data/items/bottled-liquid-game-item";
+import { SimpleGameItem } from "../../data/items/simple-game-item";
+import { GameItemMemento } from "../../data/mementos/game-item-memento";
 
 export const ItemIds = {
     consumable: {

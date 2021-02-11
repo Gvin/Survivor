@@ -26,4 +26,4 @@ jobs:
     - name: Test
       run: |
         npm install
-        npm run-script test
+        npm run-script test:prod

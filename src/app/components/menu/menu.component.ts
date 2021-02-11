@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
-import { NewGameGeneratorService } from "src/app/services/new-game-generator/new-game-generator.service";
-import { SaveGameService } from "src/app/services/save-game/save-game.service";
+import { NewGameGeneratorService } from "../../services/new-game-generator/new-game-generator.service";
+import { SaveGameService } from "../../services/save-game/save-game.service";
 
 @Component({
     selector: 'srv-menu',

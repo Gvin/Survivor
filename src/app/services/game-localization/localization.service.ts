@@ -1,6 +1,6 @@
 import { stringify } from "@angular/compiler/src/util";
 import { Injectable } from "@angular/core";
-import { LocalizableString } from "src/app/data/localizable-string";
+import { LocalizableString } from "../../data/localizable-string";
 import { environment } from "src/environments/environment";
 import * as locales from '../../localization';
 import { LocalStorageService } from "../local-storage/local-storage.service";
