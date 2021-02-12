@@ -24,6 +24,10 @@ export class SurvivorMenuComponent {
         this.router.navigate(['/game']);
     }
 
+    public checkIfSavedGameExists(): boolean {
+        return this.saveGameService.checkSaveGameExists();
+    }
+
     public get GameVersion(): string {
         return this.gameVersionService.getGameVersion();
     }

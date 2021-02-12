@@ -21,4 +21,9 @@ export class SaveGameService {
         var saveGameString = JSON.stringify(data);
         this.localStorageService.setSaveGame(saveGameString);
     }
+
+    public checkSaveGameExists(): boolean {
+        var saveGameString = this.localStorageService.getSaveGame();
+        return saveGameString != undefined;
+    }
 }
