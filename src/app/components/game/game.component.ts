@@ -4,6 +4,7 @@ import { GameLocation } from "../../data/game-location";
 import { LocalizationService } from "../../services/game-localization/localization.service";
 import { ItemCreationService } from "../../services/item-creation/item-creation.service";
 import { SaveGameService } from "../../services/save-game/save-game.service";
+import { version } from '../../../../package.json';
 
 @Component({
     selector: 'srv-game',
@@ -41,5 +42,9 @@ export class SurvivorGameComponent implements OnInit{
             return undefined;
         }
         return this.game.Map.getLocation(this.game.CurrentLocation);
+    }
+
+    public get GameVersion(): string {
+        return version;
     }
 }
