@@ -1,10 +1,10 @@
 import { Component, OnInit } from "@angular/core";
+import { GameVersionService } from "src/app/services/game-version/game-version.service";
 import { Game } from "../../data/game";
 import { GameLocation } from "../../data/game-location";
 import { LocalizationService } from "../../services/game-localization/localization.service";
 import { ItemCreationService } from "../../services/item-creation/item-creation.service";
 import { SaveGameService } from "../../services/save-game/save-game.service";
-import { version } from '../../../../package.json';
 
 @Component({
     selector: 'srv-game',
@@ -17,7 +17,8 @@ export class SurvivorGameComponent implements OnInit{
     constructor(
         private readonly saveGameService: SaveGameService,
         private readonly localizationService: LocalizationService,
-        private readonly itemCreationService: ItemCreationService) {
+        private readonly itemCreationService: ItemCreationService,
+        private readonly gameVersionService: GameVersionService) {
     }
 
     public ngOnInit(): void {
@@ -45,6 +46,6 @@ export class SurvivorGameComponent implements OnInit{
     }
 
     public get GameVersion(): string {
-        return version;
+        return this.gameVersionService.getGameVersion();
     }
 }

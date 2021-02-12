@@ -20,15 +20,15 @@
     <div class="footer">
         <div class="footer-container">
             <div class="footer-item">
-                <a [routerLink]="['/']">To main menu</a>
+                <a [routerLink]="['/']">{{'menu.to-menu-link' | localize: 'To main menu'}}</a>
             </div>
 
             <div class="footer-item">
-                <a href="https://github.com/Gvin/Survivor/issues">Report bugs/suggestions</a>
+                <a href="https://github.com/Gvin/Survivor/issues">{{'menu.report-issues-link' | localize: 'Report bugs/suggestions'}}</a>
             </div>
 
             <div class="footer-item">
-                Version: {{GameVersion}}
+                {{'menu.version-text' | localize: 'Version: {0}': GameVersion}}
             </div>
         </div>
     </div>

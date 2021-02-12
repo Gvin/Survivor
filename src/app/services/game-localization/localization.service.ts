@@ -5,14 +5,14 @@ import { locales } from '../../localization';
 import { LocalStorageService } from "../local-storage/local-storage.service";
 
 export enum LocaleNamespace {
-    default = 'default',
+    common = 'common',
     items = 'items',
     locations = 'locations'
 }
 
 const LocaleNamespacesMap = [
     {
-        key: LocaleNamespace.default,
+        key: LocaleNamespace.common,
         value: 'common'
     },
     {
@@ -52,7 +52,7 @@ export class LocalizationService {
     public translateString(localizableString: LocalizableString): string {
         return localizableString.Parts.map(part => {
             if (part.shouldLocalize) {
-                const translation = this.translate(part.data, part.namespace, part.args);
+                const translation = this.translate(part.data, part.namespace, null, part.args);
                 if (translation == null) {
                     return 'TRANSLATION_NOT_FOUND';
                 } else {
@@ -64,7 +64,12 @@ export class LocalizationService {
         }).join('');
     }
 
-    public translate(key: string, localeNamespace: LocaleNamespace = LocaleNamespace.default, args: string[] = []): string | null {
+    public translate(key: string, localeNamespace: LocaleNamespace = LocaleNamespace.common, defaultValue: string | null = null, args: string[] = []): string | null {
+        const translationRaw = this.getTranslatedText(key, localeNamespace, defaultValue, args);
+        return this.applyArguments(translationRaw, args);
+    }
+
+    private getTranslatedText(key: string, localeNamespace: LocaleNamespace, defaultValue: string | null , args: string[]): string | null {
         const localeData = this.getLocaleData(localeNamespace);
         const parts = key.split('.');
 
@@ -76,11 +81,11 @@ export class LocalizationService {
                 if (!environment.production) {
                     console.warn(`Translation not found for key "${key}" in namespace "${localeNamespace}".`);
                 }
-                return null;
+                return defaultValue;
             }
         }
 
-        return this.applyArguments(currentElement, args);
+        return currentElement;
     }
 
     private applyArguments(translation: string | null, args: string[]): string | null {
