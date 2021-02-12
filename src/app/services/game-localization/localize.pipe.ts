@@ -15,11 +15,8 @@ export class LocalizePipe implements PipeTransform {
     }
 
     private getTranslation(value: string, args: string[]): string {
-        const translation = this.localizationService.translate(value, LocaleNamespace.default, args.slice(1));
-        if (translation == null && args.length >= 1) {
-            return args[0];
-        }
-
+        const defaultTranslation = args.length >= 1 ? args[0] : null;
+        const translation = this.localizationService.translate(value, LocaleNamespace.common, defaultTranslation, args.slice(1));
         return translation ?? '';
     }
 }

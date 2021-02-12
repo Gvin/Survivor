@@ -1,8 +1,8 @@
 <div class="game" *ngIf="game">
     <div class="character-panel panel">
         <div class="stats-panel">
-            <srv-player-stats [game]="game" [model]="game.Player"></srv-player-stats>
-            <srv-environment-stats [model]="game.Environment"></srv-environment-stats>
+            <srv-player-stats [game]="game" [model]="game?.Player"></srv-player-stats>
+            <srv-environment-stats [model]="game?.Environment"></srv-environment-stats>
         </div>
     </div>
 
@@ -11,9 +11,25 @@
             <srv-location-details [game]="game" [model]="getCurrentLocation()"></srv-location-details>
             <mat-card class="journal-box">
                 <mat-card-content>
-                    <srv-journal [model]="game.Journal"></srv-journal>
+                    <srv-journal [model]="game?.Journal"></srv-journal>
                 </mat-card-content>
             </mat-card>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="footer-container">
+            <div class="footer-item">
+                <a [routerLink]="['/']">{{'menu.to-menu-link' | localize: 'To main menu'}}</a>
+            </div>
+
+            <div class="footer-item">
+                <a href="https://github.com/Gvin/Survivor/issues">{{'menu.report-issues-link' | localize: 'Report bugs/suggestions'}}</a>
+            </div>
+
+            <div class="footer-item">
+                {{'menu.version-text' | localize: 'Version: {0}': GameVersion}}
+            </div>
         </div>
     </div>
 </div>

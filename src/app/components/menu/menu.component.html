@@ -6,8 +6,20 @@
                 <a mat-raised-button color="primary" (click)="startNewGameClick()">{{'menu.new-game-button' | localize: 'Start a new game'}}</a>
             </div>
             <div class="button">
-                <a mat-raised-button [routerLink]="['/game']">{{'menu.continue-game-button' | localize: 'Continue game'}}</a>
+                <a mat-raised-button [disabled]="!checkIfSavedGameExists()" [routerLink]="['/game']">{{'menu.continue-game-button' | localize: 'Continue game'}}</a>
             </div>
         </mat-card-content>
     </mat-card>
+
+    <div class="footer">
+        <div class="footer-container">
+            <div class="footer-item">
+                <a href="https://github.com/Gvin/Survivor/issues">{{'menu.report-issues-link' | localize: 'Report bugs/suggestions'}}</a>
+            </div>
+
+            <div class="footer-item">
+                {{'menu.version-text' | localize: 'Version: {0}': GameVersion}}
+            </div>
+        </div>
+    </div>
 </div>

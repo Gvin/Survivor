@@ -1,4 +1,6 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { GameVersionService } from "src/app/services/game-version/game-version.service";
 import { Game } from "../../data/game";
 import { GameLocation } from "../../data/game-location";
 import { LocalizationService } from "../../services/game-localization/localization.service";
@@ -16,13 +18,17 @@ export class SurvivorGameComponent implements OnInit{
     constructor(
         private readonly saveGameService: SaveGameService,
         private readonly localizationService: LocalizationService,
-        private readonly itemCreationService: ItemCreationService) {
+        private readonly itemCreationService: ItemCreationService,
+        private readonly gameVersionService: GameVersionService,
+        private readonly router: Router) {
     }
 
     public ngOnInit(): void {
         var gameData = this.saveGameService.getGameData();
         if (gameData == null) {
-            throw new Error('Unable to load game data.');
+            console.warn('Unable to load game data. Redirecting to main menu.');
+            this.router.navigate(['/']);
+            return;
         }
 
         this.game = new Game(gameData, this.itemCreationService, this.localizationService);
@@ -41,5 +47,9 @@ export class SurvivorGameComponent implements OnInit{
             return undefined;
         }
         return this.game.Map.getLocation(this.game.CurrentLocation);
+    }
+
+    public get GameVersion(): string {
+        return this.gameVersionService.getGameVersion();
     }
 }

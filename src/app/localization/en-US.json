@@ -2,7 +2,10 @@
     "menu": {
         "title": "Main Menu",
         "new-game-button": "Start a new game",
-        "continue-game-button": "Continue game"
+        "continue-game-button": "Continue game",
+        "to-menu-link": "To main menu",
+        "report-issues-link": "Report bugs/suggestions",
+        "version-text": "Version {0}"
     },
     "environment": {
         "title": "Environment",
