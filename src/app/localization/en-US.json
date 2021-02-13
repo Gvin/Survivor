@@ -2,10 +2,16 @@
     "menu": {
         "title": "Main Menu",
         "new-game-button": "Start a new game",
-        "continue-game-button": "Continue game",
+        "continue-game-button": "Continue game"
+    },
+    "footer": {
         "to-menu-link": "To main menu",
         "report-issues-link": "Report bugs/suggestions",
-        "version-text": "Version {0}"
+        "version-text": "Version {0}",
+        "change-locale": "Change Language"
+    },
+    "locales-selector": {
+        "title": "Select Language"
     },
     "environment": {
         "title": "Environment",

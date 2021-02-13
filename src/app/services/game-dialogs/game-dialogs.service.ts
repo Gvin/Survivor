@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
+import { SurvivorLocalesSelectorComponent } from "src/app/components/locales-selector/locales-selector.component";
 import { SurvivorPlayerInventoryComponent } from "../../components/player-inventory/player-inventory.component";
 import { SurvivorStorageInventoryComponent } from "../../components/storage-inventory/storage-inventory.component";
 import { Game } from "../../data/game";
@@ -34,5 +35,12 @@ export class GameDialogsService {
         };
 
         this.dialog.open(SurvivorStorageInventoryComponent, dialogConfig);
+    }
+
+    public showLocalesSelectorDialog(): void {
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.autoFocus = true;
+
+        this.dialog.open(SurvivorLocalesSelectorComponent, dialogConfig);
     }
 }

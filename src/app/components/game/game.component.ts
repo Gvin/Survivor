@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { GameVersionService } from "src/app/services/game-version/game-version.service";
 import { Game } from "../../data/game";
 import { GameLocation } from "../../data/game-location";
 import { LocalizationService } from "../../services/game-localization/localization.service";
@@ -19,7 +18,6 @@ export class SurvivorGameComponent implements OnInit{
         private readonly saveGameService: SaveGameService,
         private readonly localizationService: LocalizationService,
         private readonly itemCreationService: ItemCreationService,
-        private readonly gameVersionService: GameVersionService,
         private readonly router: Router) {
     }
 
@@ -47,9 +45,5 @@ export class SurvivorGameComponent implements OnInit{
             return undefined;
         }
         return this.game.Map.getLocation(this.game.CurrentLocation);
-    }
-
-    public get GameVersion(): string {
-        return this.gameVersionService.getGameVersion();
     }
 }

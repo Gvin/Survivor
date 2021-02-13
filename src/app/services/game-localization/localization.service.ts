@@ -32,21 +32,47 @@ interface Indexable {
     [key: string]: any;
 }
 
+export interface GameLocale {
+    code: string;
+    name: string;
+    localName: string;
+    icon: string;
+}
+
 @Injectable({providedIn: 'root'})
 export class LocalizationService {
-    private locale: string;
+    private locale: GameLocale;
 
     constructor(private readonly localStorageService: LocalStorageService) {
-        this.locale = this.localStorageService.getLocale() || defaultLocale;
+        const localeKey = this.localStorageService.getLocale() || defaultLocale;
+        const existingLocales = this.getExistingLocales();
+        const currentLocale = existingLocales.find(loc => loc.code === localeKey);
+        if (!currentLocale) {
+            throw Error(`Unable to load locale ${localeKey}.`);
+        }
+        this.locale = currentLocale;
     }
 
-    public get currentLocale(): string {
+    public get currentLocale(): GameLocale {
         return this.locale;
     }
 
-    public setLocale(newLocale: string): void {
+    public getExistingLocales(): GameLocale[] {
+        const localeNames = Object.keys(locales);
+        return localeNames.map(name => {
+            const localeDetails = (locales as Indexable)[name].details;
+            return {
+                code: name,
+                name: localeDetails.name,
+                localName: localeDetails.localName,
+                icon: localeDetails.icon
+            };
+        });
+    }
+
+    public setLocale(newLocale: GameLocale): void {
         this.locale = newLocale;
-        this.localStorageService.setLocale(newLocale);
+        this.localStorageService.setLocale(newLocale.code);
     }
 
     public translateString(localizableString: LocalizableString): string {
@@ -100,7 +126,7 @@ export class LocalizationService {
     }
 
     private getLocaleData(namespace: LocaleNamespace): any {
-        const localeTranslation = (locales as Indexable)[this.locale];
+        const localeTranslation = (locales as Indexable)[this.locale.code];
         if (!localeTranslation) {
             throw Error(`Translation not found for locale ${this.locale}.`);
         }
