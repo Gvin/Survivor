@@ -11,6 +11,6 @@ export class ChangedLocationJournalMessage implements GameJournalMessage {
     
     public getMessageString(): LocalizableString {
         return new LocalizableString()
-            .addStatic('You walked from ').addSubstring(this.sourceLocation.Title).addStatic(' to ').addSubstring(this.targetLocation.Title).addStatic('.');
+            .addStatic('You walked from the ').addSubstring(this.sourceLocation.FromName).addStatic(' to the ').addSubstring(this.targetLocation.ToName).addStatic('.');
     }
 }

@@ -2,22 +2,32 @@
     "tropical": {
         "camp": {
             "title": "Camp",
+            "from": "Camp",
+            "to": "Capm",
             "description": "A good place to build a camp."
         },
         "beach": {
             "title": "Beach",
+            "from": "Beach",
+            "to": "Beach",
             "description": "Beautiful sandy beach."
         },
         "forest": {
             "title": "Forest",
+            "from": "Forest",
+            "to": "Forest",
             "description": "Thick tropical forest. Who knows what creatures live in it."
         },
         "caves": {
             "title": "Caves",
+            "from": "Caves",
+            "to": "Caves",
             "description": "A group of caves on the side of the hill. It's quite dark inside."
         },
         "spring": {
             "title": "Spring",
+            "from": "Spring",
+            "to": "Spring",
             "description": "A fresh water spring. It's water is cold."
         }
     }

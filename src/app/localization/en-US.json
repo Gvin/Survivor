@@ -30,7 +30,7 @@
     },
     "location": {
         "go-to": {
-            "title": "Go to {0} ({1}m)",
+            "title": "Go to the {0} ({1}m)",
             "tooltip": "Move to a different location."
         },
         "check-ground": {

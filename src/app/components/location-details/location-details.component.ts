@@ -118,7 +118,7 @@ export class SurvivorLocationDetailsComponent {
         return this.game.Map.getConnections(this.model.Id);
     }
 
-    public getConnectedLocationTitle(connection: GameLocationConnection): string {
+    public getConnectedLocationToName(connection: GameLocationConnection): string {
         if (!this.game) {
             throw Error('Game object not initialized.')
         }
@@ -129,7 +129,7 @@ export class SurvivorLocationDetailsComponent {
             throw Error(`Unable to find location ${targetLocation}.`)
         }
 
-        return this.translateLocationTitle(location.Id);
+        return this.localizationService.translateString(location.ToName);
     }
 
     private translateLocationTitle(locationId: GameLocationId): string {

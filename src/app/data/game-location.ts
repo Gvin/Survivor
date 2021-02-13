@@ -60,6 +60,14 @@ export class GameLocation {
         return new LocalizableString().addLocalizable(`${this.id}.description`, LocaleNamespace.locations);
     }
 
+    public get FromName(): LocalizableString {
+        return new LocalizableString().addLocalizable(`${this.id}.from`, LocaleNamespace.locations);
+    }
+
+    public get ToName(): LocalizableString {
+        return new LocalizableString().addLocalizable(`${this.id}.to`, LocaleNamespace.locations);
+    }
+
     public get GroundInventory(): Inventory {
         return this.groundInventory;
     }
