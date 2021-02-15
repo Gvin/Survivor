@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { MatDialogRef } from "@angular/material/dialog";
 import { GameLocale, LocalizationService } from "src/app/services/game-localization/localization.service";
+import { PageRefreshService } from "src/app/services/page-refresh/page-refresh.service";
 
 @Component({
     selector: 'srv-locales-selector',
@@ -15,6 +16,7 @@ export class SurvivorLocalesSelectorComponent {
     
     constructor(
         private readonly localizationService: LocalizationService,
+        private readonly pageRefreshService: PageRefreshService,
         private readonly dialogRef: MatDialogRef<SurvivorLocalesSelectorComponent>) {
             this.locales = this.localizationService.getExistingLocales();
     }
@@ -22,7 +24,7 @@ export class SurvivorLocalesSelectorComponent {
     public applyLocale(locale: GameLocale): void {
         this.localizationService.setLocale(locale);
         this.close();
-        location.reload();
+        this.pageRefreshService.refreshPage();
     }
 
     public close(): void {

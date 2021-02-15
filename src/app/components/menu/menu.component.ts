@@ -1,5 +1,6 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { PageRefreshService } from "src/app/services/page-refresh/page-refresh.service";
 import { NewGameGeneratorService } from "../../services/new-game-generator/new-game-generator.service";
 import { SaveGameService } from "../../services/save-game/save-game.service";
 
@@ -8,12 +9,23 @@ import { SaveGameService } from "../../services/save-game/save-game.service";
     templateUrl: './menu.component.html',
     styleUrls: ['./menu.component.scss']
 })
-export class SurvivorMenuComponent {
+export class SurvivorMenuComponent implements OnInit {
+
+    public render: boolean;
 
     constructor(
         private readonly saveGameService: SaveGameService, 
         private readonly newGameService: NewGameGeneratorService,
-        private readonly router: Router) {
+        private readonly router: Router,
+        private readonly pageRefreshService: PageRefreshService) {
+
+            this.render = true;
+    }
+
+    public ngOnInit(): void {
+        this.pageRefreshService.pageStateChanged.subscribe((status: boolean) => {
+            this.render = status;
+        });
     }
 
     public startNewGameClick(): void {

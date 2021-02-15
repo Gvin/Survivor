@@ -1,4 +1,4 @@
-<div class="game" *ngIf="game">
+<div class="game" *ngIf="render && game">
     <div class="character-panel panel">
         <div class="stats-panel">
             <srv-player-stats [game]="game" [model]="game?.Player"></srv-player-stats>
