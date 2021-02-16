@@ -1,0 +1,10 @@
+{
+    "changed-location": "You walked from the {0} to the {1}.",
+    "drink-on-location": "You have drank some water from the water source.",
+    "empty-item": "You have emptied the {0}.",
+    "item-consumed": "You have consumed the {0}.",
+    "item-dropped": "You have dropped {0}.",
+    "item-picked-up": "You have picked up one {0}.",
+    "item-received": "You have received {0}.",
+    "swim-on-location": "You swam in the water."
+}

@@ -4,7 +4,7 @@ export interface LocalizableStringPart {
     shouldLocalize: boolean;
     data: string;
     namespace?: LocaleNamespace;
-    args?: string[];
+    args?: LocalizableString[];
 }
 
 export class LocalizableString {
@@ -23,6 +23,16 @@ export class LocalizableString {
     }
 
     public addLocalizable(key: string, namespace?: LocaleNamespace, args?: string[]) {
+        this.parts.push({
+            shouldLocalize: true,
+            data: key,
+            namespace: namespace,
+            args: args?.map(arg => new LocalizableString().addStatic(arg))
+        });
+        return this;
+    }
+
+    public addLocalizableComposite(key: string, namespace?: LocaleNamespace, args?: LocalizableString[]) {
         this.parts.push({
             shouldLocalize: true,
             data: key,

@@ -7,7 +7,8 @@ import { LocalStorageService } from "../local-storage/local-storage.service";
 export enum LocaleNamespace {
     common = 'common',
     items = 'items',
-    locations = 'locations'
+    locations = 'locations',
+    journal = 'journal'
 }
 
 const LocaleNamespacesMap = [
@@ -22,6 +23,10 @@ const LocaleNamespacesMap = [
     {
         key: LocaleNamespace.locations,
         value: 'locations'
+    },
+    {
+        key: LocaleNamespace.journal,
+        value: 'journal'
     }
 ]
 
@@ -78,7 +83,8 @@ export class LocalizationService {
     public translateString(localizableString: LocalizableString): string {
         return localizableString.Parts.map(part => {
             if (part.shouldLocalize) {
-                const translation = this.translate(part.data, part.namespace, null, part.args);
+                const translatedArgs = part.args ? part.args.map(arg => this.translateString(arg)) : [];
+                const translation = this.translate(part.data, part.namespace, null, translatedArgs);
                 if (translation == null) {
                     return 'TRANSLATION_NOT_FOUND';
                 } else {
@@ -128,7 +134,7 @@ export class LocalizationService {
     private getLocaleData(namespace: LocaleNamespace): any {
         const localeTranslation = (locales as Indexable)[this.locale.code];
         if (!localeTranslation) {
-            throw Error(`Translation not found for locale ${this.locale}.`);
+            throw Error(`Translation not found for locale ${this.locale.code}.`);
         }
 
         const namespaceKey = LocaleNamespacesMap.find(record => record.key === namespace)?.value;
@@ -137,7 +143,7 @@ export class LocalizationService {
         }
         const namespaceTranslation = localeTranslation[namespaceKey];
         if (!namespaceTranslation) {
-            throw Error(`Translation not found for locale ${this.locale} and namespace ${namespaceKey}.`);
+            throw Error(`Translation not found for locale ${this.locale.code} and namespace ${namespaceKey}.`);
         }
 
         // default is used to fix JSON format issues.

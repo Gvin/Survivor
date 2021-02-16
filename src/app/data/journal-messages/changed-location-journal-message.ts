@@ -1,3 +1,4 @@
+import { LocaleNamespace } from "src/app/services/game-localization/localization.service";
 import { GameLocation } from "../game-location";
 import { LocalizableString } from "../localizable-string";
 import { GameJournalMessage } from "./game-journal-message";
@@ -10,7 +11,9 @@ export class ChangedLocationJournalMessage implements GameJournalMessage {
     }
     
     public getMessageString(): LocalizableString {
-        return new LocalizableString()
-            .addStatic('You walked from the ').addSubstring(this.sourceLocation.FromName).addStatic(' to the ').addSubstring(this.targetLocation.ToName).addStatic('.');
+        return new LocalizableString().addLocalizableComposite('changed-location', LocaleNamespace.journal, [
+            this.sourceLocation.FromName,
+            this.targetLocation.ToName
+        ]);
     }
 }

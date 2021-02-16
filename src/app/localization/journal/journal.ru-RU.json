@@ -1,0 +1,10 @@
+{
+    "changed-location": "Вы прошли из {0} к {1}.",
+    "drink-on-location": "Вы выпили немного воды из источника.",
+    "empty-item": "Вы опустошили {0}.",
+    "item-consumed": "Вы использовали {0}.",
+    "item-dropped": "Вы выбросили {0}.",
+    "item-picked-up": "Вы подняли {0}.",
+    "item-received": "Вы получили {0}.",
+    "swim-on-location": "Вы поплавали в воде."
+}

@@ -1,6 +1,6 @@
 import { Game } from "../game";
 import { GameItem } from "../items/game-item";
-import { ItemDroppedJournalMessage } from "../journal-messages/item-thrown-journal-message";
+import { ItemDroppedJournalMessage } from "../journal-messages/item-dropped-journal-message";
 import { PlayerAction } from "./player-action";
 
 
