@@ -1,6 +1,6 @@
 import { Component, Input } from "@angular/core";
-import { GameEnvironment } from "../../data/game-environment";
-import { LocalizationService } from "../../services/game-localization/localization.service";
+import { GameEnvironment } from "src/app/data/game-environment";
+import { LocalizationService } from "src/app/services/game-localization/localization.service";
 
 @Component({
     selector: 'srv-environment-stats',

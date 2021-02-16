@@ -1,4 +1,4 @@
-import { LocaleNamespace } from "../services/game-localization/localization.service";
+import { LocaleNamespace } from "src/app/services/game-localization/localization.service";
 
 export interface LocalizableStringPart {
     shouldLocalize: boolean;

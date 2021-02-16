@@ -1,5 +1,5 @@
 import { Component, Input } from "@angular/core";
-import { GameJournal } from "../../data/game-journal";
+import { GameJournal } from "src/app/data/game-journal";
 
 @Component({
     selector: 'srv-journal',

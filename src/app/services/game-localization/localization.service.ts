@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
-import { LocalizableString } from "../../data/localizable-string";
+import { LocalizableString } from "src/app/data/localizable-string";
 import { environment } from "src/environments/environment";
-import { locales } from '../../localization';
-import { LocalStorageService } from "../local-storage/local-storage.service";
+import { locales } from 'src/app/localization';
+import { LocalStorageService } from "src/app/services/local-storage/local-storage.service";
 
 export enum LocaleNamespace {
     common = 'common',

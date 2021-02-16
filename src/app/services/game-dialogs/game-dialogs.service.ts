@@ -1,11 +1,11 @@
 import { Injectable } from "@angular/core";
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { SurvivorLocalesSelectorComponent } from "src/app/components/locales-selector/locales-selector.component";
-import { SurvivorPlayerInventoryComponent } from "../../components/player-inventory/player-inventory.component";
-import { SurvivorStorageInventoryComponent } from "../../components/storage-inventory/storage-inventory.component";
-import { Game } from "../../data/game";
-import { Inventory } from "../../data/inventory";
-import { LocalizableString } from "../../data/localizable-string";
+import { SurvivorPlayerInventoryComponent } from "src/app/components/player-inventory/player-inventory.component";
+import { SurvivorStorageInventoryComponent } from "src/app/components/storage-inventory/storage-inventory.component";
+import { Game } from "src/app/data/game";
+import { Inventory } from "src/app/data/inventory";
+import { LocalizableString } from "src/app/data/localizable-string";
 
 @Injectable({providedIn: 'root'})
 export class GameDialogsService {

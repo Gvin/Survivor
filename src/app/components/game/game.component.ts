@@ -1,11 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { PageRefreshService } from "src/app/services/page-refresh/page-refresh.service";
-import { Game } from "../../data/game";
-import { GameLocation } from "../../data/game-location";
-import { LocalizationService } from "../../services/game-localization/localization.service";
-import { ItemCreationService } from "../../services/item-creation/item-creation.service";
-import { SaveGameService } from "../../services/save-game/save-game.service";
+import { Game } from "src/app/data/game";
+import { GameLocation } from "src/app/data/game-location";
+import { LocalizationService } from "src/app/services/game-localization/localization.service";
+import { ItemCreationService } from "src/app/services/item-creation/item-creation.service";
+import { SaveGameService } from "src/app/services/save-game/save-game.service";
 
 @Component({
     selector: 'srv-game',

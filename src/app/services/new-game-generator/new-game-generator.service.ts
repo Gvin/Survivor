@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
-import { WaterType } from "../../data/mementos/game-location-memento";
-import { GameMapMemento } from "../../data/mementos/game-map-memento";
-import { GameMemento } from "../../data/mementos/game-memento";
+import { WaterType } from "src/app/data/mementos/game-location-memento";
+import { GameMapMemento } from "src/app/data/mementos/game-map-memento";
+import { GameMemento } from "src/app/data/mementos/game-memento";
 import { ItemCreationService, ItemIds } from "../item-creation/item-creation.service";
 
 const locCamp = 'tropical.camp';

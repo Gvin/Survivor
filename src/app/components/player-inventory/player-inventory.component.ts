@@ -1,10 +1,10 @@
 import { Component, Inject } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { Game } from "../../data/game";
-import { GameInventoryStack, Inventory } from "../../data/inventory";
-import { GameItemExtraAction } from "../../data/items/game-item";
-import { DropItemPlayerAction } from "../../data/player-actions/drop-item-player-action";
-import { LocalizationService } from "../../services/game-localization/localization.service";
+import { Game } from "src/app/data/game";
+import { GameInventoryStack, Inventory } from "src/app/data/inventory";
+import { GameItemExtraAction } from "src/app/data/items/game-item";
+import { DropItemPlayerAction } from "src/app/data/player-actions/drop-item-player-action";
+import { LocalizationService } from "src/app/services/game-localization/localization.service";
 
 @Component({
     selector: 'srv-player-inventory',

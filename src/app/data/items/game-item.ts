@@ -1,4 +1,4 @@
-import { LocaleNamespace } from "../../services/game-localization/localization.service";
+import { LocaleNamespace } from "src/app/services/game-localization/localization.service";
 import { Game } from "../game";
 import { LocalizableString } from "../localizable-string";
 import { GameItemData, GameItemMemento } from "../mementos/game-item-memento";
