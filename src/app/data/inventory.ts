@@ -1,4 +1,4 @@
-import { ItemCreationService } from "../services/item-creation/item-creation.service";
+import { ItemCreationFactory } from "./items/item-creation/item-creation-factory";
 import { GameItem } from "./items/game-item";
 import { GameItemMemento } from "./mementos/game-item-memento";
 import { InventoryMemento } from "./mementos/inventory-memento";
@@ -39,7 +39,7 @@ class GameInventoryStackImpl implements GameInventoryStack {
 export class Inventory {
     private stacks: GameInventoryStackImpl[];
 
-    constructor(data: InventoryMemento, itemCreationService: ItemCreationService) {
+    constructor(data: InventoryMemento, itemCreationService: ItemCreationFactory) {
         this.stacks = [];
         
         data.items.map(itemMemento => itemCreationService.loadItem(itemMemento)).forEach(item => {

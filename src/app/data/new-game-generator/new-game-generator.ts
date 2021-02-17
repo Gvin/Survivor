@@ -1,8 +1,8 @@
-import { Injectable } from "@angular/core";
 import { WaterType } from "src/app/data/mementos/game-location-memento";
 import { GameMapMemento } from "src/app/data/mementos/game-map-memento";
 import { GameMemento } from "src/app/data/mementos/game-memento";
-import { ItemCreationService, ItemIds } from "../item-creation/item-creation.service";
+import { ItemCreationFactory } from "../items/item-creation/item-creation-factory";
+import { ItemIds } from "../items/item-creation/tropical-items-map";
 
 const locCamp = 'tropical.camp';
 const locBeach = 'tropical.beach';
@@ -10,9 +10,8 @@ const locForest = 'tropical.forest';
 const locCaves = 'tropical.caves';
 const locSpring = 'tropical.spring';
 
-@Injectable({providedIn: 'root'})
-export class NewGameGeneratorService {
-    constructor(private readonly itemCreationService: ItemCreationService) {
+export class NewGameGenerator {
+    constructor(private readonly itemCreationFactory: ItemCreationFactory) {
     }
 
     public generateNewGame(): GameMemento {
@@ -24,8 +23,8 @@ export class NewGameGeneratorService {
                 energy: 100,
                 inventory: {
                     items: [
-                        this.itemCreationService.getItemMemento(ItemIds.consumable.freshWaterBottle),
-                        this.itemCreationService.getItemMemento(ItemIds.consumable.saltWaterBottle)
+                        this.itemCreationFactory.getItemMemento(ItemIds.consumable.freshWaterBottle),
+                        this.itemCreationFactory.getItemMemento(ItemIds.consumable.saltWaterBottle)
                     ]
                 }
             },

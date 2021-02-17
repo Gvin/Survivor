@@ -1,5 +1,5 @@
 import { LocaleNamespace } from "../services/game-localization/localization.service";
-import { ItemCreationService } from "../services/item-creation/item-creation.service";
+import { ItemCreationFactory } from "./items/item-creation/item-creation-factory";
 import { Inventory } from "./inventory";
 import { LocalizableString } from "./localizable-string";
 import { DrinkLocationAction } from "./location-actions/drink-location-action";
@@ -14,7 +14,7 @@ export class GameLocation {
     private readonly actions: GameLocationAction[];
     private readonly groundInventory: Inventory;
 
-    constructor(memento: GameLocationMemento, itemCreationService: ItemCreationService) {
+    constructor(memento: GameLocationMemento, itemCreationService: ItemCreationFactory) {
         this.id = memento.id;
         this.canSwim = memento.canSwim;
         this.waterSource = memento.waterSource;

@@ -1,4 +1,4 @@
-import { ItemCreationService } from "../services/item-creation/item-creation.service";
+import { ItemCreationFactory } from "./items/item-creation/item-creation-factory";
 import { Game } from "./game";
 import { Inventory } from "./inventory";
 import { PlayerMemento } from "./mementos/player-memento";
@@ -10,7 +10,7 @@ export class Player {
     private energy: number;
     private inventory: Inventory;
 
-    constructor(data: PlayerMemento, itemCreationService: ItemCreationService) {
+    constructor(data: PlayerMemento, itemCreationService: ItemCreationFactory) {
         this.health = data.health;
         this.thirst = data.thirst;
         this.hunger = data.hunger;

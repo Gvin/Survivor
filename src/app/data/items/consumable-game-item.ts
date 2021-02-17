@@ -27,8 +27,6 @@ export abstract class ConsumableGameItem extends GameItem {
                 case 'energy':
                     player.Energy += value;
                     break;
-                default:
-                    throw Error(`Unknown effect type: ${effect.key},`);
             }
         });
     }

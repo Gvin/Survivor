@@ -4,8 +4,9 @@ import { PageRefreshService } from "src/app/services/page-refresh/page-refresh.s
 import { Game } from "src/app/data/game";
 import { GameLocation } from "src/app/data/game-location";
 import { LocalizationService } from "src/app/services/game-localization/localization.service";
-import { ItemCreationService } from "src/app/services/item-creation/item-creation.service";
+import { ItemCreationFactory } from "src/app/data/items/item-creation/item-creation-factory";
 import { SaveGameService } from "src/app/services/save-game/save-game.service";
+import { tropicalItemsMap } from "src/app/data/items/item-creation/tropical-items-map";
 
 @Component({
     selector: 'srv-game',
@@ -20,7 +21,6 @@ export class SurvivorGameComponent implements OnInit {
     constructor(
         private readonly saveGameService: SaveGameService,
         private readonly localizationService: LocalizationService,
-        private readonly itemCreationService: ItemCreationService,
         private readonly pageRefreshService: PageRefreshService,
         private readonly router: Router) {
 
@@ -39,7 +39,8 @@ export class SurvivorGameComponent implements OnInit {
             return;
         }
 
-        this.game = new Game(gameData, this.itemCreationService, this.localizationService);
+        const itemCreationFactory = new ItemCreationFactory(tropicalItemsMap);
+        this.game = new Game(gameData, itemCreationFactory, this.localizationService);
         this.game.actionPerformed.on('action', () => this.gameActionPerformed());
     }
 
