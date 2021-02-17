@@ -8,6 +8,6 @@ export class ItemPickedUpJournalMessage implements GameJournalMessage {
     }
     
     public getMessageString(): LocalizableString {
-        return new LocalizableString().addLocalizableComposite('item-picked-up', LocaleNamespace.journal, [this.item.Name]);
+        return new LocalizableString().addLocalizableComposite('item-picked-up', LocaleNamespace.journal, [this.item.UseName]);
     }
 }

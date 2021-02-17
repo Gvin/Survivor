@@ -11,7 +11,9 @@ export const ItemIds = {
         saltWaterBottle: 'salt-water-bottle'
     },
     misc: {
-        emptyBottle: 'empty-bottle'
+        emptyBottle: 'empty-bottle',
+        branch: 'branch',
+        stick: 'stick'
     }
 }
 
@@ -53,13 +55,25 @@ export class ItemCreationService {
                     data: [
                         {key: 'thirst', value: '10'}
                     ]
-                }
+                };
             case ItemIds.misc.emptyBottle:
                 return {
                     type: ItemType.misc,
                     id: itemId,
                     stackable: true,
-                }
+                };
+            case ItemIds.misc.branch:
+                return {
+                    type: ItemType.misc,
+                    id: itemId,
+                    stackable: true
+                };
+            case ItemIds.misc.stick:
+                return {
+                    type: ItemType.misc,
+                    id: itemId,
+                    stackable: true
+                };
             default:
                 throw Error(`Unknown item id: ${itemId}.`);
         }

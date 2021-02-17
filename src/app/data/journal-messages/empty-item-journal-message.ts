@@ -8,6 +8,6 @@ export class EmptyItemJournalMessage implements GameJournalMessage {
     }
 
     public getMessageString(): LocalizableString {
-        return new LocalizableString().addLocalizableComposite('empty-item', LocaleNamespace.journal, [this.item.Name]);
+        return new LocalizableString().addLocalizableComposite('empty-item', LocaleNamespace.journal, [this.item.UseName]);
     }
 }

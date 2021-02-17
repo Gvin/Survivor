@@ -16,6 +16,7 @@ export abstract class GameItem {
     protected readonly data?: GameItemData[];
 
     private readonly name: LocalizableString;
+    private readonly useName: LocalizableString;
     private readonly description: LocalizableString;
 
     constructor(memento: GameItemMemento) {
@@ -25,11 +26,16 @@ export abstract class GameItem {
         this.data = memento.data;
 
         this.name = new LocalizableString().addLocalizable(`${this.Id}.name`, LocaleNamespace.items);
+        this.useName = new LocalizableString().addLocalizable(`${this.Id}.useName`, LocaleNamespace.items);
         this.description = new LocalizableString().addLocalizable(`${this.Id}.description`, LocaleNamespace.items);
     }
 
     public get Name(): LocalizableString {
         return this.name;
+    }
+
+    public get UseName(): LocalizableString {
+        return this.useName;
     }
 
     public get Description(): LocalizableString {

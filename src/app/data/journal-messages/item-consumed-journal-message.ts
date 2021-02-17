@@ -9,6 +9,6 @@ export class ItemConsumedJournalMessage implements GameJournalMessage {
     }
 
     public getMessageString(): LocalizableString {
-        return new LocalizableString().addLocalizableComposite('item-consumed', LocaleNamespace.journal, [this.item.Name]);
+        return new LocalizableString().addLocalizableComposite('item-consumed', LocaleNamespace.journal, [this.item.UseName]);
     }
 }
