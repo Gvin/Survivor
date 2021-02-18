@@ -2,10 +2,16 @@
     "menu": {
         "title": "Главное Меню",
         "new-game-button": "Начать новую игру",
-        "continue-game-button": "Продолжить игру",
+        "continue-game-button": "Продолжить игру"
+    },
+    "footer": {
         "to-menu-link": "В главное меню",
         "report-issues-link": "Внести ошибки/предложения",
-        "version-text": "Версия {0}"
+        "version-text": "Версия {0}",
+        "change-locale": "Изменить язык"
+    },
+    "locales-selector": {
+        "title": "Выберите язык"
     },
     "environment": {
         "title": "Окружение",
@@ -24,7 +30,7 @@
     },
     "location": {
         "go-to": {
-            "title": "Переместиться в {0} ({1}мин)",
+            "title": "Пойти к {0} ({1}мин)",
             "tooltip": "Переместиться в другое место."
         },
         "check-ground": {

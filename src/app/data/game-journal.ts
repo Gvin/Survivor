@@ -1,31 +1,30 @@
-import { LocalizationService } from "../services/game-localization/localization.service";
 import { Game } from "./game";
 import { GameJournalMessage } from "./journal-messages/game-journal-message";
 import { GameJournalMemento } from "./mementos/game-journal-memento";
-import { DatePipe } from '@angular/common';
+import { LocalizableString } from "./localizable-string";
+
+export interface GameJournalMessageRecord {
+    timeStamp: Date;
+    message: LocalizableString;
+}
 
 export class GameJournal {
-    private messages: string[];
+    private messages: GameJournalMessageRecord[];
 
-    constructor(data: GameJournalMemento, private readonly localizationService: LocalizationService) {
+    constructor(memento: GameJournalMemento) {
         this.messages = [];
     }
-
-    private getTimeStamp(game: Game): string {
-        const datepipe: DatePipe = new DatePipe('en-US')
-        const format = this.localizationService.translate('environment.date-time-format') ?? 'MM/dd/yyyy hh:mm';
-        return  datepipe.transform(game.Environment.Time, format) ?? game.Environment.Time.toString();
-    }
-
+    
     public write(game: Game, message: GameJournalMessage): void {
-        const timeStamp = this.getTimeStamp(game);
+        const timeStamp = game.Environment.Time;
         const messageLocalizableString = message.getMessageString();
-        const pureMessageText = this.localizationService.translateString(messageLocalizableString);
-        const messageText = `[${timeStamp}] ${pureMessageText}`;
-        this.messages.push(messageText);
+        this.messages.push({
+            timeStamp: timeStamp,
+            message: messageLocalizableString
+        });
     }
 
-    public get Messages(): string[] {
+    public get Messages(): GameJournalMessageRecord[] {
         return this.messages;
     }
 

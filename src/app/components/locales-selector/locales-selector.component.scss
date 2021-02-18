@@ -1,0 +1,13 @@
+.locales-selector-dialog {
+    .content {
+        .locale {
+            cursor: pointer;
+            margin-bottom: 3px;
+
+            &:hover {
+                background-color: lightgray;
+                border-radius: 3px;
+            }
+        }
+    }
+}

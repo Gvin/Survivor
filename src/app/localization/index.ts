@@ -10,15 +10,32 @@ import * as items_ru_RU from './items/items.ru-RU.json';
 import * as locations_en_US from './locations/locations.en-US.json';
 import * as locations_ru_RU from './locations/locations.ru-RU.json';
 
+// Journal
+import * as journal_en_US from './journal/journal.en-US.json';
+import * as journal_ru_RU from './journal/journal.ru-RU.json';
+
+// icon names are taken from flag-icons.scss
 export const locales = {
     "en-US": {
+        details: {
+            name: "English (US)",
+            localName: "English (US)",
+            icon: "flag-icon-us"
+        },
         common: en_US,
         items: items_en_US,
-        locations: locations_en_US
+        locations: locations_en_US,
+        journal: journal_en_US
     },
     "ru-RU": {
+        details: {
+            name: "Russian",
+            localName: "Русский",
+            icon: "flag-icon-ru"
+        },
         common: ru_RU,
         items: items_ru_RU,
-        locations: locations_ru_RU
+        locations: locations_ru_RU,
+        journal: journal_ru_RU
     }
 }

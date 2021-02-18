@@ -1,29 +1,35 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { GameVersionService } from "src/app/services/game-version/game-version.service";
-import { Game } from "../../data/game";
-import { GameLocation } from "../../data/game-location";
-import { LocalizationService } from "../../services/game-localization/localization.service";
-import { ItemCreationService } from "../../services/item-creation/item-creation.service";
-import { SaveGameService } from "../../services/save-game/save-game.service";
+import { PageRefreshService } from "src/app/services/page-refresh/page-refresh.service";
+import { Game } from "src/app/data/game";
+import { GameLocation } from "src/app/data/game-location";
+import { ItemCreationFactory } from "src/app/data/items/item-creation/item-creation-factory";
+import { SaveGameService } from "src/app/services/save-game/save-game.service";
+import { tropicalItemsMap } from "src/app/data/items/item-creation/tropical-items-map";
 
 @Component({
     selector: 'srv-game',
     templateUrl: './game.component.html',
     styleUrls: ['./game.component.scss']
 })
-export class SurvivorGameComponent implements OnInit{
+export class SurvivorGameComponent implements OnInit {
+
+    public render: boolean;
     public game?: Game;
 
     constructor(
         private readonly saveGameService: SaveGameService,
-        private readonly localizationService: LocalizationService,
-        private readonly itemCreationService: ItemCreationService,
-        private readonly gameVersionService: GameVersionService,
+        private readonly pageRefreshService: PageRefreshService,
         private readonly router: Router) {
+
+            this.render = true;
     }
 
     public ngOnInit(): void {
+        this.pageRefreshService.pageStateChanged.subscribe((status: boolean) => {
+            this.render = status;
+        });
+
         var gameData = this.saveGameService.getGameData();
         if (gameData == null) {
             console.warn('Unable to load game data. Redirecting to main menu.');
@@ -31,7 +37,8 @@ export class SurvivorGameComponent implements OnInit{
             return;
         }
 
-        this.game = new Game(gameData, this.itemCreationService, this.localizationService);
+        const itemCreationFactory = new ItemCreationFactory(tropicalItemsMap);
+        this.game = new Game(gameData, itemCreationFactory);
         this.game.actionPerformed.on('action', () => this.gameActionPerformed());
     }
 
@@ -47,9 +54,5 @@ export class SurvivorGameComponent implements OnInit{
             return undefined;
         }
         return this.game.Map.getLocation(this.game.CurrentLocation);
-    }
-
-    public get GameVersion(): string {
-        return this.gameVersionService.getGameVersion();
     }
 }

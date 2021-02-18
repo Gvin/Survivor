@@ -2,10 +2,16 @@
     "menu": {
         "title": "Main Menu",
         "new-game-button": "Start a new game",
-        "continue-game-button": "Continue game",
+        "continue-game-button": "Continue game"
+    },
+    "footer": {
         "to-menu-link": "To main menu",
         "report-issues-link": "Report bugs/suggestions",
-        "version-text": "Version {0}"
+        "version-text": "Version {0}",
+        "change-locale": "Change Language"
+    },
+    "locales-selector": {
+        "title": "Select Language"
     },
     "environment": {
         "title": "Environment",
@@ -24,7 +30,7 @@
     },
     "location": {
         "go-to": {
-            "title": "Go to {0} ({1}m)",
+            "title": "Go to the {0} ({1}m)",
             "tooltip": "Move to a different location."
         },
         "check-ground": {

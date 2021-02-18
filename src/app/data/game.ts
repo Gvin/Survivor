@@ -3,11 +3,11 @@ import { GameMemento } from "./mementos/game-memento";
 import { Player } from "./player";
 import { Map as GameMap } from "./game-map";
 import { GameJournal } from "./game-journal";
-import { ItemCreationService } from "../services/item-creation/item-creation.service";
-import { LocalizationService } from "../services/game-localization/localization.service";
+import { ItemCreationFactory } from "./items/item-creation/item-creation-factory";
 import { PlayerAction } from "./player-actions/player-action";
 import { EventEmitter } from "events";
 import { GameLocation } from "./game-location";
+import { GameRecipeMemento } from "./mementos/game-recipe-memento";
 
 export class Game {
     private player: Player;
@@ -15,17 +15,23 @@ export class Game {
     private environment: GameEnvironment;
     private map: GameMap;
     private journal: GameJournal;
+    private recipes: GameRecipeMemento[];
 
     public readonly actionPerformed: EventEmitter;
 
-    constructor(data: GameMemento, itemCreationService: ItemCreationService, localizationService: LocalizationService) {
-        this.player = new Player(data.player, itemCreationService);
-        this.currentLocation = data.currentLocation;
-        this.environment = new GameEnvironment(data.environment);
-        this.map = new GameMap(data.map, itemCreationService);
-        this.journal = new GameJournal(data.journal, localizationService);
+    constructor(memento: GameMemento, private readonly itemCreationFactory: ItemCreationFactory) {
+        this.player = new Player(memento.player, itemCreationFactory);
+        this.currentLocation = memento.currentLocation;
+        this.environment = new GameEnvironment(memento.environment);
+        this.map = new GameMap(memento.map, itemCreationFactory);
+        this.journal = new GameJournal(memento.journal);
+        this.recipes = memento.recipes;
 
         this.actionPerformed = new EventEmitter();
+    }
+
+    public get ItemsFactory(): ItemCreationFactory {
+        return this.itemCreationFactory;
     }
 
     public get Player(): Player {
@@ -68,7 +74,8 @@ export class Game {
             currentLocation: this.currentLocation,
             environment: this.environment.getMemento(),
             map: this.map.getMemento(),
-            journal: this.journal.getMemento()
+            journal: this.journal.getMemento(),
+            recipes: this.recipes
         }
     }
 }

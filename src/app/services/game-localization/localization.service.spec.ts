@@ -1,4 +1,4 @@
-import { locales } from '../../localization';
+import { locales } from 'src/app/localization';
 
 interface Indexable {
     [key: string]: any;

@@ -1,0 +1,22 @@
+<div class="footer">
+    <div class="footer-container">
+        <div *ngIf="showToMenuLink" class="footer-item">
+            <a [routerLink]="['/']">{{'footer.to-menu-link' | localize: 'To main menu'}}</a>
+        </div>
+
+        <div class="footer-item">
+            <a href="https://github.com/Gvin/Survivor/issues">{{'footer.report-issues-link' | localize: 'Report bugs/suggestions'}}</a>
+        </div>
+
+        <div class="footer-item">
+            <div class="change-locale-button" (click)="changeLocale()">
+                <span [class]="'flag-icon ' + currentLocale.icon"></span>
+                {{'footer.change-locale' | localize: 'Change Language'}}
+            </div>
+        </div>
+
+        <div class="footer-item">
+            {{'footer.version-text' | localize: 'Version: {0}': GameVersion}}
+        </div>
+    </div>
+</div>

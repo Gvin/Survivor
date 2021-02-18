@@ -1,13 +1,14 @@
 import { Injectable } from "@angular/core";
-import { LocalizableString } from "../../data/localizable-string";
+import { LocalizableString } from "src/app/data/localizable-string";
 import { environment } from "src/environments/environment";
-import { locales } from '../../localization';
-import { LocalStorageService } from "../local-storage/local-storage.service";
+import { locales } from 'src/app/localization';
+import { LocalStorageService } from "src/app/services/local-storage/local-storage.service";
 
 export enum LocaleNamespace {
     common = 'common',
     items = 'items',
-    locations = 'locations'
+    locations = 'locations',
+    journal = 'journal'
 }
 
 const LocaleNamespacesMap = [
@@ -22,6 +23,10 @@ const LocaleNamespacesMap = [
     {
         key: LocaleNamespace.locations,
         value: 'locations'
+    },
+    {
+        key: LocaleNamespace.journal,
+        value: 'journal'
     }
 ]
 
@@ -32,27 +37,54 @@ interface Indexable {
     [key: string]: any;
 }
 
+export interface GameLocale {
+    code: string;
+    name: string;
+    localName: string;
+    icon: string;
+}
+
 @Injectable({providedIn: 'root'})
 export class LocalizationService {
-    private locale: string;
+    private locale: GameLocale;
 
     constructor(private readonly localStorageService: LocalStorageService) {
-        this.locale = this.localStorageService.getLocale() || defaultLocale;
+        const localeKey = this.localStorageService.getLocale() || defaultLocale;
+        const existingLocales = this.getExistingLocales();
+        const currentLocale = existingLocales.find(loc => loc.code === localeKey);
+        if (!currentLocale) {
+            throw Error(`Unable to load locale ${localeKey}.`);
+        }
+        this.locale = currentLocale;
     }
 
-    public get currentLocale(): string {
+    public get currentLocale(): GameLocale {
         return this.locale;
     }
 
-    public setLocale(newLocale: string): void {
+    public getExistingLocales(): GameLocale[] {
+        const localeNames = Object.keys(locales);
+        return localeNames.map(name => {
+            const localeDetails = (locales as Indexable)[name].details;
+            return {
+                code: name,
+                name: localeDetails.name,
+                localName: localeDetails.localName,
+                icon: localeDetails.icon
+            };
+        });
+    }
+
+    public setLocale(newLocale: GameLocale): void {
         this.locale = newLocale;
-        this.localStorageService.setLocale(newLocale);
+        this.localStorageService.setLocale(newLocale.code);
     }
 
     public translateString(localizableString: LocalizableString): string {
         return localizableString.Parts.map(part => {
             if (part.shouldLocalize) {
-                const translation = this.translate(part.data, part.namespace, null, part.args);
+                const translatedArgs = part.args ? part.args.map(arg => this.translateString(arg)) : [];
+                const translation = this.translate(part.data, part.namespace, null, translatedArgs);
                 if (translation == null) {
                     return 'TRANSLATION_NOT_FOUND';
                 } else {
@@ -100,9 +132,9 @@ export class LocalizationService {
     }
 
     private getLocaleData(namespace: LocaleNamespace): any {
-        const localeTranslation = (locales as Indexable)[this.locale];
+        const localeTranslation = (locales as Indexable)[this.locale.code];
         if (!localeTranslation) {
-            throw Error(`Translation not found for locale ${this.locale}.`);
+            throw Error(`Translation not found for locale ${this.locale.code}.`);
         }
 
         const namespaceKey = LocaleNamespacesMap.find(record => record.key === namespace)?.value;
@@ -111,7 +143,7 @@ export class LocalizationService {
         }
         const namespaceTranslation = localeTranslation[namespaceKey];
         if (!namespaceTranslation) {
-            throw Error(`Translation not found for locale ${this.locale} and namespace ${namespaceKey}.`);
+            throw Error(`Translation not found for locale ${this.locale.code} and namespace ${namespaceKey}.`);
         }
 
         // default is used to fix JSON format issues.

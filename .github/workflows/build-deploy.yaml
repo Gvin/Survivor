@@ -19,12 +19,6 @@ jobs:
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-node-  
-    - name:  'Automated Version Bump'
-      uses:  'phips28/gh-action-bump-version@master'
-      with:
-        tag-prefix:  'release-'
-      env:  
-        GITHUB_TOKEN: ${{ secrets.PAGES_TOKEN }}
     - name: Build
       run: |
         npm install
@@ -33,6 +27,12 @@ jobs:
       run: |
         npm install
         npm run-script test:prod
+    - name: Automated Version Bump
+      uses: 'phips28/gh-action-bump-version@master'
+      with:
+        tag-prefix: 'release-'
+      env:  
+        GITHUB_TOKEN: ${{ secrets.PAGES_TOKEN }}
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:

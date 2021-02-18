@@ -1,4 +1,4 @@
-import { LocalizationService } from "../../services/game-localization/localization.service";
+import { LocalizationService } from "src/app/services/game-localization/localization.service";
 import { LocalizableString } from "../localizable-string";
 
 export interface GameJournalMessage {

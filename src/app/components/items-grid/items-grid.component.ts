@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
-import { GameInventoryStack, Inventory } from "../../data/inventory";
-import { LocalizationService } from "../../services/game-localization/localization.service";
+import { GameInventoryStack, Inventory } from "src/app/data/inventory";
+import { LocalizationService } from "src/app/services/game-localization/localization.service";
 
 @Component({
     selector: 'srv-items-grid',

@@ -1,4 +1,4 @@
-import { LocaleNamespace } from "../../services/game-localization/localization.service";
+import { LocaleNamespace } from "src/app/services/game-localization/localization.service";
 import { Game } from "../game";
 import { LocalizableString } from "../localizable-string";
 import { GameItemData, GameItemMemento } from "../mementos/game-item-memento";
@@ -13,9 +13,10 @@ export abstract class GameItem {
     private readonly type: string;
     private readonly id: string;
     private readonly stackable: boolean;
-    protected readonly data?: GameItemData[];
+    private readonly data?: GameItemData[];
 
     private readonly name: LocalizableString;
+    private readonly useName: LocalizableString;
     private readonly description: LocalizableString;
 
     constructor(memento: GameItemMemento) {
@@ -25,11 +26,16 @@ export abstract class GameItem {
         this.data = memento.data;
 
         this.name = new LocalizableString().addLocalizable(`${this.Id}.name`, LocaleNamespace.items);
+        this.useName = new LocalizableString().addLocalizable(`${this.Id}.useName`, LocaleNamespace.items);
         this.description = new LocalizableString().addLocalizable(`${this.Id}.description`, LocaleNamespace.items);
     }
 
     public get Name(): LocalizableString {
         return this.name;
+    }
+
+    public get UseName(): LocalizableString {
+        return this.useName;
     }
 
     public get Description(): LocalizableString {
@@ -48,9 +54,14 @@ export abstract class GameItem {
         return this.stackable;
     }
 
-    public getData(key: string): string | undefined {
+    protected getData(key: string): string | undefined {
         let dataPiece = this.data?.find(d => d.key === key);
         return dataPiece?.value;
+    }
+
+    protected getDataSerialized<T>(key: string): T | undefined {
+        const data = this.getData(key);
+        return data ? JSON.parse(data) as T : undefined;
     }
 
     public abstract getExtraActions(): GameItemExtraAction[];

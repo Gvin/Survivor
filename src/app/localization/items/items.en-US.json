@@ -1,14 +1,27 @@
 {
     "fresh-water-bottle": {
         "name": "Fresh Water Bottle",
+        "useName": "Fresh Water Bottle",
         "description": "A bottle of fresh drinking water."
     },
     "salt-water-bottle": {
         "name": "Salt Water Bottle",
+        "useName": "Salt Water Bottle",
         "description": "A bottle of salt sea water."
     },
     "empty-bottle": {
         "name": "Empty Bottle",
+        "useName": "Empty Bottle",
         "description": "Empty plastic bottle. Can be used to store liquids."
+    },
+    "branch": {
+        "name": "Branch",
+        "useName": "Branch",
+        "description": "A usual tree branch. Can be used for crafting and building."
+    },
+    "stick": {
+        "name": "Stick",
+        "useName": "Stick",
+        "description": "A wooden stick. Just a branch without any extra twigs and leaves. Can be used for crafting and building."
     }
 }

@@ -1,4 +1,4 @@
-<div class="menu">
+<div class="menu" *ngIf="render">
     <mat-card class="menu-card">
         <mat-card-title>{{'menu.title' | localize: 'Main Menu'}}</mat-card-title>
         <mat-card-content>
@@ -11,15 +11,5 @@
         </mat-card-content>
     </mat-card>
 
-    <div class="footer">
-        <div class="footer-container">
-            <div class="footer-item">
-                <a href="https://github.com/Gvin/Survivor/issues">{{'menu.report-issues-link' | localize: 'Report bugs/suggestions'}}</a>
-            </div>
-
-            <div class="footer-item">
-                {{'menu.version-text' | localize: 'Version: {0}': GameVersion}}
-            </div>
-        </div>
-    </div>
+    <srv-game-footer [showToMenuLink]="false"></srv-game-footer>
 </div>
