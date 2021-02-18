@@ -8,6 +8,7 @@ import { PlayerAction } from "./player-actions/player-action";
 import { EventEmitter } from "events";
 import { GameLocation } from "./game-location";
 import { GameRecipeMemento } from "./mementos/game-recipe-memento";
+import { RecipeUnlockedJournalMessage } from "./journal-messages/recipe-unlocked-journal-message";
 
 export class Game {
     private player: Player;
@@ -53,7 +54,22 @@ export class Game {
 
     public performAction(action: PlayerAction): void {
         action.perform(this);
+        this.checkRecipesUnlock();
         this.actionPerformed.emit('action');
+    }
+
+    private checkRecipesUnlock(): void {
+        this.recipes.filter(recipe => !recipe.unlocked).forEach(recipe => {
+            if (!recipe.unlock) {
+                recipe.unlocked = true;
+            } else {
+                const canUnlockByItems = recipe.unlock.knownItems ? this.player.isKnownItems(recipe.unlock.knownItems) : true;
+                if (canUnlockByItems) {
+                    recipe.unlocked = true;
+                    this.journal.write(this, new RecipeUnlockedJournalMessage(recipe));
+                }
+            }
+        });
     }
 
     public get Environment(): GameEnvironment {

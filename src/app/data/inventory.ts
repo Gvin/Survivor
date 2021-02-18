@@ -2,6 +2,7 @@ import { ItemCreationFactory } from "./items/item-creation/item-creation-factory
 import { GameItem } from "./items/game-item";
 import { GameItemMemento } from "./mementos/game-item-memento";
 import { InventoryMemento } from "./mementos/inventory-memento";
+import { EventEmitter } from "@angular/core";
 
 export interface GameInventoryStack {
     TopItem: GameItem;
@@ -11,8 +12,9 @@ export interface GameInventoryStack {
 class GameInventoryStackImpl implements GameInventoryStack {
     private readonly items: GameItem[];
 
-    constructor() {
+    public constructor() {
         this.items = [];
+        
     }
 
     public addItem(item: GameItem): void {
@@ -37,9 +39,12 @@ class GameInventoryStackImpl implements GameInventoryStack {
 }
 
 export class Inventory {
+    public itemAdded: EventEmitter<GameItem>;
     private stacks: GameInventoryStackImpl[];
 
     constructor(data: InventoryMemento, itemCreationService: ItemCreationFactory) {
+        this.itemAdded = new EventEmitter<GameItem>();
+
         this.stacks = [];
         
         data.items.map(itemMemento => itemCreationService.loadItem(itemMemento)).forEach(item => {
@@ -64,6 +69,8 @@ export class Inventory {
             let existingStack = this.stacks.find(stack => stack.TopItem.Id === item.Id);
             existingStack?.addItem(item);
         }
+
+        this.itemAdded.next(item);
     }
 
     public removeItem(item: GameItem): void {

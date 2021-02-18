@@ -2,6 +2,7 @@ import { ItemCreationFactory } from "./items/item-creation/item-creation-factory
 import { Game } from "./game";
 import { Inventory } from "./inventory";
 import { PlayerMemento } from "./mementos/player-memento";
+import { GameItem } from "./items/game-item";
 
 export enum PlayerCharacteristic {
     health = 'health',
@@ -10,6 +11,9 @@ export enum PlayerCharacteristic {
     energy = 'energy'
 }
 
+const thirstGrowthFactor = 1; // per hour
+const hungerGrowthFactor = 0.83; // per hour
+
 export class Player {
     private health: number;
     private thirst: number;
@@ -17,12 +21,37 @@ export class Player {
     private energy: number;
     private inventory: Inventory;
 
-    constructor(data: PlayerMemento, itemCreationService: ItemCreationFactory) {
-        this.health = data.health;
-        this.thirst = data.thirst;
-        this.hunger = data.hunger;
-        this.energy = data.energy;
-        this.inventory = new Inventory(data.inventory, itemCreationService);
+    private knownItems: string[];
+
+    constructor(memento: PlayerMemento, itemCreationFactory: ItemCreationFactory) {
+        this.knownItems = memento.knownItems;
+
+        this.health = memento.health;
+        this.thirst = memento.thirst;
+        this.hunger = memento.hunger;
+        this.energy = memento.energy;
+
+        this.inventory = new Inventory(memento.inventory, itemCreationFactory);
+        this.inventory.Stacks.forEach(stack => {
+            this.addKnownItem(stack.TopItem.Id);
+        });
+        this.inventory.itemAdded.subscribe((item: GameItem) => {
+            this.addKnownItem(item.Id);
+        });
+    }
+
+    private addKnownItem(itemId: string): void {
+        if (this.knownItems.lastIndexOf(itemId) < 0) {
+            this.knownItems.push(itemId);
+        }
+    }
+
+    public isKnownItem(itemId: string): boolean {
+        return this.knownItems.lastIndexOf(itemId) >= 0;
+    }
+
+    public isKnownItems(itemIds: string[]): boolean {
+        return itemIds.every(id => this.isKnownItem(id));
     }
 
     public getCharacteristics(): PlayerCharacteristic[] {
@@ -105,9 +134,6 @@ export class Player {
     }
 
     public processTimePassed(game: Game, minutes: number): void {
-        const thirstGrowthFactor = 1; // per hour
-        const hungerGrowthFactor = 0.83; // per hour
-
         this.thirst += thirstGrowthFactor * minutes / 60;
         this.hunger += hungerGrowthFactor * minutes / 60;
     }
@@ -118,7 +144,8 @@ export class Player {
             thirst: this.thirst,
             hunger: this.hunger,
             energy: this.energy,
-            inventory: this.inventory.getMemento()
+            inventory: this.inventory.getMemento(),
+            knownItems: this.knownItems
         };
     }
 }

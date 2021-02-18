@@ -27,7 +27,8 @@ export class NewGameGenerator {
                         this.itemCreationFactory.getItemMemento(ItemIds.consumable.freshWaterBottle),
                         this.itemCreationFactory.getItemMemento(ItemIds.consumable.saltWaterBottle)
                     ]
-                }
+                },
+                knownItems: []
             },
             currentLocation: locBeach,
             environment: {
@@ -46,20 +47,35 @@ export class NewGameGenerator {
             { // Empty fresh water bottle
                 outputItemId: ItemIds.misc.emptyBottle,
                 outputCount: 1,
+                unlocked: true,
                 parts: [{
                     itemId: ItemIds.consumable.freshWaterBottle,
                     count: 1,
-                    consumed: true
+                    consumed: true,
                 }]
             },
             { // Empty salt water bottle
                 outputItemId: ItemIds.misc.emptyBottle,
                 outputCount: 1,
+                unlocked: true,
                 parts: [{
                     itemId: ItemIds.consumable.saltWaterBottle,
                     count: 1,
                     consumed: true
                 }]
+            },
+            {
+                outputItemId: ItemIds.misc.stick,
+                outputCount: 1,
+                unlocked: false,
+                parts: [{
+                    itemId: ItemIds.misc.branch,
+                    count: 1,
+                    consumed: true
+                }],
+                unlock: {
+                    knownItems: [ItemIds.misc.branch]
+                }
             }
         ];
     }
@@ -75,7 +91,7 @@ export class NewGameGenerator {
                     id: locBeach,
                     waterSource: WaterType.sea,
                     canSwim: true,
-                    groundInventory: {items: []}
+                    groundInventory: {items: [this.itemCreationFactory.getItemMemento(ItemIds.misc.branch)]}
                 },
                 {
                     id: locForest,

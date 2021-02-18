@@ -4,12 +4,15 @@ export interface GameRecipePart {
     consumed: boolean;
 }
 
-export interface GameRecipeUnlockCondition {
-
+export interface GameRecipeUnlockCondition {   
+    knownItems?: string[];
+    buldings?: string[];
 }
 
 export interface GameRecipeMemento {
     outputItemId: string;
     outputCount: number;
     parts: GameRecipePart[];
+    unlock?: GameRecipeUnlockCondition;
+    unlocked: boolean;
 }

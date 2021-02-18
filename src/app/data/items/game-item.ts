@@ -25,9 +25,17 @@ export abstract class GameItem {
         this.stackable = memento.stackable;
         this.data = memento.data;
 
-        this.name = new LocalizableString().addLocalizable(`${this.Id}.name`, LocaleNamespace.items);
-        this.useName = new LocalizableString().addLocalizable(`${this.Id}.useName`, LocaleNamespace.items);
+        this.name = GameItem.getName(this.Id);
+        this.useName = GameItem.getUseName(this.Id);
         this.description = new LocalizableString().addLocalizable(`${this.Id}.description`, LocaleNamespace.items);
+    }
+
+    public static getName(itemId: string): LocalizableString {
+        return new LocalizableString().addLocalizable(`${itemId}.name`, LocaleNamespace.items);
+    }
+
+    public static getUseName(itemId: string): LocalizableString {
+        return new LocalizableString().addLocalizable(`${itemId}.useName`, LocaleNamespace.items);
     }
 
     public get Name(): LocalizableString {
