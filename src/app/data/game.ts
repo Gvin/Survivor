@@ -4,7 +4,6 @@ import { Player } from "./player";
 import { Map as GameMap } from "./game-map";
 import { GameJournal } from "./game-journal";
 import { ItemCreationFactory } from "./items/item-creation/item-creation-factory";
-import { LocalizationService } from "../services/game-localization/localization.service";
 import { PlayerAction } from "./player-actions/player-action";
 import { EventEmitter } from "events";
 import { GameLocation } from "./game-location";
@@ -20,12 +19,12 @@ export class Game {
 
     public readonly actionPerformed: EventEmitter;
 
-    constructor(memento: GameMemento, private readonly itemCreationFactory: ItemCreationFactory, localizationService: LocalizationService) {
+    constructor(memento: GameMemento, private readonly itemCreationFactory: ItemCreationFactory) {
         this.player = new Player(memento.player, itemCreationFactory);
         this.currentLocation = memento.currentLocation;
         this.environment = new GameEnvironment(memento.environment);
         this.map = new GameMap(memento.map, itemCreationFactory);
-        this.journal = new GameJournal(memento.journal, localizationService);
+        this.journal = new GameJournal(memento.journal);
         this.recipes = memento.recipes;
 
         this.actionPerformed = new EventEmitter();
