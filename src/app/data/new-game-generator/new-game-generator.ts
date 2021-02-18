@@ -3,6 +3,7 @@ import { GameMapMemento } from "src/app/data/mementos/game-map-memento";
 import { GameMemento } from "src/app/data/mementos/game-memento";
 import { ItemCreationFactory } from "../items/item-creation/item-creation-factory";
 import { ItemIds } from "../items/item-creation/tropical-items-map";
+import { GameRecipeMemento } from "../mementos/game-recipe-memento";
 
 const locCamp = 'tropical.camp';
 const locBeach = 'tropical.beach';
@@ -35,8 +36,32 @@ export class NewGameGenerator {
                 time: new Date(2021, 7, 13, 11, 0).toString()
             },
             map: this.generateMap(),
-            journal: {}
+            journal: {},
+            recipes: this.generateRecipes()
         };
+    }
+
+    private generateRecipes(): GameRecipeMemento[] {
+        return [
+            { // Empty fresh water bottle
+                outputItemId: ItemIds.misc.emptyBottle,
+                outputCount: 1,
+                parts: [{
+                    itemId: ItemIds.consumable.freshWaterBottle,
+                    count: 1,
+                    consumed: true
+                }]
+            },
+            { // Empty salt water bottle
+                outputItemId: ItemIds.misc.emptyBottle,
+                outputCount: 1,
+                parts: [{
+                    itemId: ItemIds.consumable.saltWaterBottle,
+                    count: 1,
+                    consumed: true
+                }]
+            }
+        ];
     }
 
     private generateMap(): GameMapMemento {

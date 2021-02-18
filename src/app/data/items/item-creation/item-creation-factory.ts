@@ -1,9 +1,9 @@
 import { GameItem } from "src/app/data/items/game-item";
 import { ItemType } from "src/app/data/items/item-type";
-import { BottledLiquidGameItem } from "src/app/data/items/bottled-liquid-game-item";
 import { SimpleGameItem } from "src/app/data/items/simple-game-item";
 import { GameItemMemento } from "src/app/data/mementos/game-item-memento";
 import { GameItemsMap } from "./items-map";
+import { ConsumableGameItem } from "../consumable-game-item";
 
 export class ItemCreationFactory {
 
@@ -17,14 +17,9 @@ export class ItemCreationFactory {
 
     public loadItem(itemMemento: GameItemMemento): GameItem {
         switch (itemMemento.type) {
-            case ItemType.bottledLiquid:
-                const bottleItemId = itemMemento.data?.find(dataPiece => dataPiece.key === 'bottle')?.value;
-                if (!bottleItemId) {
-                    throw Error(`Unable to get bottle id for item ${itemMemento.id}`);
-                }
-                return new BottledLiquidGameItem(itemMemento, this.createItem(bottleItemId));
-            case ItemType.misc:  
             case ItemType.consumable:
+                return new ConsumableGameItem(itemMemento);
+            case ItemType.misc:  
                 return new SimpleGameItem(itemMemento);
             default:
                 throw Error(`Unknown item type: ${itemMemento.type}.`);

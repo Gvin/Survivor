@@ -8,6 +8,7 @@ import { LocalizationService } from "../services/game-localization/localization.
 import { PlayerAction } from "./player-actions/player-action";
 import { EventEmitter } from "events";
 import { GameLocation } from "./game-location";
+import { GameRecipeMemento } from "./mementos/game-recipe-memento";
 
 export class Game {
     private player: Player;
@@ -15,17 +16,23 @@ export class Game {
     private environment: GameEnvironment;
     private map: GameMap;
     private journal: GameJournal;
+    private recipes: GameRecipeMemento[];
 
     public readonly actionPerformed: EventEmitter;
 
-    constructor(data: GameMemento, itemCreationFactory: ItemCreationFactory, localizationService: LocalizationService) {
-        this.player = new Player(data.player, itemCreationFactory);
-        this.currentLocation = data.currentLocation;
-        this.environment = new GameEnvironment(data.environment);
-        this.map = new GameMap(data.map, itemCreationFactory);
-        this.journal = new GameJournal(data.journal, localizationService);
+    constructor(memento: GameMemento, private readonly itemCreationFactory: ItemCreationFactory, localizationService: LocalizationService) {
+        this.player = new Player(memento.player, itemCreationFactory);
+        this.currentLocation = memento.currentLocation;
+        this.environment = new GameEnvironment(memento.environment);
+        this.map = new GameMap(memento.map, itemCreationFactory);
+        this.journal = new GameJournal(memento.journal, localizationService);
+        this.recipes = memento.recipes;
 
         this.actionPerformed = new EventEmitter();
+    }
+
+    public get ItemsFactory(): ItemCreationFactory {
+        return this.itemCreationFactory;
     }
 
     public get Player(): Player {
@@ -68,7 +75,8 @@ export class Game {
             currentLocation: this.currentLocation,
             environment: this.environment.getMemento(),
             map: this.map.getMemento(),
-            journal: this.journal.getMemento()
+            journal: this.journal.getMemento(),
+            recipes: this.recipes
         }
     }
 }
