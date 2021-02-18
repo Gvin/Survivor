@@ -13,7 +13,7 @@ export abstract class GameItem {
     private readonly type: string;
     private readonly id: string;
     private readonly stackable: boolean;
-    protected readonly data?: GameItemData[];
+    private readonly data?: GameItemData[];
 
     private readonly name: LocalizableString;
     private readonly useName: LocalizableString;
@@ -54,9 +54,14 @@ export abstract class GameItem {
         return this.stackable;
     }
 
-    public getData(key: string): string | undefined {
+    protected getData(key: string): string | undefined {
         let dataPiece = this.data?.find(d => d.key === key);
         return dataPiece?.value;
+    }
+
+    protected getDataSerialized<T>(key: string): T | undefined {
+        const data = this.getData(key);
+        return data ? JSON.parse(data) as T : undefined;
     }
 
     public abstract getExtraActions(): GameItemExtraAction[];
