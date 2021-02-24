@@ -26,7 +26,8 @@
         "thirst": "Жажда:",
         "hunger": "Голод:",
         "energy": "Энергия:",
-        "inventory-button": "Инвентарь"
+        "inventory-button": "Инвентарь",
+        "crafting-button": "Создание"
     },
     "location": {
         "go-to": {
@@ -40,6 +41,9 @@
     },
     "player-inventory": {
         "title": "Инвентарь игрока"
+    },
+    "crafting": {
+        "title": "Создание"
     },
     "item-actions": {
         "drop": {

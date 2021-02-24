@@ -1,0 +1,32 @@
+<div [ngClass]="{'crafting': true, 'selection': selectedRecipeGroup}">
+    <h2 mat-dialog-title>{{'crafting.title' | localize : 'Crafting'}}</h2>
+
+    <mat-dialog-content>
+        <div class="content">
+            <div class="grid">
+                <div *ngFor="let group of getRecipeGroups()" matTooltip="{{getRecipeGroupTitle(group)}}" (click)="selectRecipeGroup(group)" [ngClass]="{'recipe': true, 'selected': isRecipeGroupSelected(group), 'unavailable': !isRecipeGroupAvailable(group)}">
+                    <div [class]="'item-icon ' + group.outputItemId"></div>
+                </div>
+            </div>
+            <div class="details" *ngIf="selectedRecipeGroup">
+                <mat-card>
+                    <mat-card-title>{{getRecipeGroupTitle(selectedRecipeGroup)}}</mat-card-title>
+                    <mat-card-content>
+                        <div class="description">
+                            {{getRecipeGroupDescription(selectedRecipeGroup)}}
+                        </div>
+                        <div class="recipes">
+                            <div *ngFor="let recipe of selectedRecipeGroup.recipes">
+                                Recipe
+                            </div>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+    </mat-dialog-content>
+
+    <mat-dialog-actions>
+        <button mat-raised-button (click)="close()">{{'actions.close' | localize: 'Close'}}</button>
+    </mat-dialog-actions>
+</div>

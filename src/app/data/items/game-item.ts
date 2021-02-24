@@ -27,7 +27,7 @@ export abstract class GameItem {
 
         this.name = GameItem.getName(this.Id);
         this.useName = GameItem.getUseName(this.Id);
-        this.description = new LocalizableString().addLocalizable(`${this.Id}.description`, LocaleNamespace.items);
+        this.description = GameItem.getDescription(this.Id);
     }
 
     public static getName(itemId: string): LocalizableString {
@@ -36,6 +36,10 @@ export abstract class GameItem {
 
     public static getUseName(itemId: string): LocalizableString {
         return new LocalizableString().addLocalizable(`${itemId}.useName`, LocaleNamespace.items);
+    }
+
+    public static getDescription(itemId: string): LocalizableString {
+        return new LocalizableString().addLocalizable(`${itemId}.description`, LocaleNamespace.items);
     }
 
     public get Name(): LocalizableString {

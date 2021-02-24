@@ -60,6 +60,15 @@ export class Inventory {
         return this.stacks.reduce((sum, stack) => sum + stack.Count, 0);
     }
 
+    public hasItem(itmeId: string, count: number = 1): boolean {
+        const stack = this.stacks.find(stack => stack.TopItem.Id === itmeId);
+        if (!stack) {
+            return false;
+        }
+
+        return stack.Count >= count;
+    }
+
     public addItem(item: GameItem): void {
         if (!item.Stackable || this.stacks.findIndex(stack => stack.TopItem.Id === item.Id) < 0) {
             let stack = new GameInventoryStackImpl();

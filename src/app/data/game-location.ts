@@ -35,6 +35,10 @@ export class GameLocation {
         return result;
     }
 
+    public hasWaterSource(waterType: WaterType): boolean {
+        return this.waterSource === waterType;
+    }
+
     public getMemento(): GameLocationMemento {
         return {
             id: this.id,

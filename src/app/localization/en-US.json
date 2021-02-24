@@ -26,7 +26,8 @@
         "thirst": "Thirst:",
         "hunger": "Hunger:",
         "energy": "Energy:",
-        "inventory-button": "Inventory"
+        "inventory-button": "Inventory",
+        "crafting-button": "Crafting"
     },
     "location": {
         "go-to": {
@@ -40,6 +41,9 @@
     },
     "player-inventory": {
         "title": "Player Inventory"
+    },
+    "crafting": {
+        "title": "Crafting"
     },
     "item-actions": {
         "drop": {

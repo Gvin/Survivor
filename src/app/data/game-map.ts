@@ -3,7 +3,7 @@ import { GameLocation } from "./game-location";
 import { ItemCreationFactory } from "./items/item-creation/item-creation-factory";
 import { GameLocationId } from "./mementos/game-location-memento";
 
-export class Map {
+export class GameMap {
     private locations: GameLocation[];
     private connections: GameLocationConnection[];
 

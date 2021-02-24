@@ -1,0 +1,50 @@
+.crafting {
+    
+    width: 700px;
+
+    &.selection {
+        width: 1200px;
+    }
+
+    .grid {
+        width: 650px;
+    
+        .recipe {
+            border: 1px solid black;
+            border-radius: 3px;
+            width: 66px;
+            height: 66px;
+            cursor: pointer;
+            margin-right: 2px;
+            margin-bottom: 2px;
+            display: inline-block;
+
+            &.selected {
+                border: 1px solid blue;
+                background-color: lightblue;
+            }
+
+            &.unavailable {
+                opacity: 0.3;
+            }
+    
+            .item-icon {
+                margin-top: 1px;
+                margin-left: 1px;
+            }
+        }
+    }
+
+    .content {
+        display: inline-flex;
+    
+        .details {
+            width: 450px;
+            margin: 2px;
+
+            .recipes {
+                margin-top: 5px;
+            }
+        }
+    }
+}

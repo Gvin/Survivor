@@ -64,6 +64,28 @@ export class NewGameGenerator {
                     consumed: true
                 }]
             },
+            { // Fill salt water bottle
+                outputItemId: ItemIds.consumable.saltWaterBottle,
+                outputCount: 1,
+                unlocked: true,
+                parts: [{
+                    itemId: ItemIds.misc.emptyBottle,
+                    count: 0,
+                    consumed: true
+                }],
+                requiresWaterSource: WaterType.sea
+            },
+            { // Fill fresh water bottle
+                outputItemId: ItemIds.consumable.freshWaterBottle,
+                outputCount: 1,
+                unlocked: true,
+                parts: [{
+                    itemId: ItemIds.misc.emptyBottle,
+                    count: 0,
+                    consumed: true
+                }],
+                requiresWaterSource: WaterType.clean
+            },
             {
                 outputItemId: ItemIds.misc.stick,
                 outputCount: 1,
