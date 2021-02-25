@@ -1,13 +1,14 @@
 .crafting {
-    
-    width: 700px;
+    min-width: 100px;
+    max-width: 700px;
 
     &.selection {
-        width: 1200px;
+        min-width: 600px;
+        max-width: 1200px;
     }
 
     .grid {
-        width: 650px;
+        min-width: 70px;
     
         .recipe {
             border: 1px solid black;
@@ -27,11 +28,6 @@
             &.unavailable {
                 opacity: 0.3;
             }
-    
-            .item-icon {
-                margin-top: 1px;
-                margin-left: 1px;
-            }
         }
     }
 
@@ -41,9 +37,67 @@
         .details {
             width: 450px;
             margin: 2px;
+            margin-left: 10px;
 
             .recipes {
+                display: grid;
                 margin-top: 5px;
+
+                .recipe {
+                    display: inline-flex;
+
+                    .environment-requirement {
+                        border: 1px solid green;
+                        border-radius: 3px;
+                        width: 66px;
+                        height: 66px;
+                        margin-right: 2px;
+                        margin-bottom: 2px;
+                        display: inline-block;
+
+                        &.missing {
+                            opacity: 0.3;
+                        }
+
+                        .requirement-icon {
+                            margin-top: 1px;
+                            margin-left: 1px;
+                        }
+                    }
+
+                    .out-count, .craft-button {
+                        display: flex;
+                        justify-content: center; /* align horizontal */
+                        align-items: center; /* align vertical */
+                    }
+
+                    .out-count {
+                        width: 30px;
+                        font-weight: bold;
+                    }
+
+                    .craft-button {
+                        margin-left: 5px;
+                    }
+
+                    .part {
+                        border: 1px solid black;
+                        border-radius: 3px;
+                        width: 66px;
+                        height: 66px;
+                        margin-right: 2px;
+                        margin-bottom: 2px;
+                        display: inline-block;
+
+                        &.consumed {
+                            border: 1px solid red;
+                        }
+
+                        &.missing {
+                            opacity: 0.3;
+                        }
+                    }
+                }
             }
         }
     }

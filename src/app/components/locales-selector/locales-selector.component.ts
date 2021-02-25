@@ -8,7 +8,7 @@ import { PageRefreshService } from "src/app/services/page-refresh/page-refresh.s
     templateUrl: './locales-selector.component.html',
     styleUrls: [
         './locales-selector.component.scss',
-        '../../../flag-icons.scss'
+        '../../../styles/flag-icons.scss'
     ]
 })
 export class SurvivorLocalesSelectorComponent {

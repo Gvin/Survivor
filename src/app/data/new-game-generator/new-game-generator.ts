@@ -25,7 +25,10 @@ export class NewGameGenerator {
                 inventory: {
                     items: [
                         this.itemCreationFactory.getItemMemento(ItemIds.consumable.freshWaterBottle),
-                        this.itemCreationFactory.getItemMemento(ItemIds.consumable.saltWaterBottle)
+                        this.itemCreationFactory.getItemMemento(ItemIds.consumable.saltWaterBottle),
+                        this.itemCreationFactory.getItemMemento(ItemIds.misc.branch),
+                        this.itemCreationFactory.getItemMemento(ItemIds.misc.stick),
+                        this.itemCreationFactory.getItemMemento(ItemIds.misc.emptyBottle)
                     ]
                 },
                 knownItems: []
@@ -70,7 +73,7 @@ export class NewGameGenerator {
                 unlocked: true,
                 parts: [{
                     itemId: ItemIds.misc.emptyBottle,
-                    count: 0,
+                    count: 1,
                     consumed: true
                 }],
                 requiresWaterSource: WaterType.sea
@@ -81,7 +84,7 @@ export class NewGameGenerator {
                 unlocked: true,
                 parts: [{
                     itemId: ItemIds.misc.emptyBottle,
-                    count: 0,
+                    count: 1,
                     consumed: true
                 }],
                 requiresWaterSource: WaterType.clean

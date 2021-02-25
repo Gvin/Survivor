@@ -1,5 +1,5 @@
 .grid {
-    width: 650px;
+    min-width: 70px;
 
     .item {
         border: 1px solid black;
@@ -10,11 +10,6 @@
         margin-right: 2px;
         margin-bottom: 2px;
         display: inline-block;
-
-        .item-icon {
-            margin-top: 1px;
-            margin-left: 1px;
-        }
     }
 
     .item.selected {

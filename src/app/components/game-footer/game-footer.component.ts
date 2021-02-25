@@ -8,7 +8,7 @@ import { GameVersionService } from "src/app/services/game-version/game-version.s
     templateUrl: './game-footer.component.html',
     styleUrls: [
         './game-footer.component.scss',
-        '../../../flag-icons.scss'
+        '../../../styles/flag-icons.scss'
     ]
 })
 export class SurvivorGameFooterComponent {

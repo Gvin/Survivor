@@ -60,8 +60,17 @@ export class Inventory {
         return this.stacks.reduce((sum, stack) => sum + stack.Count, 0);
     }
 
-    public hasItem(itmeId: string, count: number = 1): boolean {
-        const stack = this.stacks.find(stack => stack.TopItem.Id === itmeId);
+    public getItemsCount(itemId: string): number {
+        const stack = this.stacks.find(stack => stack.TopItem.Id === itemId);
+        if (!stack) {
+            return 0;
+        }
+
+        return stack.Count;
+    }
+
+    public hasItem(itemId: string, count: number = 1): boolean {
+        const stack = this.stacks.find(stack => stack.TopItem.Id === itemId);
         if (!stack) {
             return false;
         }

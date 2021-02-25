@@ -1,6 +1,6 @@
 @mixin add-icon($icon-name) {
     .item-icon.#{$icon-name} {
-        background-image: url('./assets/item-icons/#{$icon-name}.svg');
+        background-image: url('../assets/item-icons/#{$icon-name}.svg');
     }
 }
 

@@ -2,11 +2,13 @@ import { Component, Inject } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { Game } from "src/app/data/game";
 import { GameItem } from "src/app/data/items/game-item";
-import { GameRecipeMemento } from "src/app/data/mementos/game-recipe-memento";
+import { WaterType } from "src/app/data/mementos/game-location-memento";
+import { GameRecipeMemento, GameRecipePart } from "src/app/data/mementos/game-recipe-memento";
 import { LocalizationService } from "src/app/services/game-localization/localization.service";
 
 interface GameRecipesGroup {
     outputItemId: string;
+    available: boolean;
 
     recipes: GameRecipeMemento[];
 }
@@ -16,7 +18,7 @@ interface GameRecipesGroup {
     templateUrl: './crafting-dialog.component.html',
     styleUrls: [
         './crafting-dialog.component.scss',
-        '../../../item-icons.scss'
+        '../../../styles/environment-icons.scss'
     ]
 })
 export class SurvivorCraftingDialogComponent {
@@ -37,10 +39,6 @@ export class SurvivorCraftingDialogComponent {
         this.recipeGroups = this.updateRecipeGroups();
     }
 
-    public isRecipeGroupAvailable(recipeGroup: GameRecipesGroup): boolean {
-        return recipeGroup.recipes.some(recipe => this.isRecipeAvailable(recipe));
-    }
-
     public isRecipeAvailable(recipe: GameRecipeMemento): boolean {
         if (recipe.requiresWaterSource != null) {
             const currentLocation = this.game.Map.getLocation(this.game.CurrentLocation);
@@ -54,6 +52,41 @@ export class SurvivorCraftingDialogComponent {
         }
 
         return recipe.parts.every(part => this.game.Player.Inventory.hasItem(part.itemId, part.count));
+    }
+
+    public freshWaterAvailable(): boolean {
+        const currentLocation = this.game.Map.getLocation(this.game.CurrentLocation);
+        return currentLocation.hasWaterSource(WaterType.clean);
+    }
+
+    public saltWaterAvailable(): boolean {
+        const currentLocation = this.game.Map.getLocation(this.game.CurrentLocation);
+        return currentLocation.hasWaterSource(WaterType.sea);
+    }
+
+    public mudWaterAvailable(): boolean {
+        const currentLocation = this.game.Map.getLocation(this.game.CurrentLocation);
+        return currentLocation.hasWaterSource(WaterType.dirty);
+    }
+
+    public freshWaterRequired(recipe: GameRecipeMemento): boolean {
+        return recipe.requiresWaterSource === WaterType.clean;
+    }
+
+    public saltWaterRequired(recipe: GameRecipeMemento): boolean {
+        return recipe.requiresWaterSource === WaterType.sea;
+    }
+
+    public mudWaterRequired(recipe: GameRecipeMemento): boolean {
+        return recipe.requiresWaterSource === WaterType.dirty;
+    }
+
+    public getExistingCount(itemId: string): number {
+        return this.game.Player.Inventory.getItemsCount(itemId);
+    }
+
+    public getRecipePartTitle(part: GameRecipePart): string {
+        return this.localizationService.translateString(GameItem.getName(part.itemId));
     }
 
     public selectRecipeGroup(recipe: GameRecipesGroup): void {
@@ -72,15 +105,18 @@ export class SurvivorCraftingDialogComponent {
         let result: GameRecipesGroup[] = [];
 
         this.game.Recipes.filter(recipe => recipe.unlocked).forEach(recipe => {
+            const recipeAvailable = this.isRecipeAvailable(recipe);
             let existingGroup = result.find(group => group.outputItemId === recipe.outputItemId);
             if (!existingGroup) {
                 existingGroup = {
                     outputItemId: recipe.outputItemId,
-                    recipes: []
+                    recipes: [],
+                    available: recipeAvailable
                 };
                 result.push(existingGroup);
             }
             existingGroup.recipes.push(recipe);
+            existingGroup.available = existingGroup.available || recipeAvailable;
         })
 
         return result;

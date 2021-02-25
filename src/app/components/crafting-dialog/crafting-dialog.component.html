@@ -4,8 +4,8 @@
     <mat-dialog-content>
         <div class="content">
             <div class="grid">
-                <div *ngFor="let group of getRecipeGroups()" matTooltip="{{getRecipeGroupTitle(group)}}" (click)="selectRecipeGroup(group)" [ngClass]="{'recipe': true, 'selected': isRecipeGroupSelected(group), 'unavailable': !isRecipeGroupAvailable(group)}">
-                    <div [class]="'item-icon ' + group.outputItemId"></div>
+                <div *ngFor="let group of getRecipeGroups()" matTooltip="{{getRecipeGroupTitle(group)}}" (click)="selectRecipeGroup(group)" [ngClass]="{'recipe': true, 'selected': isRecipeGroupSelected(group), 'unavailable': !group.available}">
+                    <srv-item-icon [itemId]="group.outputItemId"></srv-item-icon>
                 </div>
             </div>
             <div class="details" *ngIf="selectedRecipeGroup">
@@ -16,8 +16,32 @@
                             {{getRecipeGroupDescription(selectedRecipeGroup)}}
                         </div>
                         <div class="recipes">
-                            <div *ngFor="let recipe of selectedRecipeGroup.recipes">
-                                Recipe
+                            <div *ngFor="let recipe of selectedRecipeGroup.recipes" class="recipe">
+                                
+                                <div class="out-count">
+                                    X{{recipe.outputCount}}
+                                </div>
+
+                                <div *ngFor="let part of recipe.parts" matTooltip="{{getRecipePartTitle(part)}}" [ngClass]="{'part': true, 'consumed': part.consumed, 'missing': getExistingCount(part.itemId) === 0}">
+                                    <srv-item-icon [itemId]="part.itemId" [count]="part.count + '/' + getExistingCount(part.itemId)"></srv-item-icon>
+                                </div>
+
+                                <div *ngIf="freshWaterRequired(recipe)" matTooltip="Fresh Water Source" [ngClass]="{'environment-requirement': true, 'missing': !freshWaterAvailable()}">
+                                    <div class="requirement-icon environment-icon fresh-water-source"></div>
+                                </div>
+
+                                <div *ngIf="saltWaterRequired(recipe)" matTooltip="Salt Water Source" [ngClass]="{'environment-requirement': true, 'missing': !saltWaterAvailable()}">
+                                    <div class="requirement-icon environment-icon salt-water-source"></div>
+                                </div>
+
+                                <div *ngIf="mudWaterRequired(recipe)" matTooltip="Mud Water Source" [ngClass]="{'environment-requirement': true, 'missing': !mudWaterAvailable()}">
+                                    <div class="requirement-icon environment-icon mud-water-source"></div>
+                                </div>
+
+                                <div class="craft-button">
+                                    <button mat-button [disabled]="!isRecipeAvailable(recipe)">Craft</button>
+                                </div>
+
                             </div>
                         </div>
                     </mat-card-content>
