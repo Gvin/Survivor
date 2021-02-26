@@ -26,20 +26,20 @@
                                     <srv-item-icon [itemId]="part.itemId" [count]="part.count + '/' + getExistingCount(part.itemId)"></srv-item-icon>
                                 </div>
 
-                                <div *ngIf="freshWaterRequired(recipe)" matTooltip="Fresh Water Source" [ngClass]="{'environment-requirement': true, 'missing': !freshWaterAvailable()}">
-                                    <div class="requirement-icon environment-icon fresh-water-source"></div>
+                                <div *ngIf="cleanWaterRequired(recipe)" matTooltip="{{'environment-resources.clean-water-source' | localize : 'Clean Water Source'}}" [ngClass]="{'environment-requirement': true, 'missing': !cleanWaterAvailable()}">
+                                    <div class="requirement-icon environment-icon clean-water-source"></div>
                                 </div>
 
-                                <div *ngIf="saltWaterRequired(recipe)" matTooltip="Salt Water Source" [ngClass]="{'environment-requirement': true, 'missing': !saltWaterAvailable()}">
+                                <div *ngIf="saltWaterRequired(recipe)" matTooltip="{{'environment-resources.salt-water-source' | localize : 'Salt Water Source'}}" [ngClass]="{'environment-requirement': true, 'missing': !saltWaterAvailable()}">
                                     <div class="requirement-icon environment-icon salt-water-source"></div>
                                 </div>
 
-                                <div *ngIf="mudWaterRequired(recipe)" matTooltip="Mud Water Source" [ngClass]="{'environment-requirement': true, 'missing': !mudWaterAvailable()}">
-                                    <div class="requirement-icon environment-icon mud-water-source"></div>
+                                <div *ngIf="dirtyWaterRequired(recipe)" matTooltip="{{'environment-resources.dirty-water-source' | localize : 'Dirty Water Source'}}" [ngClass]="{'environment-requirement': true, 'missing': !dirtyWaterAvailable()}">
+                                    <div class="requirement-icon environment-icon dirty-water-source"></div>
                                 </div>
 
                                 <div class="craft-button">
-                                    <button mat-button [disabled]="!isRecipeAvailable(recipe)">Craft</button>
+                                    <button mat-button (click)="craftRecipe(recipe)" [disabled]="!isRecipeAvailable(recipe)">{{'crafting.craft-button' | localize : 'Craft ({0}m)' : recipe.time}}</button>
                                 </div>
 
                             </div>

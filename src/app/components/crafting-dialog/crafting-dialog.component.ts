@@ -4,6 +4,7 @@ import { Game } from "src/app/data/game";
 import { GameItem } from "src/app/data/items/game-item";
 import { WaterType } from "src/app/data/mementos/game-location-memento";
 import { GameRecipeMemento, GameRecipePart } from "src/app/data/mementos/game-recipe-memento";
+import { CraftItemPlayerAction } from "src/app/data/player-actions/craft-items-player-action";
 import { LocalizationService } from "src/app/services/game-localization/localization.service";
 
 interface GameRecipesGroup {
@@ -54,7 +55,7 @@ export class SurvivorCraftingDialogComponent {
         return recipe.parts.every(part => this.game.Player.Inventory.hasItem(part.itemId, part.count));
     }
 
-    public freshWaterAvailable(): boolean {
+    public cleanWaterAvailable(): boolean {
         const currentLocation = this.game.Map.getLocation(this.game.CurrentLocation);
         return currentLocation.hasWaterSource(WaterType.clean);
     }
@@ -64,12 +65,12 @@ export class SurvivorCraftingDialogComponent {
         return currentLocation.hasWaterSource(WaterType.sea);
     }
 
-    public mudWaterAvailable(): boolean {
+    public dirtyWaterAvailable(): boolean {
         const currentLocation = this.game.Map.getLocation(this.game.CurrentLocation);
         return currentLocation.hasWaterSource(WaterType.dirty);
     }
 
-    public freshWaterRequired(recipe: GameRecipeMemento): boolean {
+    public cleanWaterRequired(recipe: GameRecipeMemento): boolean {
         return recipe.requiresWaterSource === WaterType.clean;
     }
 
@@ -77,7 +78,7 @@ export class SurvivorCraftingDialogComponent {
         return recipe.requiresWaterSource === WaterType.sea;
     }
 
-    public mudWaterRequired(recipe: GameRecipeMemento): boolean {
+    public dirtyWaterRequired(recipe: GameRecipeMemento): boolean {
         return recipe.requiresWaterSource === WaterType.dirty;
     }
 
@@ -132,6 +133,12 @@ export class SurvivorCraftingDialogComponent {
 
     public getRecipeGroupDescription(recipeGroup: GameRecipesGroup): string {
         return this.localizationService.translateString(GameItem.getDescription(recipeGroup.outputItemId));
+    }
+
+    public craftRecipe(recipe: GameRecipeMemento): void {
+        this.game.performAction(new CraftItemPlayerAction(recipe));
+        this.selectedRecipeGroup = undefined;
+        this.recipeGroups = this.updateRecipeGroups();
     }
 
     public close(): void {

@@ -7,5 +7,7 @@
     "item-picked-up": "You have picked up one {0}.",
     "item-received": "You have received {0}.",
     "swim-on-location": "You swam in the water.",
-    "recipe-unlocked": "You have invented {0} recipe."
+    "recipe-unlocked": "You have invented {0} recipe.",
+    "item-crafted-single": "You have crafted 1 {0}.",
+    "item-crafted-multi": "You have crafted {0} {1}."
 }

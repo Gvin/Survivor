@@ -10,6 +10,6 @@
     background-size: cover;
 }
 
-@include env-icon('fresh-water-source');
+@include env-icon('clean-water-source');
 @include env-icon('salt-water-source');
-@include env-icon('mud-water-source');
+@include env-icon('dirty-water-source');

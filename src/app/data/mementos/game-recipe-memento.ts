@@ -14,6 +14,7 @@ export interface GameRecipeUnlockCondition {
 export interface GameRecipeMemento {
     outputItemId: string;
     outputCount: number;
+    time: number;
     parts: GameRecipePart[];
     unlock?: GameRecipeUnlockCondition;
     unlocked: boolean;

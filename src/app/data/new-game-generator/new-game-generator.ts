@@ -24,7 +24,7 @@ export class NewGameGenerator {
                 energy: 100,
                 inventory: {
                     items: [
-                        this.itemCreationFactory.getItemMemento(ItemIds.consumable.freshWaterBottle),
+                        this.itemCreationFactory.getItemMemento(ItemIds.consumable.cleanWaterBottle),
                         this.itemCreationFactory.getItemMemento(ItemIds.consumable.saltWaterBottle),
                         this.itemCreationFactory.getItemMemento(ItemIds.misc.branch),
                         this.itemCreationFactory.getItemMemento(ItemIds.misc.stick),
@@ -50,9 +50,10 @@ export class NewGameGenerator {
             { // Empty fresh water bottle
                 outputItemId: ItemIds.misc.emptyBottle,
                 outputCount: 1,
+                time: 1,
                 unlocked: true,
                 parts: [{
-                    itemId: ItemIds.consumable.freshWaterBottle,
+                    itemId: ItemIds.consumable.cleanWaterBottle,
                     count: 1,
                     consumed: true,
                 }]
@@ -60,6 +61,7 @@ export class NewGameGenerator {
             { // Empty salt water bottle
                 outputItemId: ItemIds.misc.emptyBottle,
                 outputCount: 1,
+                time: 1,
                 unlocked: true,
                 parts: [{
                     itemId: ItemIds.consumable.saltWaterBottle,
@@ -70,6 +72,7 @@ export class NewGameGenerator {
             { // Fill salt water bottle
                 outputItemId: ItemIds.consumable.saltWaterBottle,
                 outputCount: 1,
+                time: 1,
                 unlocked: true,
                 parts: [{
                     itemId: ItemIds.misc.emptyBottle,
@@ -79,8 +82,9 @@ export class NewGameGenerator {
                 requiresWaterSource: WaterType.sea
             },
             { // Fill fresh water bottle
-                outputItemId: ItemIds.consumable.freshWaterBottle,
+                outputItemId: ItemIds.consumable.cleanWaterBottle,
                 outputCount: 1,
+                time: 1,
                 unlocked: true,
                 parts: [{
                     itemId: ItemIds.misc.emptyBottle,
@@ -89,9 +93,10 @@ export class NewGameGenerator {
                 }],
                 requiresWaterSource: WaterType.clean
             },
-            {
+            { // Create stick from branch
                 outputItemId: ItemIds.misc.stick,
                 outputCount: 1,
+                time: 10,
                 unlocked: false,
                 parts: [{
                     itemId: ItemIds.misc.branch,

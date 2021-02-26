@@ -92,9 +92,13 @@ export class Inventory {
     }
 
     public removeItem(item: GameItem): void {
-        const stackIndex = this.stacks.findIndex(stack => stack.TopItem.Id === item.Id);
+        this.removeItemById(item.Id);
+    }
+
+    public removeItemById(itemId: string): void {
+        const stackIndex = this.stacks.findIndex(stack => stack.TopItem.Id === itemId);
         if (stackIndex < 0) {
-            throw Error(`Item ${item} doesn't exist in inventory.`);
+            throw Error(`Item ${itemId} doesn't exist in inventory.`);
         }
         const stack = this.stacks[stackIndex];
         if (stack.Count === 1) {

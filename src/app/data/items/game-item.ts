@@ -17,6 +17,7 @@ export abstract class GameItem {
 
     private readonly name: LocalizableString;
     private readonly useName: LocalizableString;
+    private readonly multiName: LocalizableString;
     private readonly description: LocalizableString;
 
     constructor(memento: GameItemMemento) {
@@ -27,6 +28,7 @@ export abstract class GameItem {
 
         this.name = GameItem.getName(this.Id);
         this.useName = GameItem.getUseName(this.Id);
+        this.multiName = GameItem.getMultiName(this.Id);
         this.description = GameItem.getDescription(this.Id);
     }
 
@@ -36,6 +38,10 @@ export abstract class GameItem {
 
     public static getUseName(itemId: string): LocalizableString {
         return new LocalizableString().addLocalizable(`${itemId}.useName`, LocaleNamespace.items);
+    }
+
+    public static getMultiName(itemId: string): LocalizableString {
+        return new LocalizableString().addLocalizable(`${itemId}.multiName`, LocaleNamespace.items);
     }
 
     public static getDescription(itemId: string): LocalizableString {
@@ -48,6 +54,10 @@ export abstract class GameItem {
 
     public get UseName(): LocalizableString {
         return this.useName;
+    }
+
+    public get MultiName(): LocalizableString {
+        return this.multiName;
     }
 
     public get Description(): LocalizableString {
