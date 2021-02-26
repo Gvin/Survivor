@@ -2,11 +2,13 @@
     "clean-water-bottle": {
         "name": "Бутылка чистой воды",
         "useName": "Бутылку чистой воды",
+        "multiName": "Бутылки чистой воды",
         "description": "Бутылка чистой питьевой воды."
     },
     "salt-water-bottle": {
         "name": "Бутылка солёной воды",
         "useName": "Бутылку солёной воды",
+        "multiName": "Бутылки солёной воды",
         "description": "Бутылка солёной морской воды."
     },
     "dirty-water-bottle": {
