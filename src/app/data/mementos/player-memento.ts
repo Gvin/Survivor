@@ -6,4 +6,5 @@ export interface PlayerMemento {
     hunger: number;
     energy: number;
     inventory: InventoryMemento;
+    knownItems: string[];
 }

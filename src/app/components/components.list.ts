@@ -1,7 +1,9 @@
 import { SurvivorAppRootComponent } from './app-root/app-root.component';
+import { SurvivorCraftingDialogComponent } from './crafting-dialog/crafting-dialog.component';
 import { SurvivorEnvironmentStatsComponent } from './environment-stats/environment-stats.component';
 import { SurvivorGameFooterComponent } from './game-footer/game-footer.component';
 import { SurvivorGameComponent } from './game/game.component';
+import { SurvivorItemIconComponent } from './item-icon/item-icon.component';
 import { SurvivorItemsGridComponent } from './items-grid/items-grid.component';
 import { SurvivorJournalComponent } from './journal/journal.component';
 import { SurvivorLocalesSelectorComponent } from './locales-selector/locales-selector.component';
@@ -23,11 +25,14 @@ export const ComponentsList = [
   SurvivorItemsGridComponent,
   SurvivorStorageInventoryComponent,
   SurvivorLocalesSelectorComponent,
-  SurvivorGameFooterComponent
+  SurvivorGameFooterComponent,
+  SurvivorCraftingDialogComponent,
+  SurvivorItemIconComponent
 ];
 
 export const EntryComponentsList = [
   SurvivorPlayerInventoryComponent,
   SurvivorStorageInventoryComponent,
-  SurvivorLocalesSelectorComponent
+  SurvivorLocalesSelectorComponent,
+  SurvivorCraftingDialogComponent
 ];

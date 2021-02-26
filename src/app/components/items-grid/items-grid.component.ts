@@ -5,10 +5,7 @@ import { LocalizationService } from "src/app/services/game-localization/localiza
 @Component({
     selector: 'srv-items-grid',
     templateUrl: './items-grid.component.html',
-    styleUrls: [
-        './items-grid.component.scss',
-        '../../../item-icons.scss'
-    ]
+    styleUrls: ['./items-grid.component.scss']
 })
 export class SurvivorItemsGridComponent {
     @Input()

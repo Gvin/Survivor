@@ -26,7 +26,8 @@
         "thirst": "Жажда:",
         "hunger": "Голод:",
         "energy": "Энергия:",
-        "inventory-button": "Инвентарь"
+        "inventory-button": "Инвентарь",
+        "crafting-button": "Создание"
     },
     "location": {
         "go-to": {
@@ -40,6 +41,10 @@
     },
     "player-inventory": {
         "title": "Инвентарь игрока"
+    },
+    "crafting": {
+        "title": "Создание",
+        "craft-button": "Создать ({0}мин)"
     },
     "item-actions": {
         "drop": {
@@ -71,5 +76,10 @@
     },
     "actions": {
         "close": "Закрыть"
+    },
+    "environment-resources": {
+        "clean-water-source": "Источник чистой воды",
+        "salt-water-source": "Источник солёной воды",
+        "dirty-water-source": "Источник грязной воды"
     }
 }

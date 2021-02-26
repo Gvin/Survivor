@@ -6,5 +6,8 @@
     "item-dropped": "Вы выбросили {0}.",
     "item-picked-up": "Вы подняли {0}.",
     "item-received": "Вы получили {0}.",
-    "swim-on-location": "Вы поплавали в воде."
+    "swim-on-location": "Вы поплавали в воде.",
+    "recipe-unlocked": "Вы придумали, как сделать {0}.",
+    "item-crafted-single": "Вы сделали 1 {0}.",
+    "item-crafted-multi": "Вы сделали {1} в количестве {0} штук."
 }

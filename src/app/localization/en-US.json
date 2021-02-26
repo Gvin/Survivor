@@ -26,7 +26,8 @@
         "thirst": "Thirst:",
         "hunger": "Hunger:",
         "energy": "Energy:",
-        "inventory-button": "Inventory"
+        "inventory-button": "Inventory",
+        "crafting-button": "Crafting"
     },
     "location": {
         "go-to": {
@@ -40,6 +41,10 @@
     },
     "player-inventory": {
         "title": "Player Inventory"
+    },
+    "crafting": {
+        "title": "Crafting",
+        "craft-button": "Craft ({0}m)"
     },
     "item-actions": {
         "drop": {
@@ -71,5 +76,10 @@
     },
     "actions": {
         "close": "Close"
+    },
+    "environment-resources": {
+        "clean-water-source": "Clean Water Source",
+        "salt-water-source": "Salt Water Source",
+        "dirty-water-source": "Dirty Water Source"
     }
 }

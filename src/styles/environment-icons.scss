@@ -1,0 +1,15 @@
+@mixin env-icon($icon-name) {
+    .environment-icon.#{$icon-name} {
+        background-image: url('../assets/environment-icons/#{$icon-name}.svg');
+    }
+}
+
+.environment-icon {
+    width: 64px;
+    height: 64px;
+    background-size: cover;
+}
+
+@include env-icon('clean-water-source');
+@include env-icon('salt-water-source');
+@include env-icon('dirty-water-source');

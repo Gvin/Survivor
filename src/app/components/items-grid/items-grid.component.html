@@ -1,5 +1,5 @@
 <div class="grid">
     <div *ngFor="let stack of getItems()" matTooltip="{{getItemName(stack)}}" (click)="selectItem(stack)" [ngClass]="{'item': true, 'selected': isItemSelected(stack)}">
-        <div [class]="'item-icon ' + stack.TopItem.Id">{{stack.Count}}</div>
+        <srv-item-icon [itemId]="stack.TopItem.Id" [count]="stack.Count.toString()"></srv-item-icon>
     </div>
 </div>
