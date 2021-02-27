@@ -19,14 +19,11 @@ export class SurvivorPlayerStatsComponent {
     }
 
     public openInventory(): void {
-        if (!this.model) {
-            throw Error('Model not initialized.');
-        }
         if (!this.game) {
             throw Error('Game not initialized.')
         }
 
-        this.dialogService.showPlayerInventoryDialog(this.game, this.model.Inventory);
+        this.dialogService.showPlayerInventoryDialog(this.game);
     }
 
     public openCrafting(): void {

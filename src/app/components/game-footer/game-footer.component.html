@@ -9,9 +9,8 @@
         </div>
 
         <div class="footer-item">
-            <div class="change-locale-button" (click)="changeLocale()">
-                <span [class]="'flag-icon ' + currentLocale.icon"></span>
-                {{'footer.change-locale' | localize: 'Change Language'}}
+            <div class="link-button" (click)="openSettings()">
+                {{'footer.settings' | localize: 'Settings'}}
             </div>
         </div>
 

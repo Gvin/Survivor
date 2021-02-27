@@ -23,11 +23,11 @@ export class SurvivorLocalesSelectorDialogComponent {
 
     public applyLocale(locale: GameLocale): void {
         this.localizationService.setLocale(locale);
-        this.close();
+        this.dialogRef.close(true);
         this.pageRefreshService.refreshPage();
     }
 
     public close(): void {
-        this.dialogRef.close();
+        this.dialogRef.close(false);
     }
 }

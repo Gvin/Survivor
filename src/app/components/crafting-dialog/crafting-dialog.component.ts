@@ -14,6 +14,10 @@ interface GameRecipesGroup {
     recipes: GameRecipeMemento[];
 }
 
+export interface CraftingDialogData {
+    game: Game;
+}
+
 @Component({
     selector: 'srv-crafting-dialog',
     templateUrl: './crafting-dialog.component.html',
@@ -30,12 +34,9 @@ export class SurvivorCraftingDialogComponent {
     public constructor(
         private readonly localizationService: LocalizationService,
         private readonly dialogRef: MatDialogRef<SurvivorCraftingDialogComponent>,
-        @Inject(MAT_DIALOG_DATA) data: any) {
+        @Inject(MAT_DIALOG_DATA) data: CraftingDialogData) {
 
         this.game = data.game;
-        if (!this.game) {
-            throw Error('Game not provided.');
-        }
 
         this.recipeGroups = this.updateRecipeGroups();
     }

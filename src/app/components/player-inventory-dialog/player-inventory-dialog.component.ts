@@ -6,6 +6,10 @@ import { GameItemExtraAction } from "src/app/data/items/game-item";
 import { DropItemPlayerAction } from "src/app/data/player-actions/drop-item-player-action";
 import { LocalizationService } from "src/app/services/game-localization/localization.service";
 
+export interface PlayerInventoryDialogData {
+    game: Game;
+}
+
 @Component({
     selector: 'srv-player-inventory-dialog',
     templateUrl: './player-inventory-dialog.component.html',
@@ -19,16 +23,10 @@ export class SurvivorPlayerInventoryDialogComponent {
     constructor(
         private readonly localizationService: LocalizationService,
         private dialogRef: MatDialogRef<SurvivorPlayerInventoryDialogComponent>,
-        @Inject(MAT_DIALOG_DATA) data: any) {
+        @Inject(MAT_DIALOG_DATA) data: PlayerInventoryDialogData) {
 
-        this.inventory = data.inventory;
+        this.inventory = data.game.Player.Inventory;
         this.game = data.game;
-        if (!this.inventory) {
-            throw Error('Inventory not provided.');
-        }
-        if (!this.game) {
-            throw Error('Game not provided.');
-        }
 
         this.selectedItem = undefined;
     }

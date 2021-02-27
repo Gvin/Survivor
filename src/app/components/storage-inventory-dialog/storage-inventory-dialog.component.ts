@@ -6,6 +6,12 @@ import { LocalizableString } from "src/app/data/localizable-string";
 import { PickUpItemsPlayerAction } from "src/app/data/player-actions/pick-up-items-player-action";
 import { LocalizationService } from "src/app/services/game-localization/localization.service";
 
+export interface StorageInventoryDialogData {
+    game: Game;
+    inventory: Inventory;
+    title: LocalizableString;
+}
+
 @Component({
     selector: 'srv-storage-inventory-dialog',
     templateUrl: './storage-inventory-dialog.component.html',
@@ -20,20 +26,11 @@ export class SurvivorStorageInventoryDialogComponent {
     constructor(
         private readonly localizationService: LocalizationService,
         private dialogRef: MatDialogRef<SurvivorStorageInventoryDialogComponent>,
-        @Inject(MAT_DIALOG_DATA) data: any) {
+        @Inject(MAT_DIALOG_DATA) data: StorageInventoryDialogData) {
 
         this.inventory = data.inventory;
         this.game = data.game;
         this.title = data.title;
-        if (!this.inventory) {
-            throw Error('Inventory not provided.');
-        }
-        if (!this.game) {
-            throw Error('Game not provided.');
-        }
-        if (!this.title) {
-            throw Error('Title not provided.');
-        }
 
         this.selectedItem = undefined;
     }

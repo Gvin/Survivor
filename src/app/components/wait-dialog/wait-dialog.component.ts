@@ -2,6 +2,11 @@ import { Component } from "@angular/core";
 import { MatDialogRef } from "@angular/material/dialog";
 import { LocaleNamespace, LocalizationService } from "src/app/services/game-localization/localization.service";
 
+export interface WaitDialogResult {
+    confirmed: boolean;
+    time?: number;
+}
+
 @Component({
     selector: 'srv-wait-dialog',
     templateUrl: './wait-dialog.component.html',
@@ -22,10 +27,17 @@ export class SurvivorWaitDialogComponent {
     }
 
     public confirm(): void {
-        this.dialogRef.close(this.selectedTime);
+        const result: WaitDialogResult = {
+            confirmed: true,
+            time: this.selectedTime
+        };
+        this.dialogRef.close(result);
     }
 
     public close(): void {
-        this.dialogRef.close();
+        const result: WaitDialogResult = {
+            confirmed: false
+        };
+        this.dialogRef.close(result);
     }
 }

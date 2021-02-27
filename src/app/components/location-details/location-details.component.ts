@@ -134,12 +134,15 @@ export class SurvivorLocationDetailsComponent {
     }
 
     public waitOnLocation(): void {
-        this.dialogService.showWaitDialog((time: number) => {
+        this.dialogService.showWaitDialog().subscribe(result => {
+            if (!result.confirmed || !result.time) {
+                return;
+            }
             if (!this.game) {
                 throw Error('Game object not initialized.')
             }
 
-            this.game.performAction(new WaitPlayerAction(time));
+            this.game.performAction(new WaitPlayerAction(result.time));
         });
     }
 }

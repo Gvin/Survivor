@@ -1,0 +1,16 @@
+<div class="settings-dialog">
+    <h2 mat-dialog-title>{{'settings.title' | localize: 'Settings'}}</h2>
+    
+    <mat-dialog-content>
+        <div class="content">
+            <div class="change-locale-button" (click)="changeLocale()">
+                <span [class]="'flag-icon ' + currentLocale.icon"></span>
+                {{'settings.change-locale' | localize: 'Change Language'}}
+            </div>
+        </div>
+    </mat-dialog-content>
+
+    <mat-dialog-actions>
+        <button mat-raised-button (click)="close()">{{'actions.close' | localize: 'Close'}}</button>
+    </mat-dialog-actions>
+</div>

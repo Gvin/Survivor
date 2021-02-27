@@ -8,6 +8,10 @@
         "to-menu-link": "В главное меню",
         "report-issues-link": "Внести ошибки/предложения",
         "version-text": "Версия {0}",
+        "settings": "Настройки"
+    },
+    "settings": {
+        "title": "Настройки",
         "change-locale": "Изменить язык"
     },
     "locales-selector": {

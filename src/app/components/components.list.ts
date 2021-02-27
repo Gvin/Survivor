@@ -11,6 +11,7 @@ import { SurvivorLocationDetailsComponent } from './location-details/location-de
 import { SurvivorMenuComponent } from './menu/menu.component';
 import { SurvivorPlayerInventoryDialogComponent } from './player-inventory-dialog/player-inventory-dialog.component';
 import { SurvivorPlayerStatsComponent } from './player-stats/player-stats.component';
+import { SurvivorSettingsDialogComponent } from './settings-dialog/settings-dialog.component';
 import { SurvivorStorageInventoryDialogComponent } from './storage-inventory-dialog/storage-inventory-dialog.component';
 import { SurvivorWaitDialogComponent } from './wait-dialog/wait-dialog.component';
 
@@ -29,7 +30,8 @@ export const ComponentsList = [
   SurvivorGameFooterComponent,
   SurvivorCraftingDialogComponent,
   SurvivorItemIconComponent,
-  SurvivorWaitDialogComponent
+  SurvivorWaitDialogComponent,
+  SurvivorSettingsDialogComponent
 ];
 
 export const EntryComponentsList = [
@@ -37,5 +39,6 @@ export const EntryComponentsList = [
   SurvivorStorageInventoryDialogComponent,
   SurvivorLocalesSelectorDialogComponent,
   SurvivorCraftingDialogComponent,
-  SurvivorWaitDialogComponent
+  SurvivorWaitDialogComponent,
+  SurvivorSettingsDialogComponent
 ];

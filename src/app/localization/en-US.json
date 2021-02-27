@@ -8,6 +8,10 @@
         "to-menu-link": "To main menu",
         "report-issues-link": "Report bugs/suggestions",
         "version-text": "Version {0}",
+        "settings": "Settings"
+    },
+    "settings": {
+        "title": "Settings",
         "change-locale": "Change Language"
     },
     "locales-selector": {
