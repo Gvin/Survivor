@@ -1,0 +1,18 @@
+.wait-dialog {
+    .content {
+        width: 100%;
+
+        .slider mat-slider {
+            width: 100%;
+            margin-top: 30px;
+        }
+
+        .value {
+            text-align: center;
+        }
+    }
+
+    .right-action {
+        margin-left: auto;
+    }
+}

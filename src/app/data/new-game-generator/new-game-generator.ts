@@ -24,10 +24,14 @@ export class NewGameGenerator {
                 energy: 100,
                 inventory: {
                     items: [
-                        this.itemCreationFactory.getItemMemento(ItemIds.consumable.freshWaterBottle),
-                        this.itemCreationFactory.getItemMemento(ItemIds.consumable.saltWaterBottle)
+                        this.itemCreationFactory.getItemMemento(ItemIds.consumable.cleanWaterBottle),
+                        this.itemCreationFactory.getItemMemento(ItemIds.consumable.saltWaterBottle),
+                        this.itemCreationFactory.getItemMemento(ItemIds.misc.branch),
+                        this.itemCreationFactory.getItemMemento(ItemIds.misc.stick),
+                        this.itemCreationFactory.getItemMemento(ItemIds.misc.emptyBottle)
                     ]
-                }
+                },
+                knownItems: []
             },
             currentLocation: locBeach,
             environment: {
@@ -46,20 +50,62 @@ export class NewGameGenerator {
             { // Empty fresh water bottle
                 outputItemId: ItemIds.misc.emptyBottle,
                 outputCount: 1,
+                time: 1,
+                unlocked: true,
                 parts: [{
-                    itemId: ItemIds.consumable.freshWaterBottle,
+                    itemId: ItemIds.consumable.cleanWaterBottle,
                     count: 1,
-                    consumed: true
+                    consumed: true,
                 }]
             },
             { // Empty salt water bottle
                 outputItemId: ItemIds.misc.emptyBottle,
                 outputCount: 1,
+                time: 1,
+                unlocked: true,
                 parts: [{
                     itemId: ItemIds.consumable.saltWaterBottle,
                     count: 1,
                     consumed: true
                 }]
+            },
+            { // Fill salt water bottle
+                outputItemId: ItemIds.consumable.saltWaterBottle,
+                outputCount: 1,
+                time: 1,
+                unlocked: true,
+                parts: [{
+                    itemId: ItemIds.misc.emptyBottle,
+                    count: 1,
+                    consumed: true
+                }],
+                requiresWaterSource: WaterType.sea
+            },
+            { // Fill fresh water bottle
+                outputItemId: ItemIds.consumable.cleanWaterBottle,
+                outputCount: 1,
+                time: 1,
+                unlocked: true,
+                parts: [{
+                    itemId: ItemIds.misc.emptyBottle,
+                    count: 1,
+                    consumed: true
+                }],
+                requiresWaterSource: WaterType.clean
+            },
+            { // Create stick from branch
+                outputItemId: ItemIds.misc.stick,
+                outputCount: 1,
+                time: 10,
+                unlocked: false,
+                parts: [{
+                    itemId: ItemIds.misc.branch,
+                    count: 1,
+                    consumed: true
+                }],
+                unlock: {
+                    knownItems: [ItemIds.misc.branch]
+                }
             }
         ];
     }
@@ -75,7 +121,7 @@ export class NewGameGenerator {
                     id: locBeach,
                     waterSource: WaterType.sea,
                     canSwim: true,
-                    groundInventory: {items: []}
+                    groundInventory: {items: [this.itemCreationFactory.getItemMemento(ItemIds.misc.branch)]}
                 },
                 {
                     id: locForest,

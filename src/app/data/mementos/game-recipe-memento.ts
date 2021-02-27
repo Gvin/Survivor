@@ -1,15 +1,22 @@
+import { WaterType } from "./game-location-memento";
+
 export interface GameRecipePart {
     itemId: string;
     count: number;
     consumed: boolean;
 }
 
-export interface GameRecipeUnlockCondition {
-
+export interface GameRecipeUnlockCondition {   
+    knownItems?: string[];
+    buldings?: string[];
 }
 
 export interface GameRecipeMemento {
     outputItemId: string;
     outputCount: number;
+    time: number;
     parts: GameRecipePart[];
+    unlock?: GameRecipeUnlockCondition;
+    unlocked: boolean;
+    requiresWaterSource?: WaterType;
 }

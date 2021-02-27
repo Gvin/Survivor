@@ -11,8 +11,9 @@ import {MatCardModule} from '@angular/material/card';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
 import {MatTooltipModule} from '@angular/material/tooltip';
-// import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatSliderModule} from '@angular/material/slider';
+// import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 // import {MatTableModule} from '@angular/material/table';
 // import {MatSelectModule} from '@angular/material/select';
 // import {MatSortModule} from '@angular/material/sort';
@@ -35,22 +36,11 @@ import { LocalizePipe } from '../services/game-localization/localize.pipe';
     MatTooltipModule,
     MatToolbarModule,
     MatCardModule,
-    // MatGridListModule,
-    // MatFormFieldModule,
-    // MatInputModule,
     MatButtonModule,
     ReactiveFormsModule,
     FormsModule,
-    // MatProgressSpinnerModule,
     MatDialogModule,
-    // MatTableModule,
-    // MatSelectModule,
-    // MatSortModule,
-    // MatCheckboxModule,
-    // MatPaginatorModule,
-    // MatDatepickerModule,
-    // MatNativeDateModule,
-    // MatProgressBarModule
+    MatSliderModule
   ],
   declarations: [
     ...ComponentsList,

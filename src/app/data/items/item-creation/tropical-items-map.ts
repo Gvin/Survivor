@@ -1,12 +1,13 @@
 import { ItemType } from "src/app/data/items/item-type";
 import { PlayerCharacteristic } from "../../player";
-import { ConsumableGameItem, ConsumableGameItemData, ConsumableGameItemEffect } from "../consumable-game-item";
+import { ConsumableGameItem, ConsumableGameItemData } from "../consumable-game-item";
 import { GameItemsMap } from "./items-map";
 
 export const ItemIds = {
     consumable: {
-        freshWaterBottle: 'fresh-water-bottle',
-        saltWaterBottle: 'salt-water-bottle'
+        cleanWaterBottle: 'clean-water-bottle',
+        saltWaterBottle: 'salt-water-bottle',
+        dirtyWaterBottle: 'dirty-water-bottle'
     },
     misc: {
         emptyBottle: 'empty-bottle',
@@ -23,7 +24,7 @@ export const tropicalItemsMap: GameItemsMap = {
     items: [
         // Bottled liquid
         {
-            id: ItemIds.consumable.freshWaterBottle,
+            id: ItemIds.consumable.cleanWaterBottle,
             type: ItemType.consumable,
             stackable: true,
             data: [

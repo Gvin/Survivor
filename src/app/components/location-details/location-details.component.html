@@ -3,15 +3,23 @@
         <mat-card-title>{{getLocationTitle()}}</mat-card-title>
         <mat-card-content>{{getLocationDescription()}}</mat-card-content>
         <mat-card-actions class="actions">
+
+            <div class="action">
+                <button mat-raised-button matTooltip="{{'location.wait.tooltip' | localize: 'Wait here for some time.'}}" (click)="waitOnLocation()">{{'location.wait.title' | localize: 'Wait'}}</button>
+            </div>
+
             <div *ngFor="let connection of getConnections()" class="action">
                 <button mat-raised-button matTooltip="{{'location.go-to.tooltip' | localize: 'Move to a different location.'}}" (click)="movePlayer(connection)">{{'location.go-to.title' | localize: 'Go to the {0} ({1}m)': getConnectedLocationToName(connection): connection.walkTime}}</button>
             </div>
+
             <div *ngIf="getGroundItemsCount() > 0" class="action">
                 <button mat-raised-button matTooltip="{{'location.check-ground.tooltip' | localize: 'Check items on the ground.'}}" (click)="showGroundItems()">{{'location.check-ground.title' | localize: 'Check ground ({0} items)': getGroundItemsCount()}}</button>
             </div>
+
             <div *ngFor="let action of getLocationActions()" class="action">
                 <button mat-raised-button matTooltip="{{getLocationActionDescription(action)}}" (click)="performLocationAction(action)">{{getLocationActionTitle(action)}}</button>
             </div>
+
         </mat-card-actions>
     </mat-card>
 </div>

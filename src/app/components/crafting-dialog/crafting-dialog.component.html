@@ -1,0 +1,56 @@
+<div [ngClass]="{'crafting': true, 'selection': selectedRecipeGroup}">
+    <h2 mat-dialog-title>{{'crafting.title' | localize : 'Crafting'}}</h2>
+
+    <mat-dialog-content>
+        <div class="content">
+            <div class="grid">
+                <div *ngFor="let group of getRecipeGroups()" matTooltip="{{getRecipeGroupTitle(group)}}" (click)="selectRecipeGroup(group)" [ngClass]="{'recipe': true, 'selected': isRecipeGroupSelected(group), 'unavailable': !group.available}">
+                    <srv-item-icon [itemId]="group.outputItemId"></srv-item-icon>
+                </div>
+            </div>
+            <div class="details" *ngIf="selectedRecipeGroup">
+                <mat-card>
+                    <mat-card-title>{{getRecipeGroupTitle(selectedRecipeGroup)}}</mat-card-title>
+                    <mat-card-content>
+                        <div class="description">
+                            {{getRecipeGroupDescription(selectedRecipeGroup)}}
+                        </div>
+                        <div class="recipes">
+                            <div *ngFor="let recipe of selectedRecipeGroup.recipes" class="recipe">
+                                
+                                <div class="out-count">
+                                    X{{recipe.outputCount}}
+                                </div>
+
+                                <div *ngFor="let part of recipe.parts" matTooltip="{{getRecipePartTitle(part)}}" [ngClass]="{'part': true, 'consumed': part.consumed, 'missing': getExistingCount(part.itemId) === 0}">
+                                    <srv-item-icon [itemId]="part.itemId" [count]="part.count + '/' + getExistingCount(part.itemId)"></srv-item-icon>
+                                </div>
+
+                                <div *ngIf="cleanWaterRequired(recipe)" matTooltip="{{'environment-resources.clean-water-source' | localize : 'Clean Water Source'}}" [ngClass]="{'environment-requirement': true, 'missing': !cleanWaterAvailable()}">
+                                    <div class="requirement-icon environment-icon clean-water-source"></div>
+                                </div>
+
+                                <div *ngIf="saltWaterRequired(recipe)" matTooltip="{{'environment-resources.salt-water-source' | localize : 'Salt Water Source'}}" [ngClass]="{'environment-requirement': true, 'missing': !saltWaterAvailable()}">
+                                    <div class="requirement-icon environment-icon salt-water-source"></div>
+                                </div>
+
+                                <div *ngIf="dirtyWaterRequired(recipe)" matTooltip="{{'environment-resources.dirty-water-source' | localize : 'Dirty Water Source'}}" [ngClass]="{'environment-requirement': true, 'missing': !dirtyWaterAvailable()}">
+                                    <div class="requirement-icon environment-icon dirty-water-source"></div>
+                                </div>
+
+                                <div class="craft-button">
+                                    <button mat-button (click)="craftRecipe(recipe)" [disabled]="!isRecipeAvailable(recipe)">{{'crafting.craft-button' | localize : 'Craft ({0}m)' : recipe.time}}</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+    </mat-dialog-content>
+
+    <mat-dialog-actions>
+        <button mat-raised-button (click)="close()">{{'actions.close' | localize: 'Close'}}</button>
+    </mat-dialog-actions>
+</div>

@@ -1,0 +1,19 @@
+<div class="wait-dialog">
+    <h2 mat-dialog-title>{{'wait.title' | localize: 'Select time to wait'}}</h2>
+    
+    <mat-dialog-content>
+        <div class="content">
+            <div class="slider">
+                <mat-slider thumbLabel [min]="5" [max]="180" [step]="5" [(ngModel)]="selectedTime"></mat-slider>
+            </div>
+            <div class="value">
+                {{getSelectedTime()}}
+            </div>
+        </div>
+    </mat-dialog-content>
+
+    <mat-dialog-actions>
+        <button mat-raised-button (click)="confirm()">{{'actions.confirm' | localize: 'Confirm'}}</button>
+        <button mat-raised-button class="right-action" (click)="close()">{{'actions.close' | localize: 'Close'}}</button>
+    </mat-dialog-actions>
+</div>

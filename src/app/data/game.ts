@@ -1,13 +1,15 @@
 import { GameEnvironment as GameEnvironment } from "./game-environment";
 import { GameMemento } from "./mementos/game-memento";
 import { Player } from "./player";
-import { Map as GameMap } from "./game-map";
+import { GameMap as GameMap } from "./game-map";
 import { GameJournal } from "./game-journal";
 import { ItemCreationFactory } from "./items/item-creation/item-creation-factory";
 import { PlayerAction } from "./player-actions/player-action";
 import { EventEmitter } from "events";
 import { GameLocation } from "./game-location";
 import { GameRecipeMemento } from "./mementos/game-recipe-memento";
+import { RecipeUnlockedJournalMessage } from "./journal-messages/recipe-unlocked-journal-message";
+import { GameLocationId } from "./mementos/game-location-memento";
 
 export class Game {
     private player: Player;
@@ -38,7 +40,7 @@ export class Game {
         return this.player;
     }
 
-    public get CurrentLocation(): string {
+    public get CurrentLocation(): GameLocationId {
         return this.currentLocation;
     }
 
@@ -53,7 +55,26 @@ export class Game {
 
     public performAction(action: PlayerAction): void {
         action.perform(this);
+        this.checkRecipesUnlock();
         this.actionPerformed.emit('action');
+    }
+
+    private checkRecipesUnlock(): void {
+        this.recipes.filter(recipe => !recipe.unlocked).forEach(recipe => {
+            if (!recipe.unlock) {
+                recipe.unlocked = true;
+            } else {
+                const canUnlockByItems = recipe.unlock.knownItems ? this.player.isKnownItems(recipe.unlock.knownItems) : true;
+                if (canUnlockByItems) {
+                    recipe.unlocked = true;
+                    this.journal.write(this, new RecipeUnlockedJournalMessage(recipe));
+                }
+            }
+        });
+    }
+
+    public get Recipes(): GameRecipeMemento[] {
+        return this.recipes;
     }
 
     public get Environment(): GameEnvironment {

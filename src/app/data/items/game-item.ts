@@ -17,6 +17,7 @@ export abstract class GameItem {
 
     private readonly name: LocalizableString;
     private readonly useName: LocalizableString;
+    private readonly multiName: LocalizableString;
     private readonly description: LocalizableString;
 
     constructor(memento: GameItemMemento) {
@@ -25,9 +26,26 @@ export abstract class GameItem {
         this.stackable = memento.stackable;
         this.data = memento.data;
 
-        this.name = new LocalizableString().addLocalizable(`${this.Id}.name`, LocaleNamespace.items);
-        this.useName = new LocalizableString().addLocalizable(`${this.Id}.useName`, LocaleNamespace.items);
-        this.description = new LocalizableString().addLocalizable(`${this.Id}.description`, LocaleNamespace.items);
+        this.name = GameItem.getName(this.Id);
+        this.useName = GameItem.getUseName(this.Id);
+        this.multiName = GameItem.getMultiName(this.Id);
+        this.description = GameItem.getDescription(this.Id);
+    }
+
+    public static getName(itemId: string): LocalizableString {
+        return new LocalizableString().addLocalizable(`${itemId}.name`, LocaleNamespace.items);
+    }
+
+    public static getUseName(itemId: string): LocalizableString {
+        return new LocalizableString().addLocalizable(`${itemId}.useName`, LocaleNamespace.items);
+    }
+
+    public static getMultiName(itemId: string): LocalizableString {
+        return new LocalizableString().addLocalizable(`${itemId}.multiName`, LocaleNamespace.items);
+    }
+
+    public static getDescription(itemId: string): LocalizableString {
+        return new LocalizableString().addLocalizable(`${itemId}.description`, LocaleNamespace.items);
     }
 
     public get Name(): LocalizableString {
@@ -36,6 +54,10 @@ export abstract class GameItem {
 
     public get UseName(): LocalizableString {
         return this.useName;
+    }
+
+    public get MultiName(): LocalizableString {
+        return this.multiName;
     }
 
     public get Description(): LocalizableString {
