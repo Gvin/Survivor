@@ -36,7 +36,8 @@
         },
         "check-ground": {
             "title": "Check ground ({0} items)",
-            "tooltip": "Check items on the ground."
+            "tooltip": "Check items on the ground.",
+            "inventory-name": "Items on the ground"
         },
         "wait": {
             "title": "Wait",

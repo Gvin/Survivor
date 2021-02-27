@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { SurvivorCraftingDialogComponent } from "src/app/components/crafting-dialog/crafting-dialog.component";
-import { SurvivorLocalesSelectorComponent } from "src/app/components/locales-selector/locales-selector.component";
-import { SurvivorPlayerInventoryComponent } from "src/app/components/player-inventory/player-inventory.component";
-import { SurvivorStorageInventoryComponent } from "src/app/components/storage-inventory/storage-inventory.component";
+import { SurvivorLocalesSelectorDialogComponent } from "src/app/components/locales-selector-dialog/locales-selector-dialog.component";
+import { SurvivorPlayerInventoryDialogComponent } from "src/app/components/player-inventory-dialog/player-inventory-dialog.component";
+import { SurvivorStorageInventoryDialogComponent } from "src/app/components/storage-inventory-dialog/storage-inventory-dialog.component";
 import { SurvivorWaitDialogComponent } from "src/app/components/wait-dialog/wait-dialog.component";
 import { Game } from "src/app/data/game";
 import { Inventory } from "src/app/data/inventory";
@@ -24,7 +24,7 @@ export class GameDialogsService {
             game: game
         };
 
-        this.dialog.open(SurvivorPlayerInventoryComponent, dialogConfig);
+        this.dialog.open(SurvivorPlayerInventoryDialogComponent, dialogConfig);
     }
 
     public showStorageInventoryDialog(game: Game, inventory: Inventory, title: LocalizableString): void {
@@ -37,14 +37,14 @@ export class GameDialogsService {
             title: title
         };
 
-        this.dialog.open(SurvivorStorageInventoryComponent, dialogConfig);
+        this.dialog.open(SurvivorStorageInventoryDialogComponent, dialogConfig);
     }
 
     public showLocalesSelectorDialog(): void {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.autoFocus = true;
 
-        this.dialog.open(SurvivorLocalesSelectorComponent, dialogConfig);
+        this.dialog.open(SurvivorLocalesSelectorDialogComponent, dialogConfig);
     }
 
     public showCraftingDialog(game: Game): void {

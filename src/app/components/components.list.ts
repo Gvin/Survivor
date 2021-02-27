@@ -6,12 +6,12 @@ import { SurvivorGameComponent } from './game/game.component';
 import { SurvivorItemIconComponent } from './item-icon/item-icon.component';
 import { SurvivorItemsGridComponent } from './items-grid/items-grid.component';
 import { SurvivorJournalComponent } from './journal/journal.component';
-import { SurvivorLocalesSelectorComponent } from './locales-selector/locales-selector.component';
+import { SurvivorLocalesSelectorDialogComponent } from './locales-selector-dialog/locales-selector-dialog.component';
 import { SurvivorLocationDetailsComponent } from './location-details/location-details.component';
 import { SurvivorMenuComponent } from './menu/menu.component';
-import { SurvivorPlayerInventoryComponent } from './player-inventory/player-inventory.component';
+import { SurvivorPlayerInventoryDialogComponent } from './player-inventory-dialog/player-inventory-dialog.component';
 import { SurvivorPlayerStatsComponent } from './player-stats/player-stats.component';
-import { SurvivorStorageInventoryComponent } from './storage-inventory/storage-inventory.component';
+import { SurvivorStorageInventoryDialogComponent } from './storage-inventory-dialog/storage-inventory-dialog.component';
 import { SurvivorWaitDialogComponent } from './wait-dialog/wait-dialog.component';
 
 export const ComponentsList = [
@@ -22,10 +22,10 @@ export const ComponentsList = [
   SurvivorEnvironmentStatsComponent,
   SurvivorLocationDetailsComponent,
   SurvivorJournalComponent,
-  SurvivorPlayerInventoryComponent,
+  SurvivorPlayerInventoryDialogComponent,
   SurvivorItemsGridComponent,
-  SurvivorStorageInventoryComponent,
-  SurvivorLocalesSelectorComponent,
+  SurvivorStorageInventoryDialogComponent,
+  SurvivorLocalesSelectorDialogComponent,
   SurvivorGameFooterComponent,
   SurvivorCraftingDialogComponent,
   SurvivorItemIconComponent,
@@ -33,9 +33,9 @@ export const ComponentsList = [
 ];
 
 export const EntryComponentsList = [
-  SurvivorPlayerInventoryComponent,
-  SurvivorStorageInventoryComponent,
-  SurvivorLocalesSelectorComponent,
+  SurvivorPlayerInventoryDialogComponent,
+  SurvivorStorageInventoryDialogComponent,
+  SurvivorLocalesSelectorDialogComponent,
   SurvivorCraftingDialogComponent,
   SurvivorWaitDialogComponent
 ];

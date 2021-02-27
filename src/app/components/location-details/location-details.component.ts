@@ -43,7 +43,7 @@ export class SurvivorLocationDetailsComponent {
             throw Error('Game not initialized.')
         }
 
-        this.dialogService.showStorageInventoryDialog(this.game, this.model.GroundInventory, new LocalizableString().addStatic('Ground'));
+        this.dialogService.showStorageInventoryDialog(this.game, this.model.GroundInventory, new LocalizableString().addLocalizable('location.check-ground.inventory-name'));
     }
 
     public getLocationTitle(): string {
