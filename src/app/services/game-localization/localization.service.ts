@@ -44,6 +44,8 @@ export interface GameLocale {
     icon: string;
 }
 
+const errorTranslationText = 'TRANSLATION_NOT_FOUND';
+
 @Injectable({providedIn: 'root'})
 export class LocalizationService {
     private locale: GameLocale;
@@ -86,7 +88,7 @@ export class LocalizationService {
                 const translatedArgs = part.args ? part.args.map(arg => this.translateString(arg)) : [];
                 const translation = this.translate(part.data, part.namespace, null, translatedArgs);
                 if (translation == null) {
-                    return 'TRANSLATION_NOT_FOUND';
+                    return errorTranslationText;
                 } else {
                     return translation;
                 }
@@ -96,12 +98,12 @@ export class LocalizationService {
         }).join('');
     }
 
-    public translate(key: string, localeNamespace: LocaleNamespace = LocaleNamespace.common, defaultValue: string | null = null, args: string[] = []): string | null {
-        const translationRaw = this.getTranslatedText(key, localeNamespace, defaultValue, args);
+    public translate(key: string, localeNamespace: LocaleNamespace = LocaleNamespace.common, defaultValue: string | null = null, args: string[] = []): string {
+        const translationRaw = this.getTranslatedText(key, localeNamespace, defaultValue) || errorTranslationText;
         return this.applyArguments(translationRaw, args);
     }
 
-    private getTranslatedText(key: string, localeNamespace: LocaleNamespace, defaultValue: string | null , args: string[]): string | null {
+    private getTranslatedText(key: string, localeNamespace: LocaleNamespace, defaultValue: string | null): string | null {
         const localeData = this.getLocaleData(localeNamespace);
         const parts = key.split('.');
 
@@ -120,11 +122,7 @@ export class LocalizationService {
         return currentElement;
     }
 
-    private applyArguments(translation: string | null, args: string[]): string | null {
-        if (translation == null) {
-            return null;
-        }
-
+    private applyArguments(translation: string, args: string[]): string {
         for (let index = 0; index < args.length; index++) {
             translation = translation.replace(new RegExp(`\\{${index}\\}`, 'g'), args[index]);
         }

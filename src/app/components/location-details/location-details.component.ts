@@ -8,6 +8,7 @@ import { ChangeLocationPlayerAction } from "src/app/data/player-actions/change-l
 import { GameDialogsService } from "src/app/services/game-dialogs/game-dialogs.service";
 import { LocalizationService } from "src/app/services/game-localization/localization.service";
 import { Game } from "src/app/data/game";
+import { WaitPlayerAction } from "src/app/data/player-actions/wait-player-action";
 
 @Component({
     selector: 'srv-location-details',
@@ -132,12 +133,13 @@ export class SurvivorLocationDetailsComponent {
         return this.localizationService.translateString(location.ToName);
     }
 
-    private translateLocationTitle(locationId: GameLocationId): string {
-        if (!this.game) {
-            throw Error('Game object not initialized.')
-        }
+    public waitOnLocation(): void {
+        this.dialogService.showWaitDialog((time: number) => {
+            if (!this.game) {
+                throw Error('Game object not initialized.')
+            }
 
-        const location = this.game.Map.getLocation(locationId);
-        return this.localizationService.translateString(location.Title);
+            this.game.performAction(new WaitPlayerAction(time));
+        });
     }
 }

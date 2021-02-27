@@ -18,7 +18,7 @@
         "temperature": "Температура:",
         "weather": "Погода:",
         "time": "Время:",
-        "date-time-format": "dd/MM/yyyy hh:mm"
+        "date-time-format": "dd/MM/yyyy HH:mm"
     },
     "player-stats": {
         "title": "Игрок",
@@ -37,6 +37,10 @@
         "check-ground": {
             "title": "Осмотреть землю ({0} предметов)",
             "tooltip": "Осмотреть предметы на земле."
+        },
+        "wait": {
+            "title": "Ждать",
+            "tooltip": "Подождать здесь какое-то время." 
         }
     },
     "player-inventory": {
@@ -45,6 +49,10 @@
     "crafting": {
         "title": "Создание",
         "craft-button": "Создать ({0}мин)"
+    },
+    "wait": {
+        "title": "Выберите время ожидания",
+        "time": "{0} минут"
     },
     "item-actions": {
         "drop": {
@@ -75,6 +83,7 @@
         }
     },
     "actions": {
+        "confirm": "Подтвердить",
         "close": "Закрыть"
     },
     "environment-resources": {

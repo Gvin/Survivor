@@ -18,7 +18,7 @@
         "temperature": "Temperature:",
         "weather": "Weather:",
         "time": "Time:",
-        "date-time-format": "MM/dd/yyyy hh:mm"
+        "date-time-format": "MM/dd/yyyy hh:mm a"
     },
     "player-stats": {
         "title": "Player",
@@ -37,6 +37,10 @@
         "check-ground": {
             "title": "Check ground ({0} items)",
             "tooltip": "Check items on the ground."
+        },
+        "wait": {
+            "title": "Wait",
+            "tooltip": "Wait here for some time." 
         }
     },
     "player-inventory": {
@@ -45,6 +49,10 @@
     "crafting": {
         "title": "Crafting",
         "craft-button": "Craft ({0}m)"
+    },
+    "wait": {
+        "title": "Select time to wait",
+        "time": "{0} minutes"
     },
     "item-actions": {
         "drop": {
@@ -75,6 +83,7 @@
         }
     },
     "actions": {
+        "confirm": "Confirm",
         "close": "Close"
     },
     "environment-resources": {
