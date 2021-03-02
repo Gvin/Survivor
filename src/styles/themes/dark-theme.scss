@@ -1,0 +1,58 @@
+@use 'sass:color';
+
+$text-color: white;
+$background-color: #383838;
+$button-hover-color: #353535;
+$button-color: #303030;
+$shadow-color: white;
+
+body.theme-dark {
+    color: $text-color;
+    background-color: $background-color;
+    
+    ::-webkit-scrollbar {
+        height: 12px;
+        width: 12px;
+        background: $button-color;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: #434343;
+    }
+    
+    ::-webkit-scrollbar-corner {
+        background: $background-color;
+    }
+
+    a {
+        color: $text-color;
+    }
+
+    .mat-card {
+        color: $text-color;
+        background-color: $background-color;
+        box-shadow: 0px 2px 1px -1px color.change($shadow-color, $alpha: 0.2), 0px 1px 1px 0px color.change($shadow-color, $alpha: 0.14), 0px 1px 3px 0px color.change($shadow-color, $alpha: 0.12) !important;
+    }
+
+    .mat-raised-button {
+        color: $text-color;
+        background-color: $button-color;
+        box-shadow: 0px 3px 1px -2px color.change($shadow-color, $alpha: 0.2), 0px 2px 2px 0px color.change($shadow-color, $alpha: 0.14), 0px 1px 5px 0px color.change($shadow-color, $alpha: 0.12) !important;
+    }
+
+    .mat-button {
+        color: $text-color;
+        background-color: $button-color;
+
+        &:hover[disabled='false'] {
+            background-color: $button-hover-color;
+        }
+    }
+
+    .mat-dialog-container {
+        color: $text-color;
+        background-color: $background-color;
+        box-shadow: 0px 11px 15px -7px color.change($shadow-color, $alpha: 0.2), 0px 24px 38px 3px color.change($shadow-color, $alpha: 0.14), 0px 9px 46px 8px color.change($shadow-color, $alpha: 0.12) !important;
+    }
+}
+

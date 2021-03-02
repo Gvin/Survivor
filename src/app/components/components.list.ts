@@ -13,6 +13,7 @@ import { SurvivorPlayerInventoryDialogComponent } from './player-inventory-dialo
 import { SurvivorPlayerStatsComponent } from './player-stats/player-stats.component';
 import { SurvivorSettingsDialogComponent } from './settings-dialog/settings-dialog.component';
 import { SurvivorStorageInventoryDialogComponent } from './storage-inventory-dialog/storage-inventory-dialog.component';
+import { SurvivorThemeProviderComponent } from './theme-provider/theme-provider.component';
 import { SurvivorWaitDialogComponent } from './wait-dialog/wait-dialog.component';
 
 export const ComponentsList = [
@@ -31,7 +32,8 @@ export const ComponentsList = [
   SurvivorCraftingDialogComponent,
   SurvivorItemIconComponent,
   SurvivorWaitDialogComponent,
-  SurvivorSettingsDialogComponent
+  SurvivorSettingsDialogComponent,
+  SurvivorThemeProviderComponent
 ];
 
 export const EntryComponentsList = [
