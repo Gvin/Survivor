@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
+import { LocalStorageService } from "../local-storage/local-storage.service";
 
 export enum ThemesMode {
     Black = 'black',
@@ -7,11 +8,15 @@ export enum ThemesMode {
     Time = 'time'
 }
 
+const defaultThemesMode = ThemesMode.Time;
+
 @Injectable({providedIn: 'root'})
 export class SettingsManagerService {
     private readonly themesModeSource: BehaviorSubject<ThemesMode>;
 
-    public constructor() {
+    public constructor(
+        private readonly localStorageService: LocalStorageService
+    ) {
         const themesMode = this.loadThemesMode();
 
         this.themesModeSource = new BehaviorSubject<ThemesMode>(themesMode);
@@ -21,7 +26,17 @@ export class SettingsManagerService {
         return this.themesModeSource.asObservable();
     }
 
+    public setThemesMode(mode: ThemesMode): void {
+        this.localStorageService.setThemeMode(`${mode}`);
+        this.themesModeSource.next(mode);
+    }
+
     private loadThemesMode(): ThemesMode {
-        return ThemesMode.Time;
+        const savedModeString = this.localStorageService.getThemeMode();
+        if (!savedModeString) {
+            return defaultThemesMode;
+        }
+
+        return savedModeString as ThemesMode;
     }
 }

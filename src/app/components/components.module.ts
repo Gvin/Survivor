@@ -13,6 +13,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSliderModule} from '@angular/material/slider';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 // import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 // import {MatTableModule} from '@angular/material/table';
 // import {MatSelectModule} from '@angular/material/select';
@@ -40,7 +41,8 @@ import { LocalizePipe } from '../services/game-localization/localize.pipe';
     ReactiveFormsModule,
     FormsModule,
     MatDialogModule,
-    MatSliderModule
+    MatSliderModule,
+    MatButtonToggleModule
   ],
   declarations: [
     ...ComponentsList,

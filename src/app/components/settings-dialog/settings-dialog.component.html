@@ -3,9 +3,17 @@
     
     <mat-dialog-content>
         <div class="content">
-            <div class="change-locale-button" (click)="changeLocale()">
+            <div class="setting change-locale-button" (click)="changeLocale()">
                 <span [class]="'flag-icon ' + currentLocale.icon"></span>
                 {{'settings.change-locale' | localize: 'Change Language'}}
+            </div>
+            <div class="setting themes-mode-selector">
+                <p>{{'settings.themes-mode.label' | localize: 'Select Theme'}}</p>
+                <mat-button-toggle-group name="themesMode" (change)="themesModeChanged($event)" value="{{currentThemeMode}}">
+                    <mat-button-toggle value="black">{{'settings.themes-mode.black' | localize: 'Black'}}</mat-button-toggle>
+                    <mat-button-toggle value="time">{{'settings.themes-mode.time' | localize: 'Time-based'}}</mat-button-toggle>
+                    <mat-button-toggle value="white">{{'settings.themes-mode.white' | localize: 'White'}}</mat-button-toggle>
+                </mat-button-toggle-group>
             </div>
         </div>
     </mat-dialog-content>

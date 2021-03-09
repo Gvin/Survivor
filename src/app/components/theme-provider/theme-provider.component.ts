@@ -3,6 +3,7 @@ import { Game } from "src/app/data/game";
 import { EnvironmentLightLevel } from "src/app/data/game-environment";
 import { SettingsManagerService, ThemesMode } from "src/app/services/config-provider/settings-manager.service";
 import { GameTheme, ThemesManagerService } from "src/app/services/themes-manager/themes-manager.service";
+
 @Component({
     selector: 'srv-theme-provider',
     template: ''

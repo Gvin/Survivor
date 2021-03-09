@@ -1,5 +1,8 @@
-import { Component, Inject } from "@angular/core";
+import { Component, Inject, OnInit } from "@angular/core";
+import { MatButtonToggleChange } from "@angular/material/button-toggle";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { first } from "rxjs/operators";
+import { SettingsManagerService, ThemesMode } from "src/app/services/config-provider/settings-manager.service";
 import { GameDialogsService } from "src/app/services/game-dialogs/game-dialogs.service";
 import { GameLocale, LocalizationService } from "src/app/services/game-localization/localization.service";
 
@@ -15,15 +18,23 @@ export interface SettingsDialogData {
         '../../../styles/flag-icons.scss'
     ]
 })
-export class SurvivorSettingsDialogComponent {
+export class SurvivorSettingsDialogComponent implements OnInit {
     private readonly dialogService: GameDialogsService;
+    public currentThemeMode: string | undefined;
 
     public constructor(
         private readonly localizationService: LocalizationService,
         private readonly dialogRef: MatDialogRef<SurvivorSettingsDialogComponent>,
+        private readonly settingsManager: SettingsManagerService,
         @Inject(MAT_DIALOG_DATA) data: SettingsDialogData) {
 
             this.dialogService = data.dialogService;
+    }
+
+    public ngOnInit(): void {
+        this.settingsManager.getThemesMode().pipe(first()).subscribe(mode => {
+            this.currentThemeMode = mode;
+        })
     }
 
     public changeLocale(): void {
@@ -36,6 +47,11 @@ export class SurvivorSettingsDialogComponent {
 
     public get currentLocale(): GameLocale {
         return this.localizationService.currentLocale;
+    }
+
+    public themesModeChanged(event: MatButtonToggleChange): void {
+        const themeMode = event.value as ThemesMode;
+        this.settingsManager.setThemesMode(themeMode);
     }
 
     public close(): void {
