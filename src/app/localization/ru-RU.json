@@ -12,7 +12,13 @@
     },
     "settings": {
         "title": "Настройки",
-        "change-locale": "Изменить язык"
+        "change-locale": "Изменить язык",
+        "themes-mode": {
+            "label": "Выберите тему",
+            "black": "Чёрный",
+            "time": "По времени",
+            "white": "Белый"
+        }
     },
     "locales-selector": {
         "title": "Выберите язык"

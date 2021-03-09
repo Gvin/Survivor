@@ -12,7 +12,13 @@
     },
     "settings": {
         "title": "Settings",
-        "change-locale": "Change Language"
+        "change-locale": "Change Language",
+        "themes-mode": {
+            "label": "Select Theme",
+            "black": "Black",
+            "time": "Time-based",
+            "white": "White"
+        }
     },
     "locales-selector": {
         "title": "Select Language"

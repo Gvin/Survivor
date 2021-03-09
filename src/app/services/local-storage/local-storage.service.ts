@@ -2,7 +2,8 @@ import { Injectable } from "@angular/core";
 
 const keys = {
     locale: 'locale',
-    savegame: 'savegame'
+    savegame: 'savegame',
+    themeMode: 'theme-mode'
 }
 
 @Injectable({providedIn: 'root'})
@@ -21,5 +22,13 @@ export class LocalStorageService {
 
     public setSaveGame(value: string): void {
         localStorage.setItem(keys.savegame, value);
+    }
+
+    public getThemeMode(): string | null {
+        return localStorage.getItem(keys.themeMode);
+    }
+
+    public setThemeMode(value: string): void {
+        localStorage.setItem(keys.themeMode, value);
     }
 }
