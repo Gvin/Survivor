@@ -5,7 +5,8 @@ import { LocalizableString } from "./localizable-string";
 import { DrinkLocationAction } from "./location-actions/drink-location-action";
 import { GameLocationAction } from "./location-actions/game-location-action";
 import { SwimLocationAction } from "./location-actions/swim-location-action";
-import { GameLocationId, GameLocationMemento, WaterType } from "./mementos/game-location-memento";
+import { GameLocationId, GameLocationMemento, GameLocationSearchResult, WaterType } from "./mementos/game-location-memento";
+import { SearchLocationAction } from "./location-actions/search-location-action";
 
 export class GameLocation {
     private readonly id: GameLocationId;
@@ -13,13 +14,17 @@ export class GameLocation {
     private readonly waterSource?: WaterType;
     private readonly actions: GameLocationAction[];
     private readonly groundInventory: Inventory;
+    private readonly searchResults?: GameLocationSearchResult[];
 
     constructor(memento: GameLocationMemento, itemCreationService: ItemCreationFactory) {
         this.id = memento.id;
         this.canSwim = memento.canSwim;
         this.waterSource = memento.waterSource;
+        
+        this.groundInventory = new Inventory(itemCreationService, memento.groundInventory);
+        this.searchResults = memento.searchResults;
+
         this.actions = this.generateLocationActions();
-        this.groundInventory = new Inventory(memento.groundInventory, itemCreationService);
     }
 
     private generateLocationActions(): GameLocationAction[] {
@@ -30,6 +35,9 @@ export class GameLocation {
         }
         if (this.waterSource && this.canSwim) {
             result.push(new SwimLocationAction(this.waterSource));
+        }
+        if (this.searchResults) {
+            result.push(new SearchLocationAction(this.searchResults));
         }
 
         return result;
@@ -44,7 +52,8 @@ export class GameLocation {
             id: this.id,
             canSwim: this.canSwim,
             waterSource: this.waterSource,
-            groundInventory: this.groundInventory.getMemento()
+            groundInventory: this.groundInventory.getMemento(),
+            searchResults: this.searchResults
         }
     }
 
@@ -74,5 +83,9 @@ export class GameLocation {
 
     public get GroundInventory(): Inventory {
         return this.groundInventory;
+    }
+
+    public get SearchResults(): GameLocationSearchResult[] {
+        return this.searchResults ?? [];
     }
 }

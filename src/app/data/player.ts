@@ -31,7 +31,7 @@ export class Player {
         this.hunger = memento.hunger;
         this.energy = memento.energy;
 
-        this.inventory = new Inventory(memento.inventory, itemCreationFactory);
+        this.inventory = new Inventory(itemCreationFactory, memento.inventory);
         this.inventory.Stacks.forEach(stack => {
             this.addKnownItem(stack.TopItem.Id);
         });

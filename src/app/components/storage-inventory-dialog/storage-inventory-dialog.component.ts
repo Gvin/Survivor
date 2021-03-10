@@ -56,7 +56,7 @@ export class SurvivorStorageInventoryDialogComponent {
         return this.localizationService.translateString(stack.TopItem.Description);
     }
 
-    public puckUpItem(stack: GameInventoryStack): void {
+    public pickUpItem(stack: GameInventoryStack): void {
         this.game.performAction(new PickUpItemsPlayerAction([stack.TopItem]));
         this.selectedItem = undefined;
     }

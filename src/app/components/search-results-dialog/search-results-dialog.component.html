@@ -1,5 +1,5 @@
-<div [ngClass]="{'inventory': true, 'selection': selectedItem}">
-    <h2 mat-dialog-title>{{getTitle()}}</h2>
+<div [ngClass]="{'search-results': true, 'selection': selectedItem}">
+    <h2 mat-dialog-title>{{'search-results.title' | localize}}</h2>
     
     <mat-dialog-content>
         <div class="content">
@@ -19,6 +19,6 @@
     </mat-dialog-content>
 
     <mat-dialog-actions>
-        <button mat-raised-button (click)="close()">{{'actions.close' | localize: 'Close'}}</button>
+        <button mat-raised-button matTooltip="{{'search-results.close-tooltip' | localize}}" (click)="close()">{{'actions.close' | localize: 'Close'}}</button>
     </mat-dialog-actions>
 </div>

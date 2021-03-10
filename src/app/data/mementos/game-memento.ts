@@ -4,6 +4,11 @@ import { GameMapMemento } from "./game-map-memento";
 import { GameRecipeMemento } from "./game-recipe-memento";
 import { PlayerMemento } from "./player-memento";
 
+export interface GameSearchResult {
+    itemId: string;
+    count: number;
+}
+
 export interface GameMemento {
     player: PlayerMemento;
     environment: GameEnvironmentMemento;
@@ -11,4 +16,5 @@ export interface GameMemento {
     journal: GameJournalMemento;
     currentLocation: string;
     recipes: GameRecipeMemento[];
+    searchResults?: GameSearchResult[];
 }

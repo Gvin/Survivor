@@ -8,9 +8,18 @@ export enum WaterType {
     sea = 'sea'
 }
 
+export interface GameLocationSearchResult {
+    itemId: string;
+    count: number;
+    singleUse?: boolean;
+    chance: number;
+}
+
 export interface GameLocationMemento {
     id: GameLocationId;
     waterSource?: WaterType;
     canSwim?: boolean;
-    groundInventory: InventoryMemento;
+    groundInventory?: InventoryMemento;
+
+    searchResults?: GameLocationSearchResult[];
 }

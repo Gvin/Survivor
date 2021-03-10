@@ -1,0 +1,28 @@
+.search-results {
+    
+    .content {
+        display: inline-flex;
+    
+        .details {
+            width: 450px;
+            margin: 2px;
+            margin-left: 10px;
+
+            .item-actions {
+                button {
+                    margin-right: 3px;
+                }
+            }
+        }
+    }
+}
+
+.search-results {
+    min-width: 100px;
+    max-width: 700px;
+}
+
+.search-results.selection {
+    min-width: 600px;
+    max-width: 1200px;
+}

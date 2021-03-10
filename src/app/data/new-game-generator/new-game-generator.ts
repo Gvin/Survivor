@@ -114,28 +114,42 @@ export class NewGameGenerator {
         return {
             locations: [
                 {
-                    id: locCamp,
-                    groundInventory: {items: []}
+                    id: locCamp
                 },
                 {
                     id: locBeach,
                     waterSource: WaterType.sea,
                     canSwim: true,
-                    groundInventory: {items: [this.itemCreationFactory.getItemMemento(ItemIds.misc.branch)]}
+                    searchResults: [
+                        {
+                            itemId: ItemIds.misc.branch,
+                            count: 1,
+                            chance: 10
+                        },
+                        {
+                            itemId: ItemIds.misc.emptyBottle,
+                            count: 1,
+                            chance: 5
+                        }
+                    ]
                 },
                 {
                     id: locForest,
-                    groundInventory: {items: []}
+                    searchResults: [
+                        {
+                            itemId: ItemIds.misc.branch,
+                            count: 1,
+                            chance: 30
+                        }
+                    ]
                 },
                 {
-                    id: locCaves,
-                    groundInventory: {items: []}
+                    id: locCaves
                 },
                 {
                     id: locSpring,
                     waterSource: WaterType.clean,
-                    canSwim: true,
-                    groundInventory: {items: []}
+                    canSwim: true
                 }
             ],
             connections: [

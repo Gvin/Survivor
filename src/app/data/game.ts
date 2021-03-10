@@ -1,5 +1,5 @@
 import { GameEnvironment as GameEnvironment } from "./game-environment";
-import { GameMemento } from "./mementos/game-memento";
+import { GameMemento, GameSearchResult } from "./mementos/game-memento";
 import { Player } from "./player";
 import { GameMap as GameMap } from "./game-map";
 import { GameJournal } from "./game-journal";
@@ -18,6 +18,7 @@ export class Game {
     private map: GameMap;
     private journal: GameJournal;
     private recipes: GameRecipeMemento[];
+    private searchResults?: GameSearchResult[];
 
     public readonly actionPerformed: EventEmitter;
 
@@ -28,6 +29,7 @@ export class Game {
         this.map = new GameMap(memento.map, itemCreationFactory);
         this.journal = new GameJournal(memento.journal);
         this.recipes = memento.recipes;
+        this.searchResults = memento.searchResults;
 
         this.actionPerformed = new EventEmitter();
     }
@@ -87,6 +89,14 @@ export class Game {
 
     public get Journal(): GameJournal {
         return this.journal;
+    }
+
+    public get SearchResults(): GameSearchResult[] | undefined {
+        return this.searchResults;
+    }
+
+    public set SearchResults(searchResults: GameSearchResult[] | undefined) {
+        this.searchResults = searchResults;
     }
 
     public getMemento(): GameMemento {
