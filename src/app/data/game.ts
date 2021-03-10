@@ -106,7 +106,8 @@ export class Game {
             environment: this.environment.getMemento(),
             map: this.map.getMemento(),
             journal: this.journal.getMemento(),
-            recipes: this.recipes
+            recipes: this.recipes,
+            searchResults: this.searchResults
         }
     }
 }
