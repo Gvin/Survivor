@@ -65,6 +65,11 @@
         "title": "Select time to wait",
         "time": "{0} minutes"
     },
+    "search-results": {
+        "title": "Search Results",
+        "close-tooltip": "Not picked items will be thrown to the ground."
+    },
+
     "item-actions": {
         "drop": {
             "title": "Drop {0}",
@@ -91,6 +96,10 @@
         "swim": {
             "title": "Swim ({0}m)",
             "tooltip": "Swim in the water."
+        },
+        "search": {
+            "title": "Search ({0}m)",
+            "tooltip": "Search for useful items."
         }
     },
     "actions": {

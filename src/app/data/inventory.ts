@@ -42,13 +42,17 @@ export class Inventory {
     public itemAdded: EventEmitter<GameItem>;
     private stacks: GameInventoryStackImpl[];
 
-    constructor(data: InventoryMemento, itemCreationService: ItemCreationFactory) {
+    public constructor();
+    public constructor(itemCreationService: ItemCreationFactory, memento?: InventoryMemento);
+    public constructor(itemCreationService?: ItemCreationFactory, memento?: InventoryMemento) {
         this.itemAdded = new EventEmitter<GameItem>();
 
         this.stacks = [];
         
-        data.items.map(itemMemento => itemCreationService.loadItem(itemMemento)).forEach(item => {
-            this.addItem(item);
+        memento?.items.map(itemMemento => itemCreationService?.loadItem(itemMemento)).forEach(item => {
+            if (item) {
+                this.addItem(item);
+            }
         });
     }
 
@@ -58,6 +62,10 @@ export class Inventory {
 
     public get Count(): number {
         return this.stacks.reduce((sum, stack) => sum + stack.Count, 0);
+    }
+
+    public getItems(): GameItem[] {
+        return ([] as GameItem[]).concat(...this.stacks.map(stack => stack.Items));
     }
 
     public getItemsCount(itemId: string): number {

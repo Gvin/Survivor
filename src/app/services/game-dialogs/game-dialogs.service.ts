@@ -11,6 +11,7 @@ import { LocalizableString } from "src/app/data/localizable-string";
 import { first, map } from "rxjs/operators";
 import { SettingsDialogData, SurvivorSettingsDialogComponent } from "src/app/components/settings-dialog/settings-dialog.component";
 import { Observable } from "rxjs";
+import { SearchResultsDialogData, SurvivorSearchResultsDialogComponent } from "src/app/components/search-results-dialog/search-results-dialog.component";
 
 @Injectable({providedIn: 'root'})
 export class GameDialogsService {
@@ -87,5 +88,17 @@ export class GameDialogsService {
         };
         dialogConfig.data = data;
         this.dialog.open(SurvivorSettingsDialogComponent, dialogConfig);
+    }
+
+    public showSearchResultsDialog(game: Game): void {
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.autoFocus = true;
+        dialogConfig.disableClose = true;
+
+        const data: SearchResultsDialogData = {
+            game: game
+        };
+        dialogConfig.data = data;
+        this.dialog.open(SurvivorSearchResultsDialogComponent, dialogConfig);
     }
 }

@@ -6,6 +6,7 @@ import { GameLocation } from "src/app/data/game-location";
 import { ItemCreationFactory } from "src/app/data/items/item-creation/item-creation-factory";
 import { SaveGameService } from "src/app/services/save-game/save-game.service";
 import { tropicalItemsMap } from "src/app/data/items/item-creation/tropical-items-map";
+import { GameDialogsService } from "src/app/services/game-dialogs/game-dialogs.service";
 
 @Component({
     selector: 'srv-game',
@@ -18,6 +19,7 @@ export class SurvivorGameComponent implements OnInit {
     public game?: Game;
 
     constructor(
+        private readonly dialogService: GameDialogsService,
         private readonly saveGameService: SaveGameService,
         private readonly pageRefreshService: PageRefreshService,
         private readonly router: Router) {
@@ -40,12 +42,21 @@ export class SurvivorGameComponent implements OnInit {
         const itemCreationFactory = new ItemCreationFactory(tropicalItemsMap);
         this.game = new Game(gameData, itemCreationFactory);
         this.game.actionPerformed.on('action', () => this.gameActionPerformed());
+
+        this.checkSearchResults();
+    }
+
+    private checkSearchResults(): void {
+        if (this.game && this.game.SearchResults && this.game.SearchResults.length > 0) {
+            this.dialogService.showSearchResultsDialog(this.game);
+        }
     }
 
     private gameActionPerformed(): void {
         if (this.game) {
             const memento = this.game.getMemento();
             this.saveGameService.setGameData(memento);
+            this.checkSearchResults();
         }
     }
 
@@ -53,6 +64,6 @@ export class SurvivorGameComponent implements OnInit {
         if (!this.game) {
             return undefined;
         }
-        return this.game.Map.getLocation(this.game.CurrentLocation);
+        return this.game.CurrentLocation;
     }
 }

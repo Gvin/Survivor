@@ -10,5 +10,11 @@
     "recipe-unlocked": "You have invented {0} recipe.",
     "item-crafted-single": "You have crafted 1 {0}.",
     "item-crafted-multi": "You have crafted {0} {1}.",
-    "waited": "You have waited for {0} minutes."
+    "waited": "You have waited for {0} minutes.",
+    "search-on-location": {
+        "none": "You have searched for some time and didn't find anything.",
+        "single": "You have searched for some time and found {0} item.",
+        "multi": "You have searched for some time and found {0} items."
+    },
+    "location-unlocked": "You have found a new location: {0}."
 }
