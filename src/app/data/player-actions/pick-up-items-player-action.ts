@@ -8,9 +8,8 @@ export class PickUpItemsPlayerAction implements PlayerAction {
     }
 
     public perform(game: Game): void {
-        const currentLocation = game.Map.getLocation(game.CurrentLocation);
         this.items.forEach(item => {
-            currentLocation.GroundInventory.removeItem(item);
+            game.CurrentLocation.GroundInventory.removeItem(item);
             game.Player.Inventory.addItem(item);
             game.Journal.write(game, new ItemPickedUpJournalMessage(item));
         });

@@ -57,6 +57,9 @@ export class GameLocation {
         }
     }
 
+    public processTimePassed(minutes: number): void {
+    }
+
     public get Id(): GameLocationId {
         return this.id;
     }

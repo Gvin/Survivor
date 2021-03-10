@@ -43,8 +43,7 @@ export class SurvivorCraftingDialogComponent {
 
     public isRecipeAvailable(recipe: GameRecipeMemento): boolean {
         if (recipe.requiresWaterSource != null) {
-            const currentLocation = this.game.Map.getLocation(this.game.CurrentLocation);
-            if (!currentLocation.hasWaterSource(recipe.requiresWaterSource)) {
+            if (!this.game.CurrentLocation.hasWaterSource(recipe.requiresWaterSource)) {
                 return false;
             }
         }
@@ -57,18 +56,15 @@ export class SurvivorCraftingDialogComponent {
     }
 
     public cleanWaterAvailable(): boolean {
-        const currentLocation = this.game.Map.getLocation(this.game.CurrentLocation);
-        return currentLocation.hasWaterSource(WaterType.clean);
+        return this.game.CurrentLocation.hasWaterSource(WaterType.clean);
     }
 
     public saltWaterAvailable(): boolean {
-        const currentLocation = this.game.Map.getLocation(this.game.CurrentLocation);
-        return currentLocation.hasWaterSource(WaterType.sea);
+        return this.game.CurrentLocation.hasWaterSource(WaterType.sea);
     }
 
     public dirtyWaterAvailable(): boolean {
-        const currentLocation = this.game.Map.getLocation(this.game.CurrentLocation);
-        return currentLocation.hasWaterSource(WaterType.dirty);
+        return this.game.CurrentLocation.hasWaterSource(WaterType.dirty);
     }
 
     public cleanWaterRequired(recipe: GameRecipeMemento): boolean {

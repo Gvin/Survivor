@@ -13,6 +13,8 @@ export interface GameLocationSearchResult {
     count: number;
     singleUse?: boolean;
     chance: number;
+    totalCount?: number;
+    refillRate?: number;
 }
 
 export interface GameLocationMemento {

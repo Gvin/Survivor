@@ -9,11 +9,10 @@ import { EventEmitter } from "events";
 import { GameLocation } from "./game-location";
 import { GameRecipeMemento } from "./mementos/game-recipe-memento";
 import { RecipeUnlockedJournalMessage } from "./journal-messages/recipe-unlocked-journal-message";
-import { GameLocationId } from "./mementos/game-location-memento";
 
 export class Game {
     private player: Player;
-    private currentLocation: string;
+    private currentLocation: GameLocation;
     private environment: GameEnvironment;
     private map: GameMap;
     private journal: GameJournal;
@@ -24,9 +23,9 @@ export class Game {
 
     constructor(memento: GameMemento, private readonly itemCreationFactory: ItemCreationFactory) {
         this.player = new Player(memento.player, itemCreationFactory);
-        this.currentLocation = memento.currentLocation;
         this.environment = new GameEnvironment(memento.environment);
         this.map = new GameMap(memento.map, itemCreationFactory);
+        this.currentLocation = this.map.getLocation(memento.currentLocation);
         this.journal = new GameJournal(memento.journal);
         this.recipes = memento.recipes;
         this.searchResults = memento.searchResults;
@@ -42,16 +41,17 @@ export class Game {
         return this.player;
     }
 
-    public get CurrentLocation(): GameLocationId {
+    public get CurrentLocation(): GameLocation {
         return this.currentLocation;
     }
 
     public movePlayer(newLocation: GameLocation): void {
-        this.currentLocation = newLocation.Id;
+        this.currentLocation = this.map.getLocation(newLocation.Id);
     }
 
     public processTimePassed(minutes: number): void {
         this.environment.addTime(minutes);
+        this.map.processTimePassed(minutes);
         this.player.processTimePassed(this, minutes);
     }
 
@@ -102,7 +102,7 @@ export class Game {
     public getMemento(): GameMemento {
         return {
             player: this.player.getMemento(),
-            currentLocation: this.currentLocation,
+            currentLocation: this.currentLocation.Id,
             environment: this.environment.getMemento(),
             map: this.map.getMemento(),
             journal: this.journal.getMemento(),

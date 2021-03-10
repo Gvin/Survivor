@@ -64,6 +64,6 @@ export class SurvivorGameComponent implements OnInit {
         if (!this.game) {
             return undefined;
         }
-        return this.game.Map.getLocation(this.game.CurrentLocation);
+        return this.game.CurrentLocation;
     }
 }

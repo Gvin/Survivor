@@ -26,4 +26,10 @@ export class GameMap {
     public getLocation(id: GameLocationId): GameLocation {
         return this.locations.find(loc => loc.Id === id) as GameLocation;
     }
+
+    public processTimePassed(minutes: number): void {
+        this.locations.forEach(location => {
+            location.processTimePassed(minutes);
+        });
+    }
 }

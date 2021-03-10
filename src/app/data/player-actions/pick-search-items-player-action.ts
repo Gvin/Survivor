@@ -16,9 +16,8 @@ export class PickSearchItemsPlayerAction implements PlayerAction {
             game.Journal.write(game, new ItemPickedUpJournalMessage(item));
         });
 
-        const location = game.Map.getLocation(game.CurrentLocation);
         this.leftItems.forEach(item => {
-            location.GroundInventory.addItem(item);
+            game.CurrentLocation.GroundInventory.addItem(item);
         });
         
         game.SearchResults = undefined;

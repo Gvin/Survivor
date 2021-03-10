@@ -11,8 +11,7 @@ export class DropItemPlayerAction implements PlayerAction {
 
     public perform(game: Game): void {
         game.Player.Inventory.removeItem(this.item);
-        const playerLocation = game.Map.getLocation(game.CurrentLocation);
-        playerLocation.GroundInventory.addItem(this.item);
+        game.CurrentLocation.GroundInventory.addItem(this.item);
         game.Journal.write(game, new ItemDroppedJournalMessage(this.item));
     }
 }
