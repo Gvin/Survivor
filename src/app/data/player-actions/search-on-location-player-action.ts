@@ -18,12 +18,15 @@ export class SearchOnLocationPlayerAction implements PlayerAction {
     }
 
     private generateSearchResults(): GameSearchResult[] {
-        return this.searchResults.filter(result => this.checkChance(result.chance)).map(result => {
-            return {
-                itemId: result.itemId,
-                count: result.count
-            };
-        });
+        return this.searchResults
+            .filter(result => result.totalCount >= result.count && this.checkChance(result.chance))
+            .map(result => {
+                result.totalCount -= result.count;
+                return {
+                    itemId: result.itemId,
+                    count: result.count
+                };
+            });
     }
 
     private checkChance(chance: number): boolean {

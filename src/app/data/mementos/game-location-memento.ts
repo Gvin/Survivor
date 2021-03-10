@@ -9,11 +9,35 @@ export enum WaterType {
 }
 
 export interface GameLocationSearchResult {
+
+    /**
+     * Output item id.
+     */
     itemId: string;
+
+    /**
+     * Output items count for this result.
+     */
     count: number;
-    singleUse?: boolean;
+
+    /**
+     * Chance to find this specific result.
+     */
     chance: number;
-    totalCount?: number;
+
+    /**
+     * Max items count that can present on location.
+     */
+    maxCount: number;
+
+    /**
+     * Total items count present on location.
+     */
+    totalCount: number;
+
+    /**
+     * Refill rate per minute.
+     */
     refillRate?: number;
 }
 

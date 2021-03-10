@@ -93,6 +93,7 @@ export class GameDialogsService {
     public showSearchResultsDialog(game: Game): void {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.autoFocus = true;
+        dialogConfig.disableClose = true;
 
         const data: SearchResultsDialogData = {
             game: game
