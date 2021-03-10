@@ -11,5 +11,9 @@
     "item-crafted-single": "You have crafted 1 {0}.",
     "item-crafted-multi": "You have crafted {0} {1}.",
     "waited": "You have waited for {0} minutes.",
-    "search-on-location": "You have searched for some time and found {0} items."
+    "search-on-location": {
+        "none": "You have searched for some time and didn't find anything.",
+        "single": "You have searched for some time and found {0} item.",
+        "multi": "You have searched for some time and found {0} items."
+    }
 }

@@ -7,6 +7,16 @@ export class SearchOnLocationJournalMessage implements GameJournalMessage {
     }
 
     public getMessageString(): LocalizableString {
-        return new LocalizableString().addLocalizable('search-on-location', LocaleNamespace.journal, [`${this.count}`]);
+        return new LocalizableString().addLocalizable(this.getLocalizationKey(), LocaleNamespace.journal, [`${this.count}`]);
+    }
+
+    private getLocalizationKey(): string {
+        if (this.count === 0) {
+            return 'search-on-location.none';
+        }
+        if (this.count === 1) {
+            return 'search-on-location.single';
+        }
+        return 'search-on-location.multi';
     }
 }
