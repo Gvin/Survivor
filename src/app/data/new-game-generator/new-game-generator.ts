@@ -123,17 +123,19 @@ export class NewGameGenerator {
                     searchResults: [
                         {
                             itemId: ItemIds.misc.branch,
-                            count: 1,
+                            minCount: 1,
+                            maxCount: 3,
                             chance: 10,
-                            maxCount: 30,
+                            maxTotalCount: 30,
                             totalCount: 30,
                             refillRate: 0.0035 // 1 per 4.8 hours
                         },
                         {
                             itemId: ItemIds.misc.emptyBottle,
-                            count: 1,
+                            minCount: 1,
+                            maxCount: 1,
                             chance: 5,
-                            maxCount: 10,
+                            maxTotalCount: 10,
                             totalCount: 10,
                             refillRate: 0.0007 // 1 per 1 day
                         }
@@ -144,9 +146,10 @@ export class NewGameGenerator {
                     searchResults: [
                         {
                             itemId: ItemIds.misc.branch,
-                            count: 1,
+                            minCount: 1,
+                            maxCount: 5,
                             chance: 30,
-                            maxCount: 100,
+                            maxTotalCount: 100,
                             totalCount: 100,
                             refillRate: 0.007 // 1 per 2.4 hours
                         }

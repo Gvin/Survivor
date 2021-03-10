@@ -59,7 +59,7 @@ export class GameLocation {
 
     public processTimePassed(minutes: number): void {
         this.searchResults?.forEach(result => {
-            result.totalCount = Math.min(result.maxCount, result.totalCount + (result.refillRate ?? 0) * minutes);
+            result.totalCount = Math.min(result.maxTotalCount, result.totalCount + (result.refillRate ?? 0) * minutes);
         });
     }
 

@@ -14,19 +14,26 @@ export class SearchOnLocationPlayerAction implements PlayerAction {
         const searchResults = this.generateSearchResults();
         game.SearchResults = searchResults.length > 0 ? searchResults : undefined;
         game.processTimePassed(this.searchTime);
-        game.Journal.write(game, new SearchOnLocationJournalMessage(searchResults.length));
+        const itemsCount = searchResults.reduce((count, result) => count + result.count, 0);
+        game.Journal.write(game, new SearchOnLocationJournalMessage(itemsCount));
     }
 
     private generateSearchResults(): GameSearchResult[] {
         return this.searchResults
-            .filter(result => result.totalCount >= result.count && this.checkChance(result.chance))
+            .filter(result => result.totalCount >= result.minCount && this.checkChance(result.chance))
             .map(result => {
-                result.totalCount -= result.count;
+                const count = this.generateCount(result.minCount, Math.min(result.totalCount, result.maxCount));
+                result.totalCount -= count;
                 return {
                     itemId: result.itemId,
-                    count: result.count
+                    count: count
                 };
             });
+    }
+
+    private generateCount(min: number, max: number): number {
+        const delta = max - min;
+        return Math.round(min + Math.random() * delta);
     }
 
     private checkChance(chance: number): boolean {

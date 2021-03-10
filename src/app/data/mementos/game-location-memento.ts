@@ -16,9 +16,14 @@ export interface GameLocationSearchResult {
     itemId: string;
 
     /**
-     * Output items count for this result.
+     * Minimal output items count for this result.
      */
-    count: number;
+    minCount: number;
+
+    /**
+     * Maximal output items count for this result.
+     */
+    maxCount: number;
 
     /**
      * Chance to find this specific result.
@@ -28,7 +33,7 @@ export interface GameLocationSearchResult {
     /**
      * Max items count that can present on location.
      */
-    maxCount: number;
+    maxTotalCount: number;
 
     /**
      * Total items count present on location.
