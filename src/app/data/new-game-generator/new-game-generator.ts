@@ -5,11 +5,13 @@ import { ItemCreationFactory } from "../items/item-creation/item-creation-factor
 import { ItemIds } from "../items/item-creation/tropical-items-map";
 import { GameRecipeMemento } from "../mementos/game-recipe-memento";
 
-const locCamp = 'tropical.camp';
-const locBeach = 'tropical.beach';
-const locForest = 'tropical.forest';
-const locCaves = 'tropical.caves';
-const locSpring = 'tropical.spring';
+const locations = {
+    camp: 'tropical.camp',
+    beach: 'tropical.beach',
+    forest: 'tropical.forest',
+    caves: 'tropical.caves',
+    spring: 'tropical.spring'
+}
 
 export class NewGameGenerator {
     constructor(private readonly itemCreationFactory: ItemCreationFactory) {
@@ -33,7 +35,7 @@ export class NewGameGenerator {
                 },
                 knownItems: []
             },
-            currentLocation: locBeach,
+            currentLocation: locations.beach,
             environment: {
                 temperature: 27.0,
                 rain: false,
@@ -114,90 +116,111 @@ export class NewGameGenerator {
         return {
             locations: [
                 {
-                    id: locCamp
+                    id: locations.camp,
+                    locked: true
                 },
                 {
-                    id: locBeach,
+                    id: locations.beach,
                     waterSource: WaterType.sea,
                     canSwim: true,
                     searchResults: [
                         {
-                            itemId: ItemIds.misc.branch,
-                            minCount: 1,
-                            maxCount: 3,
-                            chance: 10,
-                            maxTotalCount: 30,
-                            totalCount: 30,
-                            refillRate: 0.0035 // 1 per 4.8 hours
+                            itemReward: {
+                                itemId: ItemIds.misc.branch,
+                                minCount: 1,
+                                maxCount: 3,
+                                maxTotalCount: 30,
+                                totalCount: 30,
+                                refillRate: 0.0035 // 1 per 4.8 hours
+                            },
+                            chance: 10
                         },
                         {
-                            itemId: ItemIds.misc.emptyBottle,
-                            minCount: 1,
-                            maxCount: 1,
+                            itemReward: {
+                                itemId: ItemIds.misc.emptyBottle,
+                                minCount: 1,
+                                maxCount: 1,
+                                maxTotalCount: 10,
+                                totalCount: 10,
+                                refillRate: 0.0007 // 1 per 1 day
+                            },
                             chance: 5,
-                            maxTotalCount: 10,
-                            totalCount: 10,
-                            refillRate: 0.0007 // 1 per 1 day
                         }
                     ]
                 },
                 {
-                    id: locForest,
+                    id: locations.forest,
                     searchResults: [
                         {
-                            itemId: ItemIds.misc.branch,
-                            minCount: 1,
-                            maxCount: 5,
+                            itemReward: {
+                                itemId: ItemIds.misc.branch,
+                                minCount: 1,
+                                maxCount: 5,
+                                maxTotalCount: 100,
+                                totalCount: 100,
+                                refillRate: 0.007 // 1 per 2.4 hours
+                            },
                             chance: 30,
-                            maxTotalCount: 100,
-                            totalCount: 100,
-                            refillRate: 0.007 // 1 per 2.4 hours
+                        },
+                        {
+                            locationReward: locations.spring,
+                            chance: 20
+                        },
+                        {
+                            locationReward: locations.camp,
+                            chance: 30
+                        },
+                        {
+                            locationReward: locations.caves,
+                            chance: 10
                         }
                     ]
                 },
                 {
-                    id: locCaves
+                    id: locations.caves,
+                    locked: true
                 },
                 {
-                    id: locSpring,
+                    id: locations.spring,
                     waterSource: WaterType.clean,
-                    canSwim: true
+                    canSwim: true,
+                    locked: true
                 }
             ],
             connections: [
                 {
-                    locationA: locCamp,
-                    locationB: locBeach,
+                    locationA: locations.camp,
+                    locationB: locations.beach,
                     walkTime: 15
                 },
                 {
-                    locationA: locCamp,
-                    locationB: locForest,
+                    locationA: locations.camp,
+                    locationB: locations.forest,
                     walkTime: 10
                 },
                 {
-                    locationA: locForest,
-                    locationB: locBeach,
+                    locationA: locations.forest,
+                    locationB: locations.beach,
                     walkTime: 10
                 },
                 {
-                    locationA: locCamp,
-                    locationB: locCaves,
+                    locationA: locations.camp,
+                    locationB: locations.caves,
                     walkTime: 15
                 },
                 {
-                    locationA: locForest,
-                    locationB: locCaves,
+                    locationA: locations.forest,
+                    locationB: locations.caves,
                     walkTime: 10
                 },
                 {
-                    locationA: locCamp,
-                    locationB: locSpring,
+                    locationA: locations.camp,
+                    locationB: locations.spring,
                     walkTime: 10
                 },
                 {
-                    locationA: locForest,
-                    locationB: locSpring,
+                    locationA: locations.forest,
+                    locationB: locations.spring,
                     walkTime: 5
                 }
             ]

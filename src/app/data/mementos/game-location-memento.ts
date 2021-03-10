@@ -8,29 +8,23 @@ export enum WaterType {
     sea = 'sea'
 }
 
-export interface GameLocationSearchResult {
-
+export interface GameLocationSearchItemReward {
     /**
      * Output item id.
      */
-    itemId: string;
+     itemId: string;
 
-    /**
-     * Minimal output items count for this result.
-     */
-    minCount: number;
+     /**
+      * Minimal output items count for this result.
+      */
+     minCount: number;
+ 
+     /**
+      * Maximal output items count for this result.
+      */
+     maxCount: number;
 
-    /**
-     * Maximal output items count for this result.
-     */
-    maxCount: number;
-
-    /**
-     * Chance to find this specific result.
-     */
-    chance: number;
-
-    /**
+     /**
      * Max items count that can present on location.
      */
     maxTotalCount: number;
@@ -46,11 +40,24 @@ export interface GameLocationSearchResult {
     refillRate?: number;
 }
 
+export interface GameLocationSearchResult {
+
+    itemReward?: GameLocationSearchItemReward;
+
+    locationReward?: GameLocationId;
+
+    /**
+     * Chance to find this specific result.
+     */
+    chance: number;
+}
+
 export interface GameLocationMemento {
     id: GameLocationId;
     waterSource?: WaterType;
     canSwim?: boolean;
     groundInventory?: InventoryMemento;
+    locked?: boolean;
 
     searchResults?: GameLocationSearchResult[];
 }

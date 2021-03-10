@@ -15,5 +15,6 @@
         "none": "You have searched for some time and didn't find anything.",
         "single": "You have searched for some time and found {0} item.",
         "multi": "You have searched for some time and found {0} items."
-    }
+    },
+    "location-unlocked": "You have found a new location: {0}."
 }
