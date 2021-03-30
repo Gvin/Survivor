@@ -3,6 +3,7 @@ import { GameMapMemento } from "src/app/data/mementos/game-map-memento";
 import { GameMemento } from "src/app/data/mementos/game-memento";
 import { ItemCreationFactory } from "../items/item-creation/item-creation-factory";
 import { ItemIds } from "../items/item-creation/tropical-items-map";
+import { GameBuildingRecipeMemento } from "../mementos/game-building-recipe-memento";
 import { GameRecipeMemento } from "../mementos/game-recipe-memento";
 
 const locations = {
@@ -11,6 +12,13 @@ const locations = {
     forest: 'tropical.forest',
     caves: 'tropical.caves',
     spring: 'tropical.spring'
+}
+
+const buildings = {
+    campfire: 'campfire',
+
+    shelter: 'shelter',
+    hut: 'hut'
 }
 
 export class NewGameGenerator {
@@ -43,8 +51,71 @@ export class NewGameGenerator {
             },
             map: this.generateMap(),
             journal: {},
-            recipes: this.generateRecipes()
+            recipes: this.generateRecipes(),
+            buildingRecipes: this.generateBuildingRecipes()
         };
+    }
+
+    private generateBuildingRecipes(): GameBuildingRecipeMemento[] {
+        return [
+            {
+                id: buildings.campfire,
+                buildTime: 30,
+                resources: [
+                    {
+                        itemId: ItemIds.misc.stone,
+                        count: 10
+                    },
+                    {
+                        itemId: ItemIds.misc.branch,
+                        count: 10
+                    }
+                ],
+                unlocked: true
+            },
+            {
+                id: buildings.shelter,
+                buildTime: 2 * 60,
+                resources: [
+                    {
+                        itemId: ItemIds.misc.stone,
+                        count: 8
+                    },
+                    {
+                        itemId: ItemIds.misc.stick,
+                        count: 8
+                    },
+                    {
+                        itemId: ItemIds.misc.branch,
+                        count: 15
+                    }
+                ],
+                unlocked: true
+            },
+            {
+                id: buildings.hut,
+                baseBuildingId: buildings.shelter,
+                buildTime: 12 * 60,
+                resources: [
+                    {
+                        itemId: ItemIds.misc.stone,
+                        count: 50
+                    },
+                    {
+                        itemId: ItemIds.misc.stick,
+                        count: 30
+                    },
+                    {
+                        itemId: ItemIds.misc.branch,
+                        count: 30
+                    }
+                ],
+                unlocked: false,
+                unlock: {
+                    buldings: [buildings.shelter]
+                }
+            }
+        ]
     }
 
     private generateRecipes(): GameRecipeMemento[] {

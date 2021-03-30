@@ -12,7 +12,8 @@ export const ItemIds = {
     misc: {
         emptyBottle: 'empty-bottle',
         branch: 'branch',
-        stick: 'stick'
+        stick: 'stick',
+        stone: 'stone'
     }
 }
 
@@ -70,6 +71,11 @@ export const tropicalItemsMap: GameItemsMap = {
         },
         {
             id: ItemIds.misc.stick,
+            type: ItemType.misc,
+            stackable: true
+        },
+        {
+            id: ItemIds.misc.stone,
             type: ItemType.misc,
             stackable: true
         }

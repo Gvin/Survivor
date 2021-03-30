@@ -9,6 +9,7 @@ import { EventEmitter } from "events";
 import { GameLocation } from "./game-location";
 import { GameRecipeMemento } from "./mementos/game-recipe-memento";
 import { RecipeUnlockedJournalMessage } from "./journal-messages/recipe-unlocked-journal-message";
+import { GameBuildingRecipeMemento } from "./mementos/game-building-recipe-memento";
 
 export class Game {
     private player: Player;
@@ -17,6 +18,7 @@ export class Game {
     private map: GameMap;
     private journal: GameJournal;
     private recipes: GameRecipeMemento[];
+    private buildingRecipes: GameBuildingRecipeMemento[];
     private searchResults?: GameSearchResult[];
 
     public readonly actionPerformed: EventEmitter;
@@ -28,6 +30,7 @@ export class Game {
         this.currentLocation = this.map.getLocation(memento.currentLocation);
         this.journal = new GameJournal(memento.journal);
         this.recipes = memento.recipes;
+        this.buildingRecipes = memento.buildingRecipes;
         this.searchResults = memento.searchResults;
 
         this.actionPerformed = new EventEmitter();
@@ -79,6 +82,10 @@ export class Game {
         return this.recipes;
     }
 
+    public get BuildingRecipes(): GameBuildingRecipeMemento[] {
+        return this.buildingRecipes;
+    }
+
     public get Environment(): GameEnvironment {
         return this.environment;
     }
@@ -107,6 +114,7 @@ export class Game {
             map: this.map.getMemento(),
             journal: this.journal.getMemento(),
             recipes: this.recipes,
+            buildingRecipes: this.buildingRecipes,
             searchResults: this.searchResults
         }
     }

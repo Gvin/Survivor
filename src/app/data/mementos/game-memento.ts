@@ -1,3 +1,4 @@
+import { GameBuildingRecipeMemento } from "./game-building-recipe-memento";
 import { GameEnvironmentMemento } from "./game-environment-memento";
 import { GameJournalMemento } from "./game-journal-memento";
 import { GameMapMemento } from "./game-map-memento";
@@ -16,5 +17,6 @@ export interface GameMemento {
     journal: GameJournalMemento;
     currentLocation: string;
     recipes: GameRecipeMemento[];
+    buildingRecipes: GameBuildingRecipeMemento[];
     searchResults?: GameSearchResult[];
 }
